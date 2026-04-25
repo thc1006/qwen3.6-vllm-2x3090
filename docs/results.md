@@ -135,6 +135,66 @@ Application startup complete: ~ T+135 s from launch
 
 See [README.md](../README.md) and [scripts/](../scripts/).
 
+## Voice dialog end-to-end latency budget (novel)
+
+Comparable cloud-only voice agent budget (per [Smallest.ai 2026](https://smallest.ai/blog/designing-voice-assistants-stt-llm-tts-tools-and-latency-budget),
+[Trillet 2026](https://www.trillet.ai/blogs/voice-ai-latency-benchmarks)) is **~800 ms** total.
+Public data on **embodied robot** stacks (with WebRTC + actual hardware) is essentially
+zero. This is a real, measured budget on the production stack.
+
+| Stage | Latency | Notes |
+|---|---:|---|
+| WebRTC RTT (Tailscale → robot) | **5.85 ms** avg | min 2.4 ms, jitter 4.4 ms |
+| STT (faster-whisper large-v3-turbo CUDA) | **8.8 ms** for 6 s audio (RTF 0.0015) | warm GPU, int8_float16 |
+| Mem0 search (bge-m3 + Qdrant) | **115.8 ms** cached / 1490 ms cold | Ollama embed + Qdrant |
+| LLM streaming first byte (vLLM AWQ-Marlin TP=2) | **92.9 ms** (75–124 ms range) | qwen3.6-35B-A3B AWQ |
+| TTS first byte (edge-tts cloud) | **239.0 ms** (199–312 ms range) | network-bound |
+| **Total estimated TTFB** | **462 ms** | **≈ 42% under SOTA cloud budget** |
+
+The LLM prefill curve **decreased** slightly with longer history (105 ms → 71 ms going
+from 0 → 30 turns) — vLLM's `--enable-prefix-caching` is the reason: the first 100+
+tokens of any system prompt get cached after the prewarm. Big lesson for embodied robot
+deployments: **don't fear longer context**, fear cold prefix.
+
+Full raw numbers: [`results/voice_latency_budget.json`](../results/voice_latency_budget.json).
+
+## RTX 3090 power scaling for MoE inference (novel)
+
+Question: Himesh's 2025 4× 3090 bench found a 220 W sweet spot for **dense** model
+inference. MoE models activate only a small slice of params per token — does that change
+the power-perf curve?
+
+Tested by sweeping GPU0 `nvidia-smi -pl` from 200 W to 450 W on Qwen3.6-35B-A3B AWQ
+TP=2. Each setting: same 5-prompt dialog bench × 3 runs.
+
+| PL (W) | Mean tok/s | Min | Max | Actual power draw (W) | tok/s/W |
+|---:|---:|---:|---:|---:|---:|
+| 200 | 111.7 | 92.8 | 122.7 | 197.5 | **0.566** |
+| 220 | 113.2 | 94.7 | 123.8 | 210.6 | 0.537 |
+| 250 | 112.6 | 90.1 | 124.6 | 226.7 | 0.497 |
+| 280 | 112.7 | 89.6 | 124.5 | 235.2 | 0.479 |
+| 320 | 112.6 | 89.9 | 124.6 | 234.3 | 0.481 |
+| 350 | 112.8 | 89.8 | 124.7 | 236.1 | 0.478 |
+| 390 | 112.7 | 89.8 | 124.3 | 234.1 | 0.481 |
+| 420 | 113.2 | 93.7 | 124.3 | 237.4 | 0.477 |
+| 450 | 112.2 | 89.7 | 124.3 | 233.8 | 0.480 |
+
+**Two findings:**
+
+1. **Tok/s is flat from 220 W to 450 W** (~112–113 tok/s). 230 % more power for 0 % more
+   throughput. The workload is memory-bandwidth bound, not compute bound.
+2. **Actual draw plateaus at ~235 W** regardless of cap above 280 W. 3090's 350 W
+   default and 450 W AIB headroom is unused for this model.
+
+**Implication: set 3090 power limit to 220 W for MoE serving.** 50 % less wall power,
+identical performance. Perf-per-watt sweet spot is **200 W (0.566 tok/s/W)**.
+
+This contradicts the common assumption that "more power = more tok/s" inherited from
+dense-model benchmarks. **For MoE inference, power matters until ~210 W and then stops
+mattering at all.** The bottleneck is HBM/GDDR6X bandwidth, not Tensor Core throughput.
+
+Full raw numbers: [`results/power_scaling.json`](../results/power_scaling.json).
+
 ## Speculative decoding (MTP) — empirical NEGATIVE result
 
 Re-tested 2026-04-25 with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`.

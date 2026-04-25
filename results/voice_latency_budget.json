@@ -1,0 +1,115 @@
+{
+  "hardware": "2x RTX 3090 24GB, i7-11700, 64GB DDR4",
+  "vllm": "0.19.1 + QuantTrio/Qwen3.6-35B-A3B-AWQ TP=2",
+  "stages": {
+    "1_webrtc_rtt": {
+      "min_ms": 2.371,
+      "avg_ms": 5.845,
+      "max_ms": 18.269,
+      "mdev_ms": 4.351
+    },
+    "2_stt": {
+      "audio_2s_ms": {
+        "mean": 3.447491333645303,
+        "min": 3.3516240000608377,
+        "max": 3.5876659967470914,
+        "rtf": 0.0017237456668226514
+      },
+      "audio_6s_ms": {
+        "mean": 8.755471331824083,
+        "min": 8.689088994287886,
+        "max": 8.82513599935919,
+        "rtf": 0.0014592452219706804
+      },
+      "audio_12s_ms": {
+        "mean": 16.661366666085087,
+        "min": 16.550781001569703,
+        "max": 16.804378996312153,
+        "rtf": 0.0013884472221737572
+      }
+    },
+    "3_mem0_search": {
+      "embed_only_first_call_ms": 1489.9728570017032,
+      "embed_only_subsequent_mean_ms": 115.80442274862435,
+      "raw": [
+        {
+          "query": "What is my name?",
+          "embed_only_ms": 1489.9728570017032
+        },
+        {
+          "query": "Tell me about Hideyoshi.",
+          "embed_only_ms": 194.09362700389465
+        },
+        {
+          "query": "What did I say earlier about c",
+          "embed_only_ms": 71.46147499588551
+        },
+        {
+          "query": "Recall my preferences.",
+          "embed_only_ms": 114.35614299989538
+        },
+        {
+          "query": "Random query that hasn't been ",
+          "embed_only_ms": 83.30644599482184
+        }
+      ]
+    },
+    "4_llm_prefill": {
+      "no_history": {
+        "n_history_msgs": 0,
+        "ttfb_max_tok_1_ms": 104.76284866793624
+      },
+      "5_turns": {
+        "n_history_msgs": 10,
+        "ttfb_max_tok_1_ms": 73.6122033316254
+      },
+      "15_turns": {
+        "n_history_msgs": 30,
+        "ttfb_max_tok_1_ms": 74.09752566551713
+      },
+      "30_turns": {
+        "n_history_msgs": 60,
+        "ttfb_max_tok_1_ms": 71.63151800098906
+      }
+    },
+    "5_llm_streaming_first_byte": {
+      "mean_ttfb_ms": 92.89914833304162,
+      "runs": [
+        {
+          "ttfb_ms": 74.71992699720431
+        },
+        {
+          "ttfb_ms": 124.43692200031364
+        },
+        {
+          "ttfb_ms": 79.5405960016069
+        }
+      ]
+    },
+    "6_tts_first_byte": {
+      "mean_first_byte_ms": 238.98124333451656,
+      "runs": [
+        {
+          "chars": 6,
+          "first_byte_ms": 199.28355600131908
+        },
+        {
+          "chars": 24,
+          "first_byte_ms": 205.49622800172074
+        },
+        {
+          "chars": 29,
+          "first_byte_ms": 312.1639460005099
+        }
+      ]
+    }
+  },
+  "budget_summary_ms": {
+    "stt_6s_audio": 8.755471331824083,
+    "mem0_search_cached": 115.80442274862435,
+    "llm_first_byte": 92.89914833304162,
+    "tts_first_byte": 238.98124333451656,
+    "webrtc_rtt": 5.845,
+    "estimated_total_ttfb": 462.2852857480067
+  }
+}
