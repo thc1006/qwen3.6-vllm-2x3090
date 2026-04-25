@@ -1,5 +1,6 @@
 {
   "test": "MTP (qwen3_next_mtp / mtp) speculative decoding feasibility on 2× RTX 3090",
+  "_WARNING_config_confound": "This MTP run used `--gpu-memory-utilization 0.80 --max-num-seqs 2` while the no-MTP baseline (results/dialog_baseline.json) used `0.90 / 8`. The published -12% delta therefore conflates MTP-method effect with serve-config effect. The original 0.80/2 was chosen out of OOM caution that the boot_findings block below shows is unnecessary (~0.79 GB per-card overhead, well under the 0.90/0.80 gap). For a clean apples-to-apples MTP A/B with matched flags, see results/modal_2x_a100_v2.json (2x A100-80GB SXM4 NVLink, prompt-4 decode-only delta -11.4%, TTFT-robust).",
   "vllm_version": "0.19.1",
   "model": "QuantTrio/Qwen3.6-35B-A3B-AWQ",
   "config": {

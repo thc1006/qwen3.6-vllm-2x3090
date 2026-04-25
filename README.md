@@ -137,6 +137,9 @@ loses unified VL context) are both worse for this specific use case.
 
 ## MTP speculative decoding — empirical net loss, with A100 cross-hardware corroboration
 
+![Cross-hardware comparison: spec-decode net loss across 3090 single, 3090 TP=2 PCIe, A100 NVLink](analysis/plot_cross_hardware.png)
+
+
 A separate benchmark of `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`
 (qwen3.6's built-in MTP heads) returned **net negative** on single-stream
 batch=1 dialog. This direction matches the sibling
