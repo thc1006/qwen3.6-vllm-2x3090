@@ -134,3 +134,34 @@ Application startup complete: ~ T+135 s from launch
 ## Reproducer
 
 See [README.md](../README.md) and [scripts/](../scripts/).
+
+## Speculative decoding (MTP) — empirical NEGATIVE result
+
+Re-tested 2026-04-25 with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`.
+Full numbers in [`results/mtp_speculative_decoding.json`](../results/mtp_speculative_decoding.json).
+
+| | no-MTP (production) | MTP k=1 |
+|---|---:|---:|
+| Mean tok/s | **126** | 111 |
+| Range | 125–127 | **75–142** |
+| Variance ratio | 1× | **65×** |
+| Best-case speedup | – | +12.6% |
+| Worst-case slowdown | – | **−40%** |
+| Cold-boot overhead | 0 | **+220 s** |
+| Memory per card | 11.62 GiB | 12.41 GiB (+0.8) |
+
+**Verdict: NET LOSS for diverse single-stream voice prompts on AWQ-Marlin Q4 + Ampere.**
+The MTP draft heads are real and load fine (drafter shares the target's `lm_head` and
+embedding weights — only +0.8 GB overhead per card, NOT a 2× model copy as I initially
+feared). The problem is acceptance rate: when the draft misses, you pay the verification
+cost without the parallel-decode payoff. With the baseline already at 126 tok/s, the
+mean drops 12% and variance blows up 65×.
+
+For a robot voice-dialog use case where TTFB consistency matters more than peak
+throughput, **stay on the no-MTP path**. MTP may still help in batched server scenarios
+where verification cost amortizes — not tested here.
+
+This was prematurely reported as "OOM-blocked" in an earlier draft of this repo. That
+was wrong: the OOM at first attempt was caused by external processes (faster-whisper at
+1.4 GB on GPU0 + `gpu_memory_utilization=0.90`). With those factors removed and
+`gpu_memory_utilization=0.80`, MTP boots cleanly. It's just slower for our workload.

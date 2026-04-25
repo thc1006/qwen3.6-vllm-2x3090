@@ -1,0 +1,49 @@
+{
+  "test": "MTP (qwen3_next_mtp / mtp) speculative decoding feasibility on 2× RTX 3090",
+  "vllm_version": "0.19.1",
+  "model": "QuantTrio/Qwen3.6-35B-A3B-AWQ",
+  "config": {
+    "method": "mtp",
+    "num_speculative_tokens": 1,
+    "tensor_parallel_size": 2,
+    "gpu_memory_utilization": 0.80,
+    "max_num_seqs": 2
+  },
+  "boot_findings": {
+    "main_weights_load_s": 60.5,
+    "drafter_weights_load_s": 80.5,
+    "drafter_is_separate_model": false,
+    "drafter_shares_lm_head_and_embedding": true,
+    "model_loading_total_memory_per_card_gb": 12.41,
+    "vs_no_mtp_memory_per_card_gb": 11.62,
+    "memory_overhead_per_card_gb": 0.79,
+    "torch_compile_s": 41.3,
+    "init_engine_s": 71.0,
+    "total_cold_boot_s": 280
+  },
+  "boot_verdict": "MTP boots successfully on 24GB Ampere with gpu_memory_utilization=0.80. Earlier reports of OOM were due to robot_brain Whisper occupying ~1.6GB on GPU0 + gpu_memory_utilization=0.90 leaving no headroom. With those resolved, MTP loads cleanly. Drafter sharing lm_head and embedding weights with target keeps overhead small.",
+  "decode_bench": {
+    "harness": "5 prompts × max_tokens=200 × temperature=0.5 × seed=42 (same set used in baseline)",
+    "results_tok_s": [112.9, 75.8, 132.3, 142.3, 92.8],
+    "mean_tok_s": 111.2,
+    "min_tok_s": 75.8,
+    "max_tok_s": 142.3,
+    "stddev_estimate": 26
+  },
+  "baseline_no_mtp": {
+    "mean_tok_s": 126.4,
+    "min_tok_s": 125.6,
+    "max_tok_s": 126.7,
+    "stddev_estimate": 0.4
+  },
+  "comparison": {
+    "mean_delta_pct": -12.0,
+    "variance_blowup_factor_x": 65,
+    "best_case_speedup_pct": 12.6,
+    "worst_case_slowdown_pct": -40.0
+  },
+  "verdict": "MTP k=1 is a NET LOSS on this configuration for diverse voice-dialog prompts. Mean throughput drops 12% with huge variance. Best-case acceptance gives +12% speedup but worst-case rejection costs -40% (all the verification overhead with no payoff). For a baseline as fast as 126 tok/s, the MTP draft must achieve very high acceptance rate to be net-positive — and qwen3.6's MTP heads on AWQ-Marlin Q4 don't clear that bar on diverse prompts.",
+  "recommendation": "DO NOT enable MTP for low-latency single-stream voice dialog on RTX 3090 + AWQ-Marlin. Stick with the no-MTP baseline (126 tok/s, near-zero variance). MTP may still help in batched server scenarios where the verification cost amortizes across requests — untested here.",
+  "what_did_not_kill_it": "OOM was avoidable. MTP draft is ~0.8GB extra per card, not a 2× model copy.",
+  "what_killed_it": "Acceptance rate. The k=1 draft predictions disagreed with the target enough that mean throughput net-decreased."
+}
