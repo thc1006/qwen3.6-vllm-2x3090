@@ -13,7 +13,38 @@ always-on conversational robot brain.
 - 2× NVIDIA RTX 3090 24GB (SM 8.6, Ampere, no NVLink, PCIe Gen4 x8)
 - Driver 580.126, CUDA 13.0
 - Ubuntu 24.04 LTS, Python 3.12.3
-- Stock GPU clocks, no power-limit changes
+- See [Hardware tuning disclosure](#hardware-tuning-disclosure) below for exact GPU power-limit and OS-level settings used during the bench.
+
+## Hardware tuning disclosure
+
+For full reproducibility — these are the exact deviations from a stock Ubuntu install at the time the v1 / v2 numbers in this repo were collected:
+
+### GPU
+| Setting | Value | Notes |
+|---|---|---|
+| GPU0 power limit (`nvidia-smi -i 0 -pl`) | **220 W** | Factory default is **390 W**. 220 W is the perf-per-watt sweet spot per the v2 power scaling sweep — see [`results/power_scaling_v2.json`](results/power_scaling_v2.json). At 220 W mean throughput is ~122.8 tok/s; at 350 W (≈ factory plateau) it is ~125.7 tok/s. **The v2 power-scaling sweep itself walked through 200/220/250/280/320/350 W**, so factory-equivalent numbers are already in that file. |
+| GPU1 power limit | **350 W** | This is the card's factory max (FE-class), no change. |
+| Memory clock lock (`nvidia-smi -lmc 9751`) | **9751 MHz** | This is the factory **max** memory clock; locking pins it there instead of letting it down-clock at idle. Not an overclock. |
+| Persistence mode (`nvidia-smi -pm 1`) | on | Faster CUDA context init; not a perf knob during inference. |
+| Application clocks (`-ac`) | not used | RTX 3090 GPU Boost auto-manages; `-ac` is a no-op (logs "Treating as warning and moving on"). |
+
+A `systemd` unit applies these on boot:
+[`/etc/systemd/system/nvidia-power-limit.service`](https://github.com/thc1006/reachy-mini-spark-deployment) (in a separate private deployment repo).
+
+### OS-level
+| Setting | Value | Reason |
+|---|---|---|
+| CPU governor (`scaling_governor`) | **performance** | Default Ubuntu uses `powersave`; switching matters because vLLM's per-request scheduler runs hot threads. |
+| Transparent Huge Pages (`/sys/kernel/mm/transparent_hugepage/enabled`) | **always** | Default `madvise`; vLLM's KV cache benefits from THP. |
+| `vm.swappiness` | **10** | Default 60; we don't want kernel evicting Whisper / model weights to swap. |
+| `vm.dirty_ratio` / `dirty_background_ratio` | **40 / 15** | Looser writeback — saves I/O bursts during decode. |
+| TCP buffer max (`net.core.{r,w}mem_max`) | **128 MB** | For Tailscale + WebRTC streaming used by the embodied-robot deployment that motivated this repo. Negligible effect on the LLM bench itself. |
+
+### Quantitative impact
+
+Per [`results/power_scaling_v2.json`](results/power_scaling_v2.json), the difference between our 220 W production setting and a factory-equivalent 350 W setting is **+2.4 % tok/s** (122.8 → 125.7). The MTP NEGATIVE finding (mean −12 %, variance 65×) is **completely insensitive** to this — it manifests at all power levels we tested.
+
+OS tuning effect was not isolated in a separate ablation; the v2 numbers reflect "with full tuning". Public reproduction without any of these tweaks should land within a few percent of our numbers; the qualitative findings will not change.
 
 ## Stack
 
