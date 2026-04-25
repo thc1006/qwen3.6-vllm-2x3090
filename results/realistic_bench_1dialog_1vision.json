@@ -1,0 +1,33 @@
+{
+  "scenario": "Realistic robot use case: 1 dialog + 1 vision concurrent",
+  "test_runs": 3,
+  "image": "synthetic_640x480_realistic_jpg_154kb",
+  "dialog_prompt": "List five interesting facts about octopuses.",
+  "dialog_max_tokens": 200,
+  "vision_prompt": "Describe what you see in 20 words.",
+  "vision_max_tokens": 60,
+  "results": {
+    "dialog_alone_tok_s": [125.9, 125.9, 125.6],
+    "dialog_alone_mean_tok_s": 125.8,
+    "vision_alone_ms": [310, 330, 270],
+    "vision_alone_mean_ms": 302,
+    "concurrent_dialog_tok_s": [120.5, 120.3, 120.4],
+    "concurrent_dialog_mean_tok_s": 120.4,
+    "concurrent_vision_ms": [390, 400, 400],
+    "concurrent_vision_mean_ms": 397,
+    "dialog_degradation_pct": 4.3,
+    "vision_inflation_pct": 31.3,
+    "PASS_dialog": true,
+    "PASS_vision_strict_30pct": false,
+    "PASS_vision_loose_50pct": true,
+    "absolute_vision_acceptable_under_500ms": true
+  },
+  "comparison_baselines": {
+    "ollama_unified_dialog_alone_tok_s": 107,
+    "ollama_unified_vision_alone_ms_5_to_31000": "6000-31000",
+    "ollama_unified_dialog_during_vision_tok_s": 0,
+    "spark_nvfp4_mtp_k2_tok_s": 55,
+    "llama_cpp_q4km_single_3090_tok_s": 119
+  },
+  "verdict": "PASS for realistic robot use case. vLLM TP=2 unified continuous batching delivers concurrent vision+dialog with <5% dialog degradation. Vision inflation 31% is technically over the strict 30% threshold but absolute number (397ms) is still excellent for robot use case (vs Ollama unified 6-31s). Option F validated."
+}

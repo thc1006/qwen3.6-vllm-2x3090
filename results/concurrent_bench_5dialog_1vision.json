@@ -1,0 +1,13 @@
+{
+  "T1_dialog_mean_tok_s": 114.96394607124773,
+  "T1_dialog_min": 89.11279250317843,
+  "T1_dialog_max": 126.1086916123354,
+  "T2_vision_mean_s": 0.5210277973334693,
+  "T3_concurrent_dialog_mean_tok_s": 46.64180552764427,
+  "T3_concurrent_vision_s": 1.4727268920014467,
+  "dialog_degradation_pct": 59.42918878346566,
+  "vision_inflation_pct": 182.65802698792845,
+  "PASS_dialog": false,
+  "PASS_vision": false,
+  "PASS_overall": false
+}

@@ -1,0 +1,22 @@
+{
+  "endpoint": "http://127.0.0.1:8000/v1/chat/completions",
+  "model": "qwen36-awq",
+  "served_model": "QuantTrio/Qwen3.6-35B-A3B-AWQ",
+  "hardware": "2x RTX 3090 24GB, vLLM 0.19.1, TP=2, AWQ-Marlin",
+  "scenario": "Dialog-only sequential, max_tokens=200, temperature=0.5, seed=42",
+  "results": [
+    {"prompt_idx": 1, "ct": 200, "elapsed_s": 1.59, "tok_s": 125.6},
+    {"prompt_idx": 2, "ct": 200, "elapsed_s": 1.58, "tok_s": 126.5},
+    {"prompt_idx": 3, "ct": 200, "elapsed_s": 1.58, "tok_s": 126.6},
+    {"prompt_idx": 4, "ct": 200, "elapsed_s": 1.58, "tok_s": 126.7},
+    {"prompt_idx": 5, "ct": 200, "elapsed_s": 1.58, "tok_s": 126.6}
+  ],
+  "summary": {
+    "mean_tok_s": 126.4,
+    "min_tok_s": 125.6,
+    "max_tok_s": 126.7,
+    "vs_ollama_baseline_pct": "+18% (107 → 126)",
+    "vs_llama_cpp_baseline_pct": "+6% (119 → 126)",
+    "vs_spark_nvfp4_pct": "+129% (55 → 126)"
+  }
+}
