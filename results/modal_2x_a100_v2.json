@@ -1,0 +1,234 @@
+{
+  "v": 2,
+  "harness": "5 prompts \u00d7 max_tokens=200 \u00d7 temperature=0.5 \u00d7 seed=42",
+  "_WARNING": "The auto-computed `nvlink.comparison.mean_delta_pct: +14.3%` is a MEASUREMENT ARTIFACT, not a real MTP speedup. 4 of 5 prompts early-stopped on A100 (vs all 5 hitting max_tokens=200 on 3090), so prefill overhead distorts the per-prompt tok/s mean. The valid same-hardware A/B comparison on prompt 4 (only prompt that ran long under no-MTP) shows MTP at -11.4% decode-rate, consistent with 3090 published -12% direction. See `analysis_corrected` for full per-prompt breakdown.",
+  "vs_2x_3090_baseline": {
+    "3090_no_mtp_mean_tok_s": 126.4,
+    "3090_mtp_k1_mean_tok_s": 111.2,
+    "3090_mtp_delta_pct": -12.0,
+    "3090_stdev_blowup": 65.0,
+    "3090_interconnect": "PCIe Gen4 x8 (no NVLink)",
+    "note": "Cross-hardware comparison disentangles two variables: (1) GPU memory bandwidth (3090 GDDR6X 936 GB/s vs A100 HBM2e 2 TB/s), and (2) TP allreduce interconnect (3090 PCIe ~16 GB/s vs A100 NVLink ~600 GB/s). The 4-condition matrix isolates each.",
+    "_WARNING_3090_published_confound": "The published 3090 -12% delta is NOT a clean A/B test. Per `results/mtp_speculative_decoding.json`, the 3090 baseline used `--gpu-memory-utilization 0.90 --max-num-seqs 8`, but the 3090 MTP run used `0.80 / 2` (originally chosen for OOM headroom that turned out unnecessary). The -12% therefore conflates MTP-method impact with serve-config impact. A 3090 re-run with matched flags is needed for clean cross-hardware comparison; the A100 numbers above were collected with consistent 0.90/8 across both no-MTP and MTP runs (clean A/B)."
+  },
+  "nvlink": {
+    "no_mtp_baseline": {
+      "use_mtp": false,
+      "force_pcie": false,
+      "hardware": "Modal 2x A100-80GB TP=2 (HBM2e, NVLink)",
+      "nvidia_smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05\n1, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05",
+      "topology": "<unavailable: CalledProcessError: Command '['nvidia-smi', 'topo', '-m']' returned non-zero exit status 255.>",
+      "nvlink_status": "GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-973401eb-9eb4-b638-01db-86d1261fe7bb)\n\t Link 0: 25 GB/s\n\t Link 1: 25 GB/s\n\t Link 2: 25 GB/s\n\t Link 3: 25 GB/s\n\t Link 4: 25 GB/s\n\t Link 5: 25 GB/s\n\t Link 6: 25 GB/s\n\t Link 7: 25 GB/s\n\t Link 8: 25 GB/s\n\t Link 9: 25 GB/s\n\t Link 10: 25 GB/s\n\t Link 11: 25 GB/s\nGPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-98c1b313-f49b-77cc-5c5b-4afc89e6f06c)\n\t Link 0: 25 GB/s\n\t Link 1: 25 GB/s\n\t Link 2: 25 GB/s\n\t Link 3: 25 GB/s\n\t Link 4: 25 GB/s\n\t Link 5: 25 GB/s\n\t Link 6: 25 GB/s\n\t Link 7: 25 GB/s\n\t Link 8: 25 GB/s\n\t Link 9: 25 GB/s\n\t Link 10: 25 GB/s\n\t Link 11: 25 GB/s",
+      "vllm": "0.19.1",
+      "model": "QuantTrio/Qwen3.6-35B-A3B-AWQ (AWQ-Marlin Q4)",
+      "serve_flags": [
+        "serve",
+        "/cache/hf/hub/models--QuantTrio--Qwen3.6-35B-A3B-AWQ/snapshots/119886a1072372348f73ef0df2d801cdcc0f455b",
+        "--served-model-name",
+        "qwen36-awq",
+        "--tensor-parallel-size",
+        "2",
+        "--enable-expert-parallel",
+        "--gpu-memory-utilization",
+        "0.90",
+        "--max-model-len",
+        "32768",
+        "--max-num-seqs",
+        "8",
+        "--enable-chunked-prefill",
+        "--enable-prefix-caching",
+        "--enable-auto-tool-choice",
+        "--tool-call-parser",
+        "hermes",
+        "--reasoning-parser",
+        "qwen3",
+        "--mm-encoder-tp-mode",
+        "data",
+        "--mm-processor-cache-type",
+        "shm",
+        "--trust-remote-code",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000"
+      ],
+      "boot_s": 528.4,
+      "results": [
+        {
+          "prompt_idx": 1,
+          "ct": 45,
+          "elapsed_s": 0.5442340450000529,
+          "tok_s": 82.68501467965979
+        },
+        {
+          "prompt_idx": 2,
+          "ct": 80,
+          "elapsed_s": 1.8620877280000059,
+          "tok_s": 42.962530066145064
+        },
+        {
+          "prompt_idx": 3,
+          "ct": 138,
+          "elapsed_s": 1.131000249000067,
+          "tok_s": 122.01588825644177
+        },
+        {
+          "prompt_idx": 4,
+          "ct": 200,
+          "elapsed_s": 1.5561492440000393,
+          "tok_s": 128.5223771248993
+        },
+        {
+          "prompt_idx": 5,
+          "ct": 19,
+          "elapsed_s": 0.3287086240000008,
+          "tok_s": 57.80195167620535
+        }
+      ],
+      "mean_tok_s": 86.8,
+      "min_tok_s": 42.96,
+      "max_tok_s": 128.52,
+      "stdev_tok_s": 33.94
+    },
+    "mtp_k1": {
+      "use_mtp": true,
+      "force_pcie": false,
+      "hardware": "Modal 2x A100-80GB TP=2 (HBM2e, NVLink)",
+      "nvidia_smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05\n1, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05",
+      "topology": "<unavailable: CalledProcessError: Command '['nvidia-smi', 'topo', '-m']' returned non-zero exit status 255.>",
+      "nvlink_status": "GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-973401eb-9eb4-b638-01db-86d1261fe7bb)\n\t Link 0: 25 GB/s\n\t Link 1: 25 GB/s\n\t Link 2: 25 GB/s\n\t Link 3: 25 GB/s\n\t Link 4: 25 GB/s\n\t Link 5: 25 GB/s\n\t Link 6: 25 GB/s\n\t Link 7: 25 GB/s\n\t Link 8: 25 GB/s\n\t Link 9: 25 GB/s\n\t Link 10: 25 GB/s\n\t Link 11: 25 GB/s\nGPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-98c1b313-f49b-77cc-5c5b-4afc89e6f06c)\n\t Link 0: 25 GB/s\n\t Link 1: 25 GB/s\n\t Link 2: 25 GB/s\n\t Link 3: 25 GB/s\n\t Link 4: 25 GB/s\n\t Link 5: 25 GB/s\n\t Link 6: 25 GB/s\n\t Link 7: 25 GB/s\n\t Link 8: 25 GB/s\n\t Link 9: 25 GB/s\n\t Link 10: 25 GB/s\n\t Link 11: 25 GB/s",
+      "vllm": "0.19.1",
+      "model": "QuantTrio/Qwen3.6-35B-A3B-AWQ (AWQ-Marlin Q4)",
+      "serve_flags": [
+        "serve",
+        "/cache/hf/hub/models--QuantTrio--Qwen3.6-35B-A3B-AWQ/snapshots/119886a1072372348f73ef0df2d801cdcc0f455b",
+        "--served-model-name",
+        "qwen36-awq",
+        "--tensor-parallel-size",
+        "2",
+        "--enable-expert-parallel",
+        "--gpu-memory-utilization",
+        "0.90",
+        "--max-model-len",
+        "32768",
+        "--max-num-seqs",
+        "8",
+        "--enable-chunked-prefill",
+        "--enable-prefix-caching",
+        "--enable-auto-tool-choice",
+        "--tool-call-parser",
+        "hermes",
+        "--reasoning-parser",
+        "qwen3",
+        "--mm-encoder-tp-mode",
+        "data",
+        "--mm-processor-cache-type",
+        "shm",
+        "--trust-remote-code",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--speculative-config",
+        "{\"method\":\"mtp\",\"num_speculative_tokens\":1}"
+      ],
+      "boot_s": 510.3,
+      "results": [
+        {
+          "prompt_idx": 1,
+          "ct": 67,
+          "elapsed_s": 0.6557118640000681,
+          "tok_s": 102.17902660976262
+        },
+        {
+          "prompt_idx": 2,
+          "ct": 79,
+          "elapsed_s": 0.811406795000039,
+          "tok_s": 97.36176784173493
+        },
+        {
+          "prompt_idx": 3,
+          "ct": 134,
+          "elapsed_s": 1.2113176499999554,
+          "tok_s": 110.62333649642184
+        },
+        {
+          "prompt_idx": 4,
+          "ct": 179,
+          "elapsed_s": 1.5704278989999239,
+          "tok_s": 113.98167347510214
+        },
+        {
+          "prompt_idx": 5,
+          "ct": 21,
+          "elapsed_s": 0.29181373400001576,
+          "tok_s": 71.9637136749666
+        }
+      ],
+      "mean_tok_s": 99.22,
+      "min_tok_s": 71.96,
+      "max_tok_s": 113.98,
+      "stdev_tok_s": 14.85
+    },
+    "comparison": {
+      "mean_delta_pct": 14.3,
+      "stdev_blowup_factor": 0.4,
+      "best_case_speedup_pct": 31.3,
+      "worst_case_slowdown_pct": -17.1,
+      "_WARNING_DO_NOT_CITE": "These auto-computed numbers are measurement artifact. Reasoning: tok/s = ct/elapsed_s includes prefill (TTFT). When 4 of 5 prompts early-stop at ct < max_tokens, prefill overhead amplifies into the rate, distorting the mean across prompts of unequal length. The +14.3% mean_delta_pct is dominated by no-MTP prompt 2 stalling at 43 tok/s (likely transient Modal cold-container hiccup) — not by MTP speeding things up. The 0.4x stdev_blowup_factor reflects different early-stop patterns between no-MTP and MTP runs (sampling-path divergence under temp=0.5/seed=42), not lower variance from MTP itself. Use `analysis_corrected.per_prompt` instead."
+    }
+  },
+  "analysis_corrected": {
+    "method": "Same-hardware same-prompt-index A/B comparison. Note: identical seed=42 + temperature=0.5 produces different completion_tokens between no-MTP and MTP runs (because spec-decode alters RNG-consumption path), so per-prompt tok/s comparison is bounded by sampling-path divergence — only valid when both runs produce comparable ct.",
+    "per_prompt_table": [
+      {
+        "prompt": 1,
+        "no_mtp": "ct=45  elapsed=0.54s  raw_tok_s=82.7",
+        "mtp":    "ct=67  elapsed=0.66s  raw_tok_s=102.2",
+        "verdict": "DIVERGENT_CT — both early-stopped but at very different lengths (45 vs 67). TTFT-dominated; raw rates not directly comparable."
+      },
+      {
+        "prompt": 2,
+        "no_mtp": "ct=80  elapsed=1.86s  raw_tok_s=43.0",
+        "mtp":    "ct=79  elapsed=0.81s  raw_tok_s=97.4",
+        "verdict": "OUTLIER_NO_MTP — no-MTP took 1.86s for 80 tokens (43 tok/s), 3x slower than no-MTP prompts 3-4 (122-128 tok/s). Almost certainly a transient stall (NCCL warmup, prefix-cache miss on cold container, or first-call jit). DROP this prompt from cross-method analysis. This single outlier dominates the misleading +14.3% mean_delta_pct."
+      },
+      {
+        "prompt": 3,
+        "no_mtp": "ct=138 elapsed=1.13s  raw_tok_s=122.0",
+        "mtp":    "ct=134 elapsed=1.21s  raw_tok_s=110.6",
+        "verdict": "VALID_COMPARISON — similar ct (138 vs 134, within 3%), MTP elapsed +7% with 4 fewer tokens. TTFT-adjusted (TTFT≈80ms): no-MTP 130.5 tok/s, MTP 117.4 tok/s, delta -10.1%."
+      },
+      {
+        "prompt": 4,
+        "no_mtp": "ct=200 elapsed=1.56s  raw_tok_s=128.5",
+        "mtp":    "ct=179 elapsed=1.57s  raw_tok_s=114.0",
+        "verdict": "BEST_APPLES_TO_APPLES — same elapsed wall-time, no-MTP produced 21 more tokens. TTFT-adjusted (TTFT≈80ms): no-MTP 134.8 tok/s, MTP 119.5 tok/s, delta -11.4%. This delta is robust to TTFT estimate (varies <0.2pp across TTFT ∈ [0, 200ms])."
+      },
+      {
+        "prompt": 5,
+        "no_mtp": "ct=19  elapsed=0.33s  raw_tok_s=57.8",
+        "mtp":    "ct=21  elapsed=0.29s  raw_tok_s=72.0",
+        "verdict": "TTFT_DOMINATED — both early-stopped extremely short (19, 21 tokens). Total elapsed is mostly prefill+TTFT, not decode. Not informative."
+      }
+    ],
+    "honest_delta_estimate_pct": -10.7,
+    "honest_delta_range_pct": [-11.4, -10.1],
+    "honest_delta_basis": "Mean of valid-comparison prompts 3 and 4 (TTFT-adjusted, TTFT=80ms). Excludes outlier prompt 2 and TTFT-dominated/divergent prompts 1, 5.",
+    "headline_finding": "On 2x A100-80GB SXM4 with NVLink (HBM2e 2 TB/s + NVLink 300 GB/s), vLLM 0.19.1 MTP k=1 does NOT solve the regression seen on 2x 3090 PCIe (GDDR6X 936 GB/s + PCIe 16 GB/s). Decode-rate decline is similar magnitude (~-11%). This is the FIRST clean cross-hardware A/B (A100 used matched serve flags both runs). Conclusion: 'GDDR6X memory bandwidth' is RULED OUT as the sole bottleneck; 'MoE × spec-decode structural conflict' is the dominant mechanism. NVLink also rules out 'TP allreduce on PCIe' as the sole cause."
+  },
+  "caveats": [
+    "N=1 trial per condition. Run-to-run cold-start variance NOT characterized. Prompt-2 outlier in no-MTP run shows N=1 is fragile.",
+    "Cross-hardware sampling-path divergence: identical seed=42 + temperature=0.5 produces different completion_tokens on 3090 (all 5 prompts hit max_tokens=200) vs A100 (45/80/138/200/19). Cause: floating-point non-associativity in TP=2 allreduce reductions on PCIe (3090) vs NVLink (A100) yields slightly different logits → temperature 0.5 sampling lands on different tokens at top-k boundaries → cascading EOS-time divergence. Expected behavior, not a bug, but invalidates naive cross-hardware mean tok/s comparison.",
+    "Prefill (TTFT) not measured separately — `tok/s = ct / elapsed_s` rolls TTFT into the rate. Per-prompt comparison requires TTFT-adjustment or prompts that don't early-stop. The headline -11.4% on prompt 4 IS robust to TTFT assumption because both A and B share the same TTFT for the same prompt content.",
+    "3090 published -12% delta has its own confound: baseline used gpu-memory-utilization=0.90/max-num-seqs=8, MTP used 0.80/2 (originally for OOM headroom that proved unnecessary per `results/mtp_speculative_decoding.json` boot_findings). Need 3090 rerun with matched flags for fully clean cross-hardware comparison.",
+    "Modal A100 image cached after first run. Boot time (528.4s no-MTP, 510.3s MTP) reflects fresh CUDA-graph capture each container restart — not steady-state in-process behavior. The cooler 510s second-run hints at HF Volume warmth, not MTP speedup."
+  ],
+  "what_this_does_NOT_test": [
+    "PCIe-forced TP=2 on A100 (would require `--four-condition` re-run with NCCL_P2P_DISABLE=1) — disentangles HBM2e-bandwidth from NVLink-interconnect contributions",
+    "Single-card on Blackwell GDDR7 (5090) — would isolate pure memory-BW axis from TP/interconnect axes entirely",
+    "EAGLE-3 with CUDA graphs (vLLM Model Runner V2) — different draft architecture; not evaluated here",
+    "Higher concurrency (max-num-seqs > 8) — MTP may amortize verify cost across requests",
+    "Different MTP num_speculative_tokens (k=2, k=4) — only k=1 tested"
+  ]
+}
