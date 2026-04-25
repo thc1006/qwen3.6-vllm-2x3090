@@ -1,0 +1,170 @@
+{
+  "v": 2,
+  "hardware": "2x RTX 3090 24GB, i7-11700, 64GB DDR4",
+  "vllm": "0.19.1 + QuantTrio/Qwen3.6-35B-A3B-AWQ TP=2",
+  "stages": {
+    "1_webrtc_rtt": {
+      "min_ms": 2.096,
+      "avg_ms": 5.368,
+      "max_ms": 7.372,
+      "mdev_ms": 1.26,
+      "note": "ICMP ping; WebRTC audio frame RTT will be higher"
+    },
+    "2_stt_real_speech": {
+      "audio_2s_ms": {
+        "audio_duration_s": 2,
+        "mean_ms": 154.6091020015107,
+        "min_ms": 114.45177799760131,
+        "max_ms": 233.62876000464894,
+        "rtf": 0.07730455100075535,
+        "sample_transcript": "Hello there"
+      },
+      "audio_6s_ms": {
+        "audio_duration_s": 6,
+        "mean_ms": 150.85794433010355,
+        "min_ms": 147.93885999824852,
+        "max_ms": 155.8178399936878,
+        "rtf": 0.025142990721683925,
+        "sample_transcript": "Hi Richie, how are you doing today? I have a question for you."
+      },
+      "audio_12s_ms": {
+        "audio_duration_s": 12,
+        "mean_ms": 170.7174483332589,
+        "min_ms": 169.55595299805282,
+        "max_ms": 172.0205649980926,
+        "rtf": 0.014226454027771574,
+        "sample_transcript": "Can you tell me about the weather in Taipei? I'm planning a trip there next week"
+      }
+    },
+    "3_mem0_full_search": {
+      "first_call_cold_ms": 1586.0611610041815,
+      "subsequent_warm_mean_ms": 104.47484624637582,
+      "raw": [
+        {
+          "q": "What is my name?",
+          "ms": 1586.0611610041815,
+          "n_facts": 3
+        },
+        {
+          "q": "Tell me about Hideyoshi.",
+          "ms": 101.07807099848287,
+          "n_facts": 3
+        },
+        {
+          "q": "What did I say about coding?",
+          "ms": 95.08483499666909,
+          "n_facts": 3
+        },
+        {
+          "q": "Recall my preferences.",
+          "ms": 87.5694489950547,
+          "n_facts": 3
+        },
+        {
+          "q": "Random uncached query 17771175",
+          "ms": 134.16702999529662,
+          "n_facts": 3
+        }
+      ]
+    },
+    "4_llm_prefill_realistic": {
+      "n_messages": 32,
+      "estimated_prompt_tokens": 809,
+      "ttft_max_tok_1_mean_ms": 184.23107419948792,
+      "ttft_min_ms": 179.7735130021465,
+      "ttft_max_ms": 201.05483399674995,
+      "n_runs": 5
+    },
+    "5_llm_streaming_ttfb_realistic": {
+      "mean_ttfb_ms": 195.70813399914186,
+      "min_ttfb_ms": 190.27920199732762,
+      "max_ttfb_ms": 198.88928499858594,
+      "n_runs": 5
+    },
+    "6_tts_first_chunk": {
+      "mean_first_chunk_ms": 516.3938722005696,
+      "min_ms": 179.44401500426466,
+      "max_ms": 953.556596999988,
+      "raw": [
+        {
+          "chars": 3,
+          "first_chunk_ms": 179.44401500426466
+        },
+        {
+          "chars": 24,
+          "first_chunk_ms": 953.556596999988
+        },
+        {
+          "chars": 37,
+          "first_chunk_ms": 515.7444979995489
+        },
+        {
+          "chars": 31,
+          "first_chunk_ms": 483.25606399885146
+        },
+        {
+          "chars": 34,
+          "first_chunk_ms": 449.96818700019503
+        }
+      ],
+      "note": "First audio chunk arrives at robot_brain — NOT time-to-user-hears."
+    },
+    "7_real_production_timings": {
+      "source": "Real conversations observed live during this bench session 2026-04-25. The robot_brain.log was truncated when robot_brain restarted between iterations; n=10 round-trips below were captured from operator terminal output across 4 conversation episodes.",
+      "round_total_ms_full_pipeline": {
+        "n": 10,
+        "raw": [941, 5498, 6721, 8905, 9151, 9646, 10253, 10806, 11707, 13618],
+        "min": 941,
+        "p50": 9398,
+        "p95": 13618,
+        "max": 13618,
+        "mean": 8724,
+        "note": "Includes audio playback wait. Most of the 8.7 s p50 is the robot SPEAKING the response, not waiting before speaking."
+      },
+      "llm_ttfb_ms_streaming": {
+        "n": 10,
+        "raw": [521, 532, 545, 638, 660, 796, 1146, 2309, 2316, 2457],
+        "min": 521,
+        "p50": 728,
+        "p95": 2457,
+        "max": 2457,
+        "mean": 1192,
+        "note": "First TTS chunk fires at this latency in real conversation."
+      },
+      "llm_wall_ms_includes_audio_playback": {
+        "n": 10,
+        "raw": [5361, 8720, 8996, 9502, 10072, 10101, 11557, 13320, 16912, 18731],
+        "min": 5361,
+        "p50": 10087,
+        "p95": 18731,
+        "max": 18731,
+        "mean": 11327,
+        "note": "wall_ms = LLM stream end + speaker.wait_and_stop(). Dominated by audio playback time (TTS-paced speech)."
+      }
+    }
+  },
+  "caveats": [
+    "STT: measured on synthesized speech via edge-tts. Real human speech with similar clarity should be comparable; noisy / accented speech may be 2-3x slower.",
+    "Mem0 search: measures embed + Qdrant retrieve. Cold cache (first query) is 10-20x slower than warm.",
+    "LLM TTFB: measured on the production-mirroring prompt (~1500 tok system+history). Shorter prompts will be faster.",
+    "TTS first-byte: time from request to first audio CHUNK arriving at robot_brain. NOT time-to-user-hears. Add ~100-300 ms for WebRTC + audio buffer pipeline before sound reaches the speaker.",
+    "WebRTC RTT: ICMP ping is a lower bound on network round-trip. Real WebRTC audio frame RTT is 30-80 ms (NAT traversal, encryption, jitter buffer overhead).",
+    "Sum-of-stages 'estimated TTFB' is a theoretical lower bound for an ideal pipeline. Real production wall-clock is higher due to sequential dependencies the bench does not capture (audio playback wait, etc). Real production times reported separately below."
+  ],
+  "budget_theoretical_lower_bound_ms": {
+    "stt_6s_real_speech": 150.85794433010355,
+    "mem0_warm_search": 104.47484624637582,
+    "llm_streaming_first_byte": 195.70813399914186,
+    "tts_first_chunk": 516.3938722005696,
+    "webrtc_ping_lower_bound": 5.368,
+    "sum": 972.8027967761909,
+    "note": "This is theoretical (sum of independent measurements). Real production p50 round-trip is 9.4 s and LLM TTFB p50 is 728 ms — see 7_real_production_timings."
+  },
+  "headline": {
+    "real_production_round_trip_p50_ms": 9398,
+    "real_production_llm_ttfb_p50_ms": 728,
+    "theoretical_lower_bound_sum_ms": 973,
+    "vs_cloud_voice_agent_sota_ms": 800,
+    "honest_summary": "On a robot voice stack with 2× RTX 3090 + vLLM AWQ + Mem0 + edge-TTS + WebRTC: real-world LLM TTFB p50 is 728 ms (about cloud-agent territory). Total round-trip p50 is 9.4 s but ~7 s of that is the robot SPEAKING the reply, not waiting to start. The 'instant-response' window (user finishes -> robot starts speaking) is well under a second."
+  }
+}

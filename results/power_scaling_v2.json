@@ -1,0 +1,44 @@
+[
+  {
+    "pl_w": 200,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 200, "mean_tps_per_prompt": 120.04, "agg_tok_s": 120.04, "ct_total": 1449, "dt_total": 12.07, "gpu0_avg_w": 192.5, "gpu0_max_w": 199.8, "gpu1_avg_w": 189.6, "gpu1_max_w": 199.5, "power_samples": 23},{"run_idx": 2, "pl_w": 200, "mean_tps_per_prompt": 120.21, "agg_tok_s": 120.2, "ct_total": 1471, "dt_total": 12.24, "gpu0_avg_w": 198.0, "gpu0_max_w": 199.8, "gpu1_avg_w": 197.6, "gpu1_max_w": 200.3, "power_samples": 24},{"run_idx": 3, "pl_w": 200, "mean_tps_per_prompt": 120.52, "agg_tok_s": 120.52, "ct_total": 1486, "dt_total": 12.33, "gpu0_avg_w": 196.0, "gpu0_max_w": 199.9, "gpu1_avg_w": 196.2, "gpu1_max_w": 199.8, "power_samples": 24},{"run_idx": 4, "pl_w": 200, "mean_tps_per_prompt": 120.24, "agg_tok_s": 120.24, "ct_total": 1461, "dt_total": 12.15, "gpu0_avg_w": 196.6, "gpu0_max_w": 200.8, "gpu1_avg_w": 196.6, "gpu1_max_w": 200.7, "power_samples": 23},{"run_idx": 5, "pl_w": 200, "mean_tps_per_prompt": 120.22, "agg_tok_s": 120.22, "ct_total": 1469, "dt_total": 12.22, "gpu0_avg_w": 198.8, "gpu0_max_w": 200.5, "gpu1_avg_w": 198.5, "gpu1_max_w": 200.0, "power_samples": 24}]
+  }
+,  {
+    "pl_w": 220,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 220, "mean_tps_per_prompt": 122.95, "agg_tok_s": 122.95, "ct_total": 1477, "dt_total": 12.01, "gpu0_avg_w": 206.0, "gpu0_max_w": 215.9, "gpu1_avg_w": 205.1, "gpu1_max_w": 216.2, "power_samples": 23},{"run_idx": 2, "pl_w": 220, "mean_tps_per_prompt": 122.83, "agg_tok_s": 122.83, "ct_total": 1444, "dt_total": 11.76, "gpu0_avg_w": 213.0, "gpu0_max_w": 216.1, "gpu1_avg_w": 213.3, "gpu1_max_w": 216.2, "power_samples": 23},{"run_idx": 3, "pl_w": 220, "mean_tps_per_prompt": 122.69, "agg_tok_s": 122.7, "ct_total": 1457, "dt_total": 11.87, "gpu0_avg_w": 210.6, "gpu0_max_w": 215.8, "gpu1_avg_w": 210.5, "gpu1_max_w": 215.4, "power_samples": 23},{"run_idx": 4, "pl_w": 220, "mean_tps_per_prompt": 122.63, "agg_tok_s": 122.64, "ct_total": 1464, "dt_total": 11.94, "gpu0_avg_w": 211.5, "gpu0_max_w": 215.9, "gpu1_avg_w": 211.3, "gpu1_max_w": 215.4, "power_samples": 23},{"run_idx": 5, "pl_w": 220, "mean_tps_per_prompt": 122.71, "agg_tok_s": 122.71, "ct_total": 1498, "dt_total": 12.21, "gpu0_avg_w": 212.1, "gpu0_max_w": 216.1, "gpu1_avg_w": 212.5, "gpu1_max_w": 216.4, "power_samples": 24}]
+  }
+,  {
+    "pl_w": 250,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 250, "mean_tps_per_prompt": 124.4, "agg_tok_s": 124.39, "ct_total": 1461, "dt_total": 11.75, "gpu0_avg_w": 220.0, "gpu0_max_w": 234.4, "gpu1_avg_w": 222.7, "gpu1_max_w": 234.9, "power_samples": 23},{"run_idx": 2, "pl_w": 250, "mean_tps_per_prompt": 124.7, "agg_tok_s": 124.69, "ct_total": 1454, "dt_total": 11.66, "gpu0_avg_w": 227.9, "gpu0_max_w": 235.8, "gpu1_avg_w": 229.2, "gpu1_max_w": 235.1, "power_samples": 23},{"run_idx": 3, "pl_w": 250, "mean_tps_per_prompt": 124.92, "agg_tok_s": 124.96, "ct_total": 1506, "dt_total": 12.05, "gpu0_avg_w": 228.3, "gpu0_max_w": 236.1, "gpu1_avg_w": 229.8, "gpu1_max_w": 236.6, "power_samples": 23},{"run_idx": 4, "pl_w": 250, "mean_tps_per_prompt": 124.71, "agg_tok_s": 124.72, "ct_total": 1488, "dt_total": 11.93, "gpu0_avg_w": 232.2, "gpu0_max_w": 236.3, "gpu1_avg_w": 232.0, "gpu1_max_w": 236.1, "power_samples": 23},{"run_idx": 5, "pl_w": 250, "mean_tps_per_prompt": 124.7, "agg_tok_s": 124.71, "ct_total": 1477, "dt_total": 11.84, "gpu0_avg_w": 231.3, "gpu0_max_w": 237.0, "gpu1_avg_w": 231.6, "gpu1_max_w": 236.6, "power_samples": 23}]
+  }
+,  {
+    "pl_w": 280,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 280, "mean_tps_per_prompt": 125.51, "agg_tok_s": 125.5, "ct_total": 1480, "dt_total": 11.79, "gpu0_avg_w": 233.5, "gpu0_max_w": 247.4, "gpu1_avg_w": 239.8, "gpu1_max_w": 254.4, "power_samples": 23},{"run_idx": 2, "pl_w": 280, "mean_tps_per_prompt": 125.49, "agg_tok_s": 125.48, "ct_total": 1466, "dt_total": 11.68, "gpu0_avg_w": 239.9, "gpu0_max_w": 249.1, "gpu1_avg_w": 248.2, "gpu1_max_w": 256.0, "power_samples": 23},{"run_idx": 3, "pl_w": 280, "mean_tps_per_prompt": 125.91, "agg_tok_s": 125.96, "ct_total": 1524, "dt_total": 12.1, "gpu0_avg_w": 240.0, "gpu0_max_w": 249.7, "gpu1_avg_w": 248.0, "gpu1_max_w": 256.9, "power_samples": 23},{"run_idx": 4, "pl_w": 280, "mean_tps_per_prompt": 125.64, "agg_tok_s": 125.65, "ct_total": 1481, "dt_total": 11.79, "gpu0_avg_w": 245.3, "gpu0_max_w": 250.7, "gpu1_avg_w": 249.4, "gpu1_max_w": 254.8, "power_samples": 23},{"run_idx": 5, "pl_w": 280, "mean_tps_per_prompt": 125.61, "agg_tok_s": 125.62, "ct_total": 1477, "dt_total": 11.76, "gpu0_avg_w": 242.7, "gpu0_max_w": 251.5, "gpu1_avg_w": 247.7, "gpu1_max_w": 256.9, "power_samples": 23}]
+  }
+,  {
+    "pl_w": 320,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 320, "mean_tps_per_prompt": 125.44, "agg_tok_s": 125.43, "ct_total": 1498, "dt_total": 11.94, "gpu0_avg_w": 234.2, "gpu0_max_w": 249.2, "gpu1_avg_w": 238.6, "gpu1_max_w": 254.6, "power_samples": 23},{"run_idx": 2, "pl_w": 320, "mean_tps_per_prompt": 125.57, "agg_tok_s": 125.56, "ct_total": 1455, "dt_total": 11.59, "gpu0_avg_w": 242.6, "gpu0_max_w": 250.4, "gpu1_avg_w": 250.5, "gpu1_max_w": 257.0, "power_samples": 22},{"run_idx": 3, "pl_w": 320, "mean_tps_per_prompt": 125.89, "agg_tok_s": 125.9, "ct_total": 1504, "dt_total": 11.95, "gpu0_avg_w": 247.0, "gpu0_max_w": 251.9, "gpu1_avg_w": 254.3, "gpu1_max_w": 259.3, "power_samples": 23},{"run_idx": 4, "pl_w": 320, "mean_tps_per_prompt": 125.75, "agg_tok_s": 125.77, "ct_total": 1499, "dt_total": 11.92, "gpu0_avg_w": 245.0, "gpu0_max_w": 252.1, "gpu1_avg_w": 253.4, "gpu1_max_w": 260.9, "power_samples": 23},{"run_idx": 5, "pl_w": 320, "mean_tps_per_prompt": 125.43, "agg_tok_s": 125.44, "ct_total": 1482, "dt_total": 11.81, "gpu0_avg_w": 245.6, "gpu0_max_w": 253.1, "gpu1_avg_w": 252.3, "gpu1_max_w": 258.6, "power_samples": 23}]
+  }
+,  {
+    "pl_w": 350,
+    "settle_s": 30,
+    "n_runs": 5,
+    "max_tokens": 500,
+    "runs": [{"run_idx": 1, "pl_w": 350, "mean_tps_per_prompt": 125.45, "agg_tok_s": 125.44, "ct_total": 1508, "dt_total": 12.02, "gpu0_avg_w": 234.5, "gpu0_max_w": 250.5, "gpu1_avg_w": 240.1, "gpu1_max_w": 255.2, "power_samples": 23},{"run_idx": 2, "pl_w": 350, "mean_tps_per_prompt": 125.67, "agg_tok_s": 125.66, "ct_total": 1484, "dt_total": 11.81, "gpu0_avg_w": 246.0, "gpu0_max_w": 252.1, "gpu1_avg_w": 251.5, "gpu1_max_w": 257.1, "power_samples": 23},{"run_idx": 3, "pl_w": 350, "mean_tps_per_prompt": 125.89, "agg_tok_s": 125.89, "ct_total": 1492, "dt_total": 11.85, "gpu0_avg_w": 244.7, "gpu0_max_w": 253.4, "gpu1_avg_w": 251.9, "gpu1_max_w": 259.1, "power_samples": 23},{"run_idx": 4, "pl_w": 350, "mean_tps_per_prompt": 125.91, "agg_tok_s": 125.93, "ct_total": 1488, "dt_total": 11.82, "gpu0_avg_w": 246.2, "gpu0_max_w": 253.7, "gpu1_avg_w": 254.0, "gpu1_max_w": 260.4, "power_samples": 23},{"run_idx": 5, "pl_w": 350, "mean_tps_per_prompt": 125.54, "agg_tok_s": 125.54, "ct_total": 1477, "dt_total": 11.76, "gpu0_avg_w": 246.0, "gpu0_max_w": 254.0, "gpu1_avg_w": 251.8, "gpu1_max_w": 260.5, "power_samples": 23}]
+  }
+]

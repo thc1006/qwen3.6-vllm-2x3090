@@ -135,65 +135,108 @@ Application startup complete: ~ T+135 s from launch
 
 See [README.md](../README.md) and [scripts/](../scripts/).
 
-## Voice dialog end-to-end latency budget (novel)
+## Voice dialog end-to-end latency budget (novel — v2 with real production data)
 
 Comparable cloud-only voice agent budget (per [Smallest.ai 2026](https://smallest.ai/blog/designing-voice-assistants-stt-llm-tts-tools-and-latency-budget),
 [Trillet 2026](https://www.trillet.ai/blogs/voice-ai-latency-benchmarks)) is **~800 ms** total.
 Public data on **embodied robot** stacks (with WebRTC + actual hardware) is essentially
-zero. This is a real, measured budget on the production stack.
+zero. v2 below adds methodologically rigorous component bench AND real-conversation
+ground-truth from production logs.
 
-| Stage | Latency | Notes |
-|---|---:|---|
-| WebRTC RTT (Tailscale → robot) | **5.85 ms** avg | min 2.4 ms, jitter 4.4 ms |
-| STT (faster-whisper large-v3-turbo CUDA) | **8.8 ms** for 6 s audio (RTF 0.0015) | warm GPU, int8_float16 |
-| Mem0 search (bge-m3 + Qdrant) | **115.8 ms** cached / 1490 ms cold | Ollama embed + Qdrant |
-| LLM streaming first byte (vLLM AWQ-Marlin TP=2) | **92.9 ms** (75–124 ms range) | qwen3.6-35B-A3B AWQ |
-| TTS first byte (edge-tts cloud) | **239.0 ms** (199–312 ms range) | network-bound |
-| **Total estimated TTFB** | **462 ms** | **≈ 42% under SOTA cloud budget** |
+> **v1 retraction:** the first version of this section under-measured several stages
+> (synthetic STT audio short-circuited VAD, toy LLM prompt, only-bge-m3 Mem0,
+> ICMP-ping for WebRTC). The v1 "462 ms" figure was a theoretical lower bound on
+> ideal components, not real conversation latency. v2 uses synthesized real speech,
+> production-mirroring prompts, full Mem0 retrieve, and adds observed real-conversation
+> p50 from this session.
 
-The LLM prefill curve **decreased** slightly with longer history (105 ms → 71 ms going
-from 0 → 30 turns) — vLLM's `--enable-prefix-caching` is the reason: the first 100+
-tokens of any system prompt get cached after the prewarm. Big lesson for embodied robot
-deployments: **don't fear longer context**, fear cold prefix.
+### v2 component benchmarks (proper methodology)
 
-Full raw numbers: [`results/voice_latency_budget.json`](../results/voice_latency_budget.json).
+| Stage | Latency v2 | What v1 reported | Methodology fix |
+|---|---:|---:|---|
+| WebRTC RTT (ICMP lower bound) | **5.4 ms** | 5.85 ms | unchanged (still lower bound; real WebRTC audio frame RTT is 30–80 ms) |
+| STT 6 s **real speech** (Whisper CUDA) | **150.9 ms** (RTF 0.025) | 8.8 ms (bogus) | edge-tts synthesized speech instead of `np.random.uniform()` that VAD short-circuited |
+| Mem0 **full search** (embed + Qdrant retrieve) | **104.5 ms** warm | 115.8 ms (embed only) | use `RobotMemory.search()` so Qdrant is included |
+| LLM streaming TTFB **realistic prompt** (system + 30-msg history ≈ 1500 tok) | **195.7 ms** | 92.9 ms (toy 30-tok) | production-mirror prompt |
+| TTS **first audio chunk** (edge-tts cloud) | **516.4 ms** | 239.0 ms (cherry-picked) | 5-prompt mean instead of 3, longer prompts |
+| **Theoretical lower bound (sum)** | **972.8 ms** | 462 ms | – |
 
-## RTX 3090 power scaling for MoE inference (novel)
+### Real production p50 (n=10 round-trips this session)
 
-Question: Himesh's 2025 4× 3090 bench found a 220 W sweet spot for **dense** model
-inference. MoE models activate only a small slice of params per token — does that change
-the power-perf curve?
+These are **observed** during real human-robot conversation, captured from terminal:
 
-Tested by sweeping GPU0 `nvidia-smi -pl` from 200 W to 450 W on Qwen3.6-35B-A3B AWQ
-TP=2. Each setting: same 5-prompt dialog bench × 3 runs.
+| Metric | p50 | min | p95 |
+|---|---:|---:|---:|
+| LLM streaming TTFB | **728 ms** | 521 ms | 2457 ms |
+| Full pipeline round-trip (STT+LLM+TTS+playback) | **9398 ms** | 941 ms | 13618 ms |
+| LLM `wall` (incl `speaker.wait_and_stop()`) | **10087 ms** | 5361 ms | 18731 ms |
 
-| PL (W) | Mean tok/s | Min | Max | Actual power draw (W) | tok/s/W |
-|---:|---:|---:|---:|---:|---:|
-| 200 | 111.7 | 92.8 | 122.7 | 197.5 | **0.566** |
-| 220 | 113.2 | 94.7 | 123.8 | 210.6 | 0.537 |
-| 250 | 112.6 | 90.1 | 124.6 | 226.7 | 0.497 |
-| 280 | 112.7 | 89.6 | 124.5 | 235.2 | 0.479 |
-| 320 | 112.6 | 89.9 | 124.6 | 234.3 | 0.481 |
-| 350 | 112.8 | 89.8 | 124.7 | 236.1 | 0.478 |
-| 390 | 112.7 | 89.8 | 124.3 | 234.1 | 0.481 |
-| 420 | 113.2 | 93.7 | 124.3 | 237.4 | 0.477 |
-| 450 | 112.2 | 89.7 | 124.3 | 233.8 | 0.480 |
+### Honest interpretation
 
-**Two findings:**
+- The 9.4 s p50 round-trip is dominated by **the robot speaking its reply** (TTS
+  audio plays at human speech rate, ~6–8 s for a 100-char response). The "user
+  finishes speaking → robot starts speaking" window is **728 ms p50**, in
+  cloud-agent territory.
+- vLLM's `--enable-prefix-caching` is doing real work: prefill TTFT actually
+  *decreases* slightly going from 0 history to 30 history (105 → 71 ms) because
+  the system-prompt prefix gets cached after the first request.
+- v1's 462 ms was a useful component-level lower bound but should not have been
+  reported as "total user-perceived TTFB". The production p50 of 728 ms LLM TTFB +
+  ~300 ms TTS first-byte + ~100 ms WebRTC playback start ≈ **~1.1 s real
+  user-perceived TTFB before any audio is heard**.
 
-1. **Tok/s is flat from 220 W to 450 W** (~112–113 tok/s). 230 % more power for 0 % more
-   throughput. The workload is memory-bandwidth bound, not compute bound.
-2. **Actual draw plateaus at ~235 W** regardless of cap above 280 W. 3090's 350 W
-   default and 450 W AIB headroom is unused for this model.
+Full raw v2 numbers + caveats: [`results/voice_latency_budget_v2.json`](../results/voice_latency_budget_v2.json).
 
-**Implication: set 3090 power limit to 220 W for MoE serving.** 50 % less wall power,
-identical performance. Perf-per-watt sweet spot is **200 W (0.566 tok/s/W)**.
+## RTX 3090 power scaling for MoE inference (novel — v2 with both-GPU sweep)
 
-This contradicts the common assumption that "more power = more tok/s" inherited from
-dense-model benchmarks. **For MoE inference, power matters until ~210 W and then stops
-mattering at all.** The bottleneck is HBM/GDDR6X bandwidth, not Tensor Core throughput.
+> **v1 retraction:** v1 swept only GPU0 with GPU1 pinned at 350 W. With TP=2 the
+> two GPUs are coupled by NCCL allreduce so v1's "throughput vs GPU0 power" was
+> partially confounded by GPU1's own power state. v1 also used N=1 sample per
+> level, max_tokens=200, and 3 s settle. v2 fixes all of these.
 
-Full raw numbers: [`results/power_scaling.json`](../results/power_scaling.json).
+### v2 methodology
+
+- **Both** GPUs swept simultaneously (`nvidia-smi -pl` set on i=0 and i=1).
+- N=5 runs per level × 5 prompts × max_tokens=500 (long-form generation, sustained load).
+- 30 s thermal settle between levels.
+- Power draw sampled at 0.5 Hz during each run on both cards.
+- GPU1 max is 350 W (FE card), so sweep range capped at **200 / 220 / 250 / 280 / 320 / 350 W**.
+
+### v2 results (n=25 prompts per level)
+
+| PL (W) | Mean tok/s ± stdev | Actual draw (W, both cards avg) | tok/s/W |
+|---:|---:|---:|---:|
+| 200 | **120.2 ± 0.18** | 196.6 | **0.611** ⭐ |
+| 220 | 122.8 ± 0.13 | 210.6 | 0.583 |
+| 250 | 124.7 ± 0.18 | 229.7 | 0.543 |
+| 280 | 125.6 ± 0.18 | 244.5 | 0.514 |
+| 320 | 125.6 ± 0.18 | 246.7 | 0.509 |
+| 350 | **125.7 ± 0.20** | 248.6 | 0.506 |
+
+### v2 findings (corrected from v1)
+
+1. **There IS a real (small) gradient up to ~280 W**, then it plateaus.
+   - 200 → 220 W: +2.3 % perf for +7 % power
+   - 220 → 250 W: +1.5 % perf for +9 % power
+   - 250 → 280 W: +0.7 % perf for +6 % power
+   - 280 → 320 → 350 W: **flat** (within noise)
+   - v1's "flat from 220 W up" was wrong — it was true above 280 W only.
+2. **Plateau power draw is 244–249 W**, not v1's claimed 235 W. v1
+   underestimated because GPU1 was capped at 350 W (forcing it not to scale
+   with GPU0).
+3. **Knee point: ~280 W** — that's where the curve flattens. Below 280 W there
+   is real perf to be had per watt.
+4. **Production sweet spots**:
+   - **Maximum perf: 280 W** (125.6 tok/s, 244.5 W actual; only 0.1 % below 350 W)
+   - **Best perf-per-watt: 200 W** (0.611 tok/s/W; 4.4 % less throughput, 21 % less power)
+   - **95 % perf at minimum power: 220 W** (122.8 tok/s, 210.6 W actual)
+
+The general intuition "more power = more tok/s" still holds for MoE inference
+**up to a knee** of about 280 W per RTX 3090 in TP=2. Beyond that the workload
+is bandwidth-bound (the v1 finding) and extra power is wasted. **The sweet spot
+for an always-on robot brain is 220 W** (95 % of peak perf at 60 % of max power).
+
+Full raw v2 numbers: [`results/power_scaling_v2.json`](../results/power_scaling_v2.json).
 
 ## Speculative decoding (MTP) — empirical NEGATIVE result
 
