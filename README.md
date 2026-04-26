@@ -1,5 +1,7 @@
 # qwen3.6-vllm-2x3090
 
+<a href="https://doi.org/10.5281/zenodo.19776536"><img src="https://zenodo.org/badge/1220613669.svg" alt="DOI"></a>
+
 Empirical answer to: **can a single vLLM engine on 2× consumer Ampere GPUs
 serve concurrent vision+dialog for an embodied robot without dialog tok/s
 collapsing under VL prefill?**
