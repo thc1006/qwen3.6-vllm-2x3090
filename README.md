@@ -160,6 +160,8 @@ loses unified VL context) are both worse for this specific use case.
 > and [`results/modal_2x_a100_v2.json`](results/modal_2x_a100_v2.json) for
 > full audit; the writeup below is the corrected v3 finding.
 
+![Cross-hardware MTP / spec-decode delta — bar 1 (1× 3090 llama.cpp draft) STILL VALID at −38.6%, bar 2 (2× 3090 vLLM MTP v1) CONFOUNDED at −12.0%, bar 3 (2× A100 vLLM MTP v2) CACHE-ON regime at −11.4%, bar 4 (2× 3090 vLLM MTP v3 clean A/B with prefix-cache OFF) +27.5%](analysis/plot_cross_hardware.png)
+
 ### v3 methodology hardening
 
 After the v2 disclosures (flag confound + prefix-caching interaction), the
