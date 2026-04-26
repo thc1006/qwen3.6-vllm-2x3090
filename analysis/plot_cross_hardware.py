@@ -1,165 +1,199 @@
 #!/usr/bin/env python3
-"""Cross-hardware MTP / spec-decode comparison plot.
+"""Cross-hardware MTP / spec-decode comparison plot — UPDATED 2026-04-26 for v3.
 
-Visualises that single-stream Qwen3.6-35B-A3B speculative decoding is
-net negative across consumer Ampere + datacenter Ampere with NVLink —
-ruling out memory bandwidth and PCIe interconnect as the bottleneck.
+Shows the 4 datapoints currently available for Qwen3.6-35B-A3B
+single-stream batch=1 spec-decode delta, including the v3 clean A/B
+retest that REVERSES the 3090 vLLM sign:
 
-Datapoints:
-  1x 3090 (llama.cpp draft)      : 139.2 -> 85.5 = -38.6% (N=3 from
-                                    sibling repo's v2 srogmann config)
-  2x 3090 PCIe TP=2 (vLLM MTP)   : 126.4 -> 111.2 = -12.0% (confound
-                                    disclosed: baseline 0.90/8 vs
-                                    MTP run 0.80/2)
-  2x A100 NVLink TP=2 (vLLM MTP) : 134.8 -> 119.5 = -11.4% (clean A/B,
-                                    decode-only on prompt 4, TTFT-robust)
+  1. 1× 3090 (llama.cpp draft)         : -38.6 %  (v2 srogmann config, N=3)
+  2. 2× 3090 PCIe (vLLM MTP, v1)       : -12.0 %  (FLAG-CONFOUNDED)
+  3. 2× A100 NVLink (vLLM MTP, v2)     : -11.4 %  (PREFIX-CACHE-ON regime)
+  4. 2× 3090 PCIe (vLLM MTP, v3 clean) : +27.5 %  ← clean A/B, cache OFF
+
+Key visual: bars 2 + 3 are now framed as confounded / cache-ON datapoints,
+and bar 4 (v3) is the same hardware as bar 2 with the confounders removed,
+showing the actual sign once the confound is controlled.
 
 Run:
     python analysis/plot_cross_hardware.py
 """
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import numpy as np
 import pathlib
 
-# Data
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Datapoints (delta % vs each hardware's own baseline)
 hardware_labels = [
-    "1× 3090\nGDDR6X 936 GB/s\n(llama.cpp draft,\nsrogmann config)",
-    "2× 3090 PCIe x8\nGDDR6X / PCIe ~16 GB/s\n(vLLM MTP k=1,\nconfound disclosed)",
-    "2× A100-80GB SXM4\nHBM2e / NVLink ~600 GB/s\n(vLLM MTP k=1,\nclean A/B)",
+    "1× 3090\nllama.cpp draft\n(srogmann config)",
+    "2× 3090 PCIe TP=2\nvLLM MTP k=1\n[v1]",
+    "2× A100-80GB\nSXM4 NVLink TP=2\nvLLM MTP k=1 [v2]",
+    "2× 3090 PCIe TP=2\nvLLM MTP k=1\n[v3 — same HW as bar 2]",
 ]
-baselines = [139.2, 126.4, 134.8]
-specs = [85.5, 111.2, 119.5]
-deltas = [
-    (s / b - 1) * 100 for b, s in zip(baselines, specs)
-]  # [-38.6, -12.0, -11.4]
+deltas = [-38.6, -12.0, -11.4, +27.5]
+delta_metrics = [
+    "decode tok/s",
+    "throughput (confounded)",
+    "decode-only @ p4",
+    "decode TPOT",
+]
+status_tags = [
+    "STILL VALID",
+    "CONFOUNDED",
+    "CACHE-ON regime",
+    "CLEAN A/B",
+]
+status_colors = {
+    "STILL VALID": "#7F8C8D",
+    "CONFOUNDED": "#C0392B",
+    "CACHE-ON regime": "#E67E22",
+    "CLEAN A/B": "#27AE60",
+}
 notes = [
-    "N=3 trial replication\n(run-to-run stdev <0.11)",
-    "config confound:\nbaseline 0.90/8 vs\nMTP 0.80/2",
-    "TTFT-robust\n(varies <0.2pp)\non prompt 4",
+    "v2.3 N=3 srogmann config\nllama.cpp+Q4+draft,\nmechanism still applies",
+    "0.80/2 vs 0.90/8 flag mismatch\n+ prefix-caching ON\n→ SUPERSEDED by v3",
+    "prefix-caching ON\n(vllm #38182:\nMTP cache hit rate 92→71%)\ncache-OFF retest pending",
+    "matched 0.90/8/hermes,\n--no-enable-prefix-caching,\nstreaming N=5 trials,\n−21.6% decode TPOT",
 ]
 
-# Plot
-fig, ax = plt.subplots(figsize=(11, 6.2), constrained_layout=True)
+n = len(hardware_labels)
+fig, ax = plt.subplots(figsize=(13, 7.2), constrained_layout=True)
+x = np.arange(n)
+width = 0.55
 
-x = np.arange(len(hardware_labels))
-width = 0.36
-
-color_baseline = "#4A6FA5"  # soft blue
-color_spec = "#C0392B"  # red
-
-bars1 = ax.bar(
-    x - width / 2,
-    baselines,
+bar_colors = ["#7F8C8D", "#C0392B", "#E67E22", "#27AE60"]
+bars = ax.bar(
+    x,
+    deltas,
     width,
-    label="baseline (no spec-decode)",
-    color=color_baseline,
+    color=bar_colors,
     edgecolor="#2C3E50",
-    linewidth=0.8,
-)
-bars2 = ax.bar(
-    x + width / 2,
-    specs,
-    width,
-    label="speculative decoding",
-    color=color_spec,
-    edgecolor="#2C3E50",
-    linewidth=0.8,
+    linewidth=1.0,
 )
 
-# Number labels on bars
-for bar, val in zip(bars1, baselines):
+# Zero line
+ax.axhline(0, color="#2C3E50", linewidth=1.2)
+
+# Bar labels (delta % + metric)
+for bar, d, m in zip(bars, deltas, delta_metrics):
+    h = bar.get_height()
+    label_y = h + (2.5 if h >= 0 else -2.5)
+    va = "bottom" if h >= 0 else "top"
     ax.text(
         bar.get_x() + bar.get_width() / 2,
-        bar.get_height() + 1.2,
-        f"{val:.1f}",
+        label_y,
+        f"{d:+.1f}%",
         ha="center",
-        va="bottom",
-        fontsize=10,
-        color="#2C3E50",
+        va=va,
+        fontsize=14,
         fontweight="bold",
+        color="#2C3E50",
     )
-for bar, val in zip(bars2, specs):
     ax.text(
         bar.get_x() + bar.get_width() / 2,
-        bar.get_height() + 1.2,
-        f"{val:.1f}",
+        label_y + (4.5 if h >= 0 else -4.5),
+        f"({m})",
         ha="center",
-        va="bottom",
-        fontsize=10,
-        color="#2C3E50",
-        fontweight="bold",
+        va=va,
+        fontsize=8.5,
+        style="italic",
+        color="#34495E",
     )
 
-# Delta arrows + percent labels above each pair
-for i, (b, s, d, note) in enumerate(zip(baselines, specs, deltas, notes)):
-    midx = x[i]
-    top = max(b, s) + 14
-    ax.annotate(
-        "",
-        xy=(midx + width / 2, s + 6),
-        xytext=(midx - width / 2, b + 6),
-        arrowprops=dict(arrowstyle="->", color="#7F8C8D", lw=1.2),
-    )
+# Status tags (above bar, between bar top and label)
+for bar, tag in zip(bars, status_tags):
+    h = bar.get_height()
+    tag_y = h / 2  # mid of bar
     ax.text(
-        midx,
-        top,
-        f"Δ {d:+.1f}%",
+        bar.get_x() + bar.get_width() / 2,
+        tag_y,
+        tag,
         ha="center",
-        va="bottom",
-        fontsize=12,
+        va="center",
+        fontsize=9.5,
         fontweight="bold",
-        color="#C0392B",
+        color="white",
+        bbox=dict(
+            boxstyle="round,pad=0.3",
+            facecolor=status_colors[tag],
+            edgecolor="white",
+            linewidth=0.5,
+            alpha=0.92,
+        ),
     )
-    # Sub-note in lighter gray
+
+# Notes below x-axis labels
+for i, note in enumerate(notes):
     ax.text(
-        midx,
-        top + 7.5,
+        x[i],
+        -50,
         note,
         ha="center",
-        va="bottom",
-        fontsize=8,
-        color="#7F8C8D",
+        va="top",
+        fontsize=7.8,
         style="italic",
+        color="#34495E",
     )
 
-# Axes formatting
+# Axes
 ax.set_xticks(x)
-ax.set_xticklabels(hardware_labels, fontsize=9.5)
-ax.set_ylabel("decode tok/s (single-stream, batch=1)", fontsize=11)
-ax.set_ylim(0, 200)
+ax.set_xticklabels(hardware_labels, fontsize=10)
+ax.set_ylabel("Δ vs each hardware's baseline (%)", fontsize=11)
+ax.set_ylim(-55, 40)
 ax.yaxis.grid(True, linestyle="--", alpha=0.35)
 ax.set_axisbelow(True)
 
 # Title + subtitle
 fig.suptitle(
-    "Speculative decoding for Qwen3.6-35B-A3B is net loss "
-    "across hardware classes",
-    fontsize=13.5,
+    "Qwen3.6-35B-A3B spec-decode delta — v3 retest (2026-04-26) "
+    "REVERSES the 3090 vLLM sign",
+    fontsize=14,
     fontweight="bold",
-    y=1.02,
+    y=1.04,
 )
 ax.set_title(
-    "Δ consistently negative across hardware × engine × quant — "
-    "regression is hardware-class-independent\n"
-    "single-stream batch=1, max_tokens=200, temperature=0.5, seed=42",
+    "Bars 2+3 were confounded / cache-ON; bar 4 (v3) is the same 3090 hardware "
+    "as bar 2 with both confounders removed.\n"
+    "Bar 1 (llama.cpp draft) still valid — engine + spec-method specific, not engine-independent.",
     fontsize=10,
     color="#2C3E50",
     pad=8,
 )
 
-ax.legend(loc="upper right", fontsize=10, frameon=True, framealpha=0.95)
+# Connect bar 2 → bar 4 with a dashed line + arrow showing the sign flip
+ax.annotate(
+    "",
+    xy=(x[3], deltas[3] - 1),
+    xytext=(x[1], deltas[1] + 1),
+    arrowprops=dict(
+        arrowstyle="->",
+        color="#16A085",
+        lw=2.5,
+        linestyle=(0, (4, 2)),
+        connectionstyle="arc3,rad=-0.18",
+    ),
+)
+ax.text(
+    (x[1] + x[3]) / 2,
+    -2,
+    "fix flag confound (+30 pp)\n+ prefix-cache OFF (+10 pp)",
+    ha="center",
+    va="top",
+    fontsize=9,
+    fontweight="bold",
+    color="#16A085",
+    bbox=dict(boxstyle="round,pad=0.4", facecolor="#E8F8F5", edgecolor="#16A085"),
+)
 
-# Footer caveat — 3 short lines for readability
+# Footer
 footer_lines = [
-    "Mechanism: ρ ≈ 0.031, T_thres ≈ 94. K (1–32) ≪ T_thres → verify pass loads expert-union with no amortization vs autoregressive.",
-    "BW-independent: 3090 GDDR6X 936 GB/s + A100 HBM2e 2 TB/s show the same magnitude regression — interconnect (PCIe vs NVLink) also same direction.",
-    "Theory: MoE-Spec (arXiv 2602.16052) + Utility-Driven SD for MoE (arXiv 2506.20675).",
+    "v3 methodology: matched flags 0.90/8/hermes, --no-enable-prefix-caching, streaming TTFT separation, N=5 trials × 5 prompts (Exp 1) + N=5 × 20 reqs at C∈{1,4,8} (Exp 3).",
+    "Open follow-up: A100 v3-equivalent retest with cache OFF — does the A100 also flip positive? (Modal credits permitting.)",
+    "References: vllm #38182 (MTP × prefix-cache hit rate degradation), vllm #40756 (MTP + cache + chunked prefill crash). Theory: MoE-Spec arXiv 2602.16052 + Utility-Driven SD arXiv 2506.20675.",
 ]
 for i, line in enumerate(footer_lines):
     fig.text(
         0.5,
-        -0.025 - i * 0.028,
+        -0.03 - i * 0.025,
         line,
         ha="center",
         va="top",

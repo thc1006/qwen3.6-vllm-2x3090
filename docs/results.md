@@ -238,33 +238,68 @@ for an always-on robot brain is 220 W** (95 % of peak perf at 60 % of max power)
 
 Full raw v2 numbers: [`results/power_scaling_v2.json`](../results/power_scaling_v2.json).
 
-## Speculative decoding (MTP) — empirical NEGATIVE result
+## Speculative decoding (MTP) — v3 clean A/B retest (2026-04-26): POSITIVE
 
-Re-tested 2026-04-25 with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`.
-Full numbers in [`results/mtp_speculative_decoding.json`](../results/mtp_speculative_decoding.json).
+> **⚠ This section was rewritten on 2026-04-26 after the v3 retest.** The v1/v2
+> NEGATIVE conclusion below was driven by a **flag confound** + a known
+> **MTP × prefix-cache interaction** ([vllm #38182](https://github.com/vllm-project/vllm/issues/38182)).
+> Under matched flags (`0.90 / 8 / hermes`) AND `--no-enable-prefix-caching`,
+> MTP k=1 is **+27.5 % faster decode rate** on the same 2× RTX 3090 hardware.
+> Full v3 methodology + per-request data:
+> [`results/mtp_v3_clean_ab_no_mtp.json`](../results/mtp_v3_clean_ab_no_mtp.json) +
+> [`results/mtp_v3_clean_ab_mtp.json`](../results/mtp_v3_clean_ab_mtp.json) +
+> [`results/mtp_v3_summary.json`](../results/mtp_v3_summary.json).
+> v1/v2 raw data retained in
+> [`results/mtp_speculative_decoding.json`](../results/mtp_speculative_decoding.json)
+> for full audit.
 
-| | no-MTP (production) | MTP k=1 |
-|---|---:|---:|
-| Mean tok/s | **126** | 111 |
-| Range | 125–127 | **75–142** |
-| Variance ratio | 1× | **65×** |
-| Best-case speedup | – | +12.6% |
-| Worst-case slowdown | – | **−40%** |
-| Cold-boot overhead | 0 | **+220 s** |
-| Memory per card | 11.62 GiB | 12.41 GiB (+0.8) |
+### v3 result — Exp 1 sequential dialog (N=5 trials × 5 prompts = 25 measurements)
 
-**Verdict: NET LOSS for diverse single-stream voice prompts on AWQ-Marlin Q4 + Ampere.**
+| Metric | no-MTP | MTP k=1 | Δ |
+|---|---:|---:|---:|
+| **decode TPOT (ms / output token)** | **7.620 ± 0.022** | **5.976 ± 0.456** | **−21.6 %** (≡ +27.5 % faster decode rate) |
+| total throughput tok/s (incl prefill) | 113.4 ± 12.9 | 149.3 ± 17.3 | +31.7 % |
+| TTFT (ms) | 78.6 ± 4.4 | 53.9 ± 15.0 | −31.4 % |
+
+Improvement holds on every individual prompt (Δ TPOT range −14 % to −27 %).
+
+### v3 result — Exp 3 concurrent stress (20 reqs × N=5 trials per concurrency)
+
+| C | no-MTP agg | MTP agg | Δ agg | no-MTP TPOT | MTP TPOT | Δ TPOT |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 118.80 | 153.32 | +29.1 % | 7.633 ms | 6.048 ms | −20.8 % |
+| 4 | 271.94 | 310.16 | +14.1 % | 12.133 ms | 10.704 ms | −11.8 % |
+| 8 | 390.25 | 446.04 | +14.3 % | 15.165 ms | 13.785 ms | −9.1 % |
+
+TPOT speedup attenuates with concurrency (−21 % → −12 % → −9 %) but stays negative
+through C=8; aggregate throughput is +14 % at C=8. The vLLM Recipes warning that
+"MTP-1 reduces per-token latency but degrades text throughput under high concurrency"
+hasn't reached break-even at this concurrency × `max-num-seqs 8` configuration.
+
+### Reconciliation with v1/v2
+
+| Bench | flags | prefix cache | MTP delta | reading |
+|---|---|---|---:|---|
+| v1 (`mtp_speculative_decoding.json`) | `0.80/2` vs `0.90/8` | ON | −12.0 % | confounded — flag-effect dominates |
+| v2-clean intermediate | `0.90/8` / `0.90/8` | ON | +17.7 % | matched flags, but cache effect still in play |
+| **v3 (this section)** | **`0.90/8` / `0.90/8`** | **OFF** | **+27.5 %** decode rate | **clean — both confounders removed** |
+
+- Removing the flag confound accounts for ~30 percentage points of the swing.
+- Disabling prefix caching adds another ~10 percentage points.
+
+### Practical recommendation (revised)
+
+For single-stream voice-dialog deployments on **2× RTX 3090 PCIe + AWQ-Marlin Q4
++ vLLM 0.19.1**: enable MTP k=1 with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`
+provided you can run with `--no-enable-prefix-caching`. The typical single-user
+voice-dialog case has near-zero prefix-cache hit rate anyway. For shared-prefix
+workloads (multi-turn chat with stable system prompt, RAG with stable retrieval prefix),
+benchmark the net effect on **your** workload before enabling MTP — the cache-hit-rate
+degradation may eat the MTP gain.
+
+### Memory & boot cost notes (still valid from v1)
+
 The MTP draft heads are real and load fine (drafter shares the target's `lm_head` and
-embedding weights — only +0.8 GB overhead per card, NOT a 2× model copy as I initially
-feared). The problem is acceptance rate: when the draft misses, you pay the verification
-cost without the parallel-decode payoff. With the baseline already at 126 tok/s, the
-mean drops 12% and variance blows up 65×.
-
-For a robot voice-dialog use case where TTFB consistency matters more than peak
-throughput, **stay on the no-MTP path**. MTP may still help in batched server scenarios
-where verification cost amortizes — not tested here.
-
-This was prematurely reported as "OOM-blocked" in an earlier draft of this repo. That
-was wrong: the OOM at first attempt was caused by external processes (faster-whisper at
-1.4 GB on GPU0 + `gpu_memory_utilization=0.90`). With those factors removed and
-`gpu_memory_utilization=0.80`, MTP boots cleanly. It's just slower for our workload.
+embedding weights — only +0.8 GB overhead per card, NOT a 2× model copy). Cold-boot
+overhead is ~+220 s for MTP vs no-MTP (one-time cost, not per-request). These memory /
+boot characteristics are unaffected by the v3 retest.
