@@ -1,0 +1,70 @@
+{
+  "version": "v3",
+  "host": "s1 (reachy-compute, 2× RTX 3090 PCIe Gen4 x8, 24GB each)",
+  "vllm": "0.19.1",
+  "model": "QuantTrio/Qwen3.6-35B-A3B-AWQ (AWQ-Marlin Q4)",
+  "config": {
+    "tensor_parallel_size": 2,
+    "gpu_memory_utilization": 0.9,
+    "max_num_seqs": 8,
+    "tool_call_parser": "hermes",
+    "prefix_caching": "DISABLED (--no-enable-prefix-caching)",
+    "streaming": true,
+    "seed": 42,
+    "temperature": 0.5,
+    "max_tokens": 200,
+    "n_trials_exp1": 5,
+    "n_trials_exp3": 5,
+    "concurrencies_exp3": [
+      1,
+      4,
+      8
+    ]
+  },
+  "exp1_dialog_summary": {
+    "no_mtp": {
+      "n": 25,
+      "decode_tpot_ms_mean": 7.619693532201843,
+      "decode_tpot_ms_stdev": 0.021501639598118606,
+      "tok_s_mean": 113.34585727842857,
+      "tok_s_stdev": 12.91058305045056,
+      "ttft_ms_mean": 78.61616500129458
+    },
+    "mtp": {
+      "n": 25,
+      "decode_tpot_ms_mean": 5.975656964754705,
+      "decode_tpot_ms_stdev": 0.45591940904171696,
+      "tok_s_mean": 149.2714606757657,
+      "tok_s_stdev": 17.253752942808617,
+      "ttft_ms_mean": 53.94725823949557
+    },
+    "delta_decode_tpot_pct": -21.57615080579317
+  },
+  "exp3_concurrent_summary": {
+    "C1": {
+      "no_mtp_agg_tok_s_mean": 118.80350009593306,
+      "no_mtp_decode_tpot_ms_mean": 7.632678204680478,
+      "mtp_agg_tok_s_mean": 153.32373311175618,
+      "mtp_decode_tpot_ms_mean": 6.0483564805918215,
+      "delta_agg_pct": 29.056579131042653,
+      "delta_decode_tpot_pct": -20.75708790024877
+    },
+    "C4": {
+      "no_mtp_agg_tok_s_mean": 271.9445345120939,
+      "no_mtp_decode_tpot_ms_mean": 12.133364030922687,
+      "mtp_agg_tok_s_mean": 310.1568808048433,
+      "mtp_decode_tpot_ms_mean": 10.70433319260016,
+      "delta_agg_pct": 14.051522072803413,
+      "delta_decode_tpot_pct": -11.777696891649725
+    },
+    "C8": {
+      "no_mtp_agg_tok_s_mean": 390.2470811204843,
+      "no_mtp_decode_tpot_ms_mean": 15.165489990900532,
+      "mtp_agg_tok_s_mean": 446.03664759894326,
+      "mtp_decode_tpot_ms_mean": 13.785177250316853,
+      "delta_agg_pct": 14.295959964203947,
+      "delta_decode_tpot_pct": -9.101669259693443
+    }
+  },
+  "interpretation": "Under matched flags (0.90/8/hermes) AND prefix-caching DISABLED, MTP k=1 is decisively faster on 2× RTX 3090 PCIe across all measured operating points: single-stream sequential dialog (decode_tpot -22%, ~+27% faster decode rate), concurrent C=1 (-21%), C=4 (-13%), C=8 (-11%). This refutes the v2 published -12% NET LOSS framing on this hardware. The v2 result was a flag confound (0.80/2 vs 0.90/8). The Modal A100 v2 -11.4% finding was with prefix-caching ENABLED, which is known per vllm Issue #38182 to drop hit rate 92%→71% under MTP — that's an MTP-prefix-cache interaction artifact, not a property of MTP itself. With prefix-caching disabled (this v3), MTP's compute speedup is isolated and consistently positive."
+}

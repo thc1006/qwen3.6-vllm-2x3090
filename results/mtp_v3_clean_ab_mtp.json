@@ -1,0 +1,3523 @@
+{
+  "tag": "mtp",
+  "version": "v3",
+  "config": {
+    "n_trials_exp1": 5,
+    "n_trials_exp3": 5,
+    "concurrencies": [
+      1,
+      4,
+      8
+    ],
+    "prompts": [
+      "Why does the sky look blue? Answer in two sentences. /no_think",
+      "Write a Python function fib(n) returning the first n Fibonacci numbers as a list. /no_think",
+      "Explain TCP vs UDP in 3 concise bullet points. /no_think",
+      "Give 5 numbered steps to cook firm tofu at home. /no_think",
+      "Write a short haiku about debugging a memory leak at 2am. /no_think"
+    ],
+    "max_tokens": 200,
+    "temperature": 0.5,
+    "seed": 42,
+    "streaming": true,
+    "prefix_caching_disabled_in_serve": true
+  },
+  "exp1_dialog": {
+    "trials": [
+      [
+        {
+          "ct": 67,
+          "elapsed_s": 0.43153393200191204,
+          "ttft_s": 0.04697500300244428,
+          "decode_s": 0.38455892899946775,
+          "decode_tpot_ms": 5.826650439385875,
+          "tok_s": 155.26009667231253,
+          "decode_tok_s": 171.62519193538566,
+          "text_sha1": "ef2fcce5ed1005f2",
+          "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue and violet, more effectively than longer wavelengths like red. Although violet li",
+          "text_len": 361
+        },
+        {
+          "ct": 79,
+          "elapsed_s": 0.5145851609995589,
+          "ttft_s": 0.08207621600013226,
+          "decode_s": 0.4325089449994266,
+          "decode_tpot_ms": 5.5449864743516235,
+          "tok_s": 153.52172193723192,
+          "decode_tok_s": 180.3430909390866,
+          "text_sha1": "dca63db49b833e7b",
+          "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in range(2, n):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n```",
+          "text_len": 193
+        },
+        {
+          "ct": 134,
+          "elapsed_s": 0.8445508989971131,
+          "ttft_s": 0.047313075003330596,
+          "decode_s": 0.7972378239937825,
+          "decode_tpot_ms": 5.99426935333671,
+          "tok_s": 158.66420858603342,
+          "decode_tok_s": 166.8260034800321,
+          "text_sha1": "95b17bca914d2003",
+          "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retransmissions, while UDP is connectionless and prioritizes low latency by sending d",
+          "text_len": 723
+        },
+        {
+          "ct": 178,
+          "elapsed_s": 1.0980000590061536,
+          "ttft_s": 0.04702852100308519,
+          "decode_s": 1.0509715380030684,
+          "decode_tpot_ms": 5.937692305102082,
+          "tok_s": 162.11292389284145,
+          "decode_tok_s": 168.41559794884114,
+          "text_sha1": "78667243f5dc9e6e",
+          "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy object (like a cast-iron skillet or canned goods) on top for 15–30 minutes.\n2. C",
+          "text_len": 771
+        },
+        {
+          "ct": 21,
+          "elapsed_s": 0.1689059900090797,
+          "ttft_s": 0.04747721100284252,
+          "decode_s": 0.12142877900623716,
+          "decode_tpot_ms": 6.071438950311858,
+          "tok_s": 124.32951607501384,
+          "decode_tok_s": 164.70560079478938,
+          "text_sha1": "707b1859d6801a39",
+          "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+          "text_len": 75
+        }
+      ],
+      [
+        {
+          "ct": 67,
+          "elapsed_s": 0.4326841400034027,
+          "ttft_s": 0.046954360004747286,
+          "decode_s": 0.38572977999865543,
+          "decode_tpot_ms": 5.844390606040234,
+          "tok_s": 154.84736741095503,
+          "decode_tok_s": 171.10423779110357,
+          "text_sha1": "ef2fcce5ed1005f2",
+          "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue and violet, more effectively than longer wavelengths like red. Although violet li",
+          "text_len": 361
+        },
+        {
+          "ct": 79,
+          "elapsed_s": 0.5182867980038282,
+          "ttft_s": 0.08237355999881402,
+          "decode_s": 0.43591323800501414,
+          "decode_tpot_ms": 5.588631256474541,
+          "tok_s": 152.4252601151853,
+          "decode_tok_s": 178.9346897492083,
+          "text_sha1": "dca63db49b833e7b",
+          "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in range(2, n):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n```",
+          "text_len": 193
+        },
+        {
+          "ct": 145,
+          "elapsed_s": 0.9179339859983884,
+          "ttft_s": 0.04581901199708227,
+          "decode_s": 0.8721149740013061,
+          "decode_tpot_ms": 6.056353986120182,
+          "tok_s": 157.96342897391597,
+          "decode_tok_s": 165.11584400313754,
+          "text_sha1": "5dc03c49c1732b21",
+          "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retransmissions, while UDP is connectionless and sends data without verification, res",
+          "text_len": 757
+        },
+        {
+          "ct": 178,
+          "elapsed_s": 1.0970769749983447,
+          "ttft_s": 0.04556942600174807,
+          "decode_s": 1.0515075489965966,
+          "decode_tpot_ms": 5.940720615799981,
+          "tok_s": 162.24932621548143,
+          "decode_tok_s": 168.32974729368576,
+          "text_sha1": "78667243f5dc9e6e",
+          "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy object (like a cast-iron skillet or canned goods) on top for 15–30 minutes.\n2. C",
+          "text_len": 771
+        },
+        {
+          "ct": 21,
+          "elapsed_s": 0.1689906190003967,
+          "ttft_s": 0.04618422100611497,
+          "decode_s": 0.12280639799428172,
+          "decode_tpot_ms": 6.140319899714086,
+          "tok_s": 124.26725296479744,
+          "decode_tok_s": 162.8579644598913,
+          "text_sha1": "c0c59791f0307652",
+          "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+          "text_len": 75
+        }
+      ],
+      [
+        {
+          "ct": 50,
+          "elapsed_s": 0.34258306300034747,
+          "ttft_s": 0.04565074200218078,
+          "decode_s": 0.2969323209981667,
+          "decode_tpot_ms": 6.059843285676871,
+          "tok_s": 145.95000570693503,
+          "decode_tok_s": 165.02076916140945,
+          "text_sha1": "a59675b4d303cafd",
+          "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue, more effectively than longer wavelengths like red. This phenomenon, known as Ray",
+          "text_len": 278
+        },
+        {
+          "ct": 79,
+          "elapsed_s": 0.516092131001642,
+          "ttft_s": 0.08323632999963593,
+          "decode_s": 0.43285580100200605,
+          "decode_tpot_ms": 5.549433346179565,
+          "tok_s": 153.07344416717848,
+          "decode_tok_s": 180.19857841673817,
+          "text_sha1": "dca63db49b833e7b",
+          "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in range(2, n):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n```",
+          "text_len": 193
+        },
+        {
+          "ct": 145,
+          "elapsed_s": 0.9189768569922308,
+          "ttft_s": 0.0453982159961015,
+          "decode_s": 0.8735786409961293,
+          "decode_tpot_ms": 6.066518340250898,
+          "tok_s": 157.78416931475115,
+          "decode_tok_s": 164.83919505609575,
+          "text_sha1": "5dc03c49c1732b21",
+          "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retransmissions, while UDP is connectionless and sends data without verification, res",
+          "text_len": 757
+        },
+        {
+          "ct": 178,
+          "elapsed_s": 1.094704522009124,
+          "ttft_s": 0.045348359999479726,
+          "decode_s": 1.0493561620096443,
+          "decode_tpot_ms": 5.928565887060137,
+          "tok_s": 162.60095434091613,
+          "decode_tok_s": 168.6748564577193,
+          "text_sha1": "78667243f5dc9e6e",
+          "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy object (like a cast-iron skillet or canned goods) on top for 15–30 minutes.\n2. C",
+          "text_len": 771
+        },
+        {
+          "ct": 21,
+          "elapsed_s": 0.17653172599966638,
+          "ttft_s": 0.044772013992769644,
+          "decode_s": 0.13175971200689673,
+          "decode_tpot_ms": 6.587985600344837,
+          "tok_s": 118.95878704567635,
+          "decode_tok_s": 151.79146717437524,
+          "text_sha1": "8480b707d2490feb",
+          "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nWhy won't it release?",
+          "text_len": 79
+        }
+      ],
+      [
+        {
+          "ct": 67,
+          "elapsed_s": 0.43109960200672504,
+          "ttft_s": 0.04482944300980307,
+          "decode_s": 0.38627015899692196,
+          "decode_tpot_ms": 5.85257816662003,
+          "tok_s": 155.41652019190408,
+          "decode_tok_s": 170.86486870068038,
+          "text_sha1": "ef2fcce5ed1005f2",
+          "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue and violet, more effectively than longer wavelengths like red. Although violet li",
+          "text_len": 361
+        },
+        {
+          "ct": 79,
+          "elapsed_s": 0.5129188040009467,
+          "ttft_s": 0.08186026499606669,
+          "decode_s": 0.43105853900488,
+          "decode_tpot_ms": 5.526391525703589,
+          "tok_s": 154.02047923330608,
+          "decode_tok_s": 180.94990109711517,
+          "text_sha1": "dca63db49b833e7b",
+          "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in range(2, n):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n```",
+          "text_len": 193
+        },
+        {
+          "ct": 145,
+          "elapsed_s": 0.9232248009939212,
+          "ttft_s": 0.04707837499154266,
+          "decode_s": 0.8761464260023786,
+          "decode_tpot_ms": 6.084350180572073,
+          "tok_s": 157.05817244499556,
+          "decode_tok_s": 164.35608903529223,
+          "text_sha1": "5dc03c49c1732b21",
+          "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retransmissions, while UDP is connectionless and sends data without verification, res",
+          "text_len": 757
+        },
+        {
+          "ct": 179,
+          "elapsed_s": 1.0714514790015528,
+          "ttft_s": 0.04548481499659829,
+          "decode_s": 1.0259666640049545,
+          "decode_tpot_ms": 5.7638576629491824,
+          "tok_s": 167.06309479063268,
+          "decode_tok_s": 173.4949158144776,
+          "text_sha1": "f5fedcca420dbb2a",
+          "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy object (like a cast-iron skillet or canned goods) on top for 15–30 minutes.\n2. C",
+          "text_len": 765
+        },
+        {
+          "ct": 21,
+          "elapsed_s": 0.18356843999936245,
+          "ttft_s": 0.062336212999070995,
+          "decode_s": 0.12123222700029146,
+          "decode_tpot_ms": 6.061611350014573,
+          "tok_s": 114.39874958937895,
+          "decode_tok_s": 164.9726355348724,
+          "text_sha1": "707b1859d6801a39",
+          "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+          "text_len": 75
+        }
+      ],
+      [
+        {
+          "ct": 67,
+          "elapsed_s": 0.4299670679902192,
+          "ttft_s": 0.045010803994955495,
+          "decode_s": 0.3849562639952637,
+          "decode_tpot_ms": 5.832670666594905,
+          "tok_s": 155.82588758059046,
+          "decode_tok_s": 171.44804792892532,
+          "text_sha1": "ef2fcce5ed1005f2",
+          "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue and violet, more effectively than longer wavelengths like red. Although violet li",
+          "text_len": 361
+        },
+        {
+          "ct": 79,
+          "elapsed_s": 0.5156742530089105,
+          "ttft_s": 0.08359928800200578,
+          "decode_s": 0.4320749650069047,
+          "decode_tpot_ms": 5.539422628293649,
+          "tok_s": 153.1974876368996,
+          "decode_tok_s": 180.52422916646776,
+          "text_sha1": "dca63db49b833e7b",
+          "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in range(2, n):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n```",
+          "text_len": 193
+        },
+        {
+          "ct": 134,
+          "elapsed_s": 0.841027218993986,
+          "ttft_s": 0.04535417498846073,
+          "decode_s": 0.7956730440055253,
+          "decode_tpot_ms": 5.982504090267108,
+          "tok_s": 159.3289693528435,
+          "decode_tok_s": 167.15408546513035,
+          "text_sha1": "95b17bca914d2003",
+          "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retransmissions, while UDP is connectionless and prioritizes low latency by sending d",
+          "text_len": 723
+        },
+        {
+          "ct": 179,
+          "elapsed_s": 1.0730917059991043,
+          "ttft_s": 0.04530897899530828,
+          "decode_s": 1.027782727003796,
+          "decode_tpot_ms": 5.77406026406627,
+          "tok_s": 166.80773786555517,
+          "decode_tok_s": 173.1883552070462,
+          "text_sha1": "f5fedcca420dbb2a",
+          "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy object (like a cast-iron skillet or canned goods) on top for 15–30 minutes.\n2. C",
+          "text_len": 765
+        },
+        {
+          "ct": 22,
+          "elapsed_s": 0.21020255399344023,
+          "ttft_s": 0.04564283200306818,
+          "decode_s": 0.16455972199037205,
+          "decode_tpot_ms": 7.836177237636764,
+          "tok_s": 104.66095478881076,
+          "decode_tok_s": 127.61324427388529,
+          "text_sha1": "a298d1f641991dd4",
+          "text_preview": "Screen glow, cold coffee,\nStack trace winds through endless loops,\nWho left this ghost here?",
+          "text_len": 92
+        }
+      ]
+    ],
+    "n_trials": 5,
+    "n_prompts": 5
+  },
+  "exp3_concurrent": {
+    "C1": {
+      "trials": [
+        {
+          "concurrent": 1,
+          "total_requests": 20,
+          "total_tokens": 1954,
+          "wall_time_s": 12.697045591994538,
+          "aggregate_tok_s": 153.89406817850548,
+          "mean_ttft_ms": 57.273765801801346,
+          "mean_decode_tpot_ms": 5.998964586657905,
+          "per_request": [
+            {
+              "ct": 58,
+              "elapsed_s": 0.386030091001885,
+              "ttft_s": 0.04508927999995649,
+              "decode_s": 0.3409408110019285,
+              "tok_s": 150.24735468022564,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5150730130117154,
+              "ttft_s": 0.08333023700106423,
+              "decode_s": 0.43174277601065114,
+              "tok_s": 153.37631365711474,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9356454719963949,
+              "ttft_s": 0.04852165299234912,
+              "decode_s": 0.8871238190040458,
+              "tok_s": 154.97322900586718,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.0901346530008595,
+              "ttft_s": 0.04832278499088716,
+              "decode_s": 1.0418118680099724,
+              "tok_s": 164.19989907417323,
+              "text_sha1": "f5fedcca420dbb2a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 765
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1742325700033689,
+              "ttft_s": 0.050906948003103025,
+              "decode_s": 0.12332562200026587,
+              "tok_s": 120.5285555943642,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4465429179981584,
+              "ttft_s": 0.04998875099408906,
+              "decode_s": 0.3965541670040693,
+              "tok_s": 150.04156890531252,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5292227390018525,
+              "ttft_s": 0.0892172909952933,
+              "decode_s": 0.44000544800655916,
+              "tok_s": 149.27552083079235,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9375379090051865,
+              "ttft_s": 0.049668785999529064,
+              "decode_s": 0.8878691230056575,
+              "tok_s": 154.66041277611725,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1175033320032526,
+              "ttft_s": 0.050408786002662964,
+              "decode_s": 1.0670945460005896,
+              "tok_s": 159.28364140169018,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1841200380004011,
+              "ttft_s": 0.0498492130136583,
+              "decode_s": 0.1342708249867428,
+              "tok_s": 114.05602686196627,
+              "text_sha1": "654789a5da8f20a6",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nNull pointer, I sigh.",
+              "text_len": 78
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.44266701499873307,
+              "ttft_s": 0.04962985499878414,
+              "decode_s": 0.3930371599999489,
+              "tok_s": 151.3553025860573,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5286135019996436,
+              "ttft_s": 0.08968412900867406,
+              "decode_s": 0.43892937299096957,
+              "tok_s": 149.44756367583904,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9393253869930049,
+              "ttft_s": 0.05027837899979204,
+              "decode_s": 0.8890470079932129,
+              "tok_s": 154.3661035971551,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.1050272489956114,
+              "ttft_s": 0.05027438700199127,
+              "decode_s": 1.0547528619936202,
+              "tok_s": 161.98695567253915,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17354569800954778,
+              "ttft_s": 0.05014329400728457,
+              "decode_s": 0.12340240400226321,
+              "tok_s": 121.00559242237549,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4428375440038508,
+              "ttft_s": 0.05008894900674932,
+              "decode_s": 0.39274859499710146,
+              "tok_s": 151.2970183020828,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5264135979959974,
+              "ttft_s": 0.08887755000614561,
+              "decode_s": 0.4375360479898518,
+              "tok_s": 150.07211117027543,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.938976472010836,
+              "ttft_s": 0.049797127008787356,
+              "decode_s": 0.8891793450020486,
+              "tok_s": 154.42346461512474,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.107869526007562,
+              "ttft_s": 0.05036788100551348,
+              "decode_s": 1.0575016450020485,
+              "tok_s": 161.57137261917808,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17497611499857157,
+              "ttft_s": 0.05103003499971237,
+              "decode_s": 0.1239460799988592,
+              "tok_s": 120.0163805224012,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 1,
+          "total_requests": 20,
+          "total_tokens": 1955,
+          "wall_time_s": 12.73366937400715,
+          "aggregate_tok_s": 153.52997966090447,
+          "mean_ttft_ms": 56.859110652294476,
+          "mean_decode_tpot_ms": 6.072493974416218,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.44409359199926257,
+              "ttft_s": 0.049752197999623604,
+              "decode_s": 0.39434139399963897,
+              "tok_s": 150.86909878247297,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5263963150064228,
+              "ttft_s": 0.08827086300880183,
+              "decode_s": 0.438125451997621,
+              "tok_s": 150.07703843640334,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9369553959986661,
+              "ttft_s": 0.04804937400331255,
+              "decode_s": 0.8889060219953535,
+              "tok_s": 154.75656644834183,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.118283509000321,
+              "ttft_s": 0.04919083201093599,
+              "decode_s": 1.069092676989385,
+              "tok_s": 159.17251624243428,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17413275000581052,
+              "ttft_s": 0.04993259800539818,
+              "decode_s": 0.12420015200041234,
+              "tok_s": 120.59764748043814,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4430036630074028,
+              "ttft_s": 0.049569341994356364,
+              "decode_s": 0.39343432101304643,
+              "tok_s": 151.2402844372878,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.528531459000078,
+              "ttft_s": 0.08978362299967557,
+              "decode_s": 0.43874783600040246,
+              "tok_s": 149.47076215568907,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9369891139940592,
+              "ttft_s": 0.04868798700044863,
+              "decode_s": 0.8883011269936105,
+              "tok_s": 154.75099746027504,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.0932191820029402,
+              "ttft_s": 0.047997956004110165,
+              "decode_s": 1.04522122599883,
+              "tok_s": 163.73660739472697,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.21673159900819883,
+              "ttft_s": 0.04833795900049154,
+              "decode_s": 0.1683936400077073,
+              "tok_s": 101.50804082411514,
+              "text_sha1": "a298d1f641991dd4",
+              "text_preview": "Screen glow, cold coffee,\nStack trace winds through endless loops,\nWho left this ghost here?",
+              "text_len": 92
+            },
+            {
+              "ct": 58,
+              "elapsed_s": 0.3953567110002041,
+              "ttft_s": 0.047923172009177506,
+              "decode_s": 0.3474335389910266,
+              "tok_s": 146.7029606080724,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5287247140076943,
+              "ttft_s": 0.088849895997555,
+              "decode_s": 0.4398748180101393,
+              "tok_s": 149.41612886068032,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9349898499931442,
+              "ttft_s": 0.04953730100532994,
+              "decode_s": 0.8854525489878142,
+              "tok_s": 155.0818974142481,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.1049173520004842,
+              "ttft_s": 0.04871837899554521,
+              "decode_s": 1.056198973004939,
+              "tok_s": 162.00306717594344,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17224375400110148,
+              "ttft_s": 0.049013762996764854,
+              "decode_s": 0.12322999100433663,
+              "tok_s": 121.92024100836602,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4397652720072074,
+              "ttft_s": 0.04835991399886552,
+              "decode_s": 0.39140535800834186,
+              "tok_s": 152.35400397624377,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5263513959944248,
+              "ttft_s": 0.08949295000638813,
+              "decode_s": 0.4368584459880367,
+              "tok_s": 150.08984606328806,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9354998049966525,
+              "ttft_s": 0.04844731999037322,
+              "decode_s": 0.8870524850062793,
+              "tok_s": 154.99735994121224,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.1042207300051814,
+              "ttft_s": 0.048508581006899476,
+              "decode_s": 1.055712148998282,
+              "tok_s": 162.10527038299676,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17252296301012393,
+              "ttft_s": 0.04875820501183625,
+              "decode_s": 0.12376475799828768,
+              "tok_s": 121.72292681274948,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 1,
+          "total_requests": 20,
+          "total_tokens": 1937,
+          "wall_time_s": 12.668120816990267,
+          "aggregate_tok_s": 152.90349910478662,
+          "mean_ttft_ms": 57.21442049762118,
+          "mean_decode_tpot_ms": 6.0606083330425715,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.44082622199493926,
+              "ttft_s": 0.04789511999115348,
+              "decode_s": 0.3929311020037858,
+              "tok_s": 151.98732892248222,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5294589900004212,
+              "ttft_s": 0.09090678198845126,
+              "decode_s": 0.4385522080119699,
+              "tok_s": 149.20891228976424,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9367249960050685,
+              "ttft_s": 0.0487787460006075,
+              "decode_s": 0.887946250004461,
+              "tok_s": 154.7946308878208,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.111556436997489,
+              "ttft_s": 0.04850859800353646,
+              "decode_s": 1.0630478389939526,
+              "tok_s": 160.1358186371621,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1831460480025271,
+              "ttft_s": 0.04869096999755129,
+              "decode_s": 0.1344550780049758,
+              "tok_s": 114.66258884117575,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.43965182699321304,
+              "ttft_s": 0.04812047599989455,
+              "decode_s": 0.3915313509933185,
+              "tok_s": 152.39331645273543,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5263943900063168,
+              "ttft_s": 0.08909175499866251,
+              "decode_s": 0.4373026350076543,
+              "tok_s": 150.0775872612396,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9359991850069491,
+              "ttft_s": 0.04828284100221936,
+              "decode_s": 0.8877163440047298,
+              "tok_s": 154.91466480168302,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1135518270020839,
+              "ttft_s": 0.048791053995955735,
+              "decode_s": 1.0647607730061281,
+              "tok_s": 159.848868892985,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1840259869932197,
+              "ttft_s": 0.04888248800125439,
+              "decode_s": 0.13514349899196532,
+              "tok_s": 114.11431799995579,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 58,
+              "elapsed_s": 0.39801682099641766,
+              "ttft_s": 0.048851712999749,
+              "decode_s": 0.34916510799666867,
+              "tok_s": 145.722484428672,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5274969110032544,
+              "ttft_s": 0.08787479100283235,
+              "decode_s": 0.439622120000422,
+              "tok_s": 149.763910180533,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9436133109993534,
+              "ttft_s": 0.0497451870032819,
+              "decode_s": 0.8938681239960715,
+              "tok_s": 153.664640281976,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1190758739976445,
+              "ttft_s": 0.050717521997285075,
+              "decode_s": 1.0683583520003594,
+              "tok_s": 159.05981366941225,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1735786509962054,
+              "ttft_s": 0.050151406991062686,
+              "decode_s": 0.12342724400514271,
+              "tok_s": 120.98262015216999,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 50,
+              "elapsed_s": 0.3531269219965907,
+              "ttft_s": 0.04999019199749455,
+              "decode_s": 0.30313672999909613,
+              "tok_s": 141.59214969308607,
+              "text_sha1": "a59675b4d303cafd",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue, ",
+              "text_len": 278
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5269735640031286,
+              "ttft_s": 0.08823798000230454,
+              "decode_s": 0.438735584000824,
+              "tok_s": 149.91264343486307,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9416509649890941,
+              "ttft_s": 0.05022725799062755,
+              "decode_s": 0.8914237069984665,
+              "tok_s": 153.98486848221873,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 181,
+              "elapsed_s": 1.1081143280025572,
+              "ttft_s": 0.050335769992670976,
+              "decode_s": 1.0577785580098862,
+              "tok_s": 163.34054657181755,
+              "text_sha1": "3e63c832ab6da01a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen cloth and placing a heavy ",
+              "text_len": 742
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17441117399721406,
+              "ttft_s": 0.05020775999582838,
+              "decode_s": 0.12420341400138568,
+              "tok_s": 120.40512954941431,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 1,
+          "total_requests": 20,
+          "total_tokens": 1926,
+          "wall_time_s": 12.570289105991833,
+          "aggregate_tok_s": 153.2184330654687,
+          "mean_ttft_ms": 57.344663847470656,
+          "mean_decode_tpot_ms": 5.990982010527743,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.4428865119989496,
+              "ttft_s": 0.04976149099820759,
+              "decode_s": 0.393125021000742,
+              "tok_s": 151.2802900625678,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5264073629950872,
+              "ttft_s": 0.08846384899516124,
+              "decode_s": 0.4379435139999259,
+              "tok_s": 150.07388869052974,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9381442009907914,
+              "ttft_s": 0.050308534991927445,
+              "decode_s": 0.887835665998864,
+              "tok_s": 154.56046079788462,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 1.0719593940011691,
+              "ttft_s": 0.05029580999689642,
+              "decode_s": 1.0216635840042727,
+              "tok_s": 160.45383898171465,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17343926600005943,
+              "ttft_s": 0.049879786995006725,
+              "decode_s": 0.12355947900505271,
+              "tok_s": 121.07984820457442,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4387039829889545,
+              "ttft_s": 0.04838840098818764,
+              "decode_s": 0.3903155820007669,
+              "tok_s": 152.7225705668756,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5291055609995965,
+              "ttft_s": 0.09034944899030961,
+              "decode_s": 0.4387561120092869,
+              "tok_s": 149.30858003221826,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9342801930033602,
+              "ttft_s": 0.04871154300053604,
+              "decode_s": 0.8855686500028241,
+              "tok_s": 155.19969393108872,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1168670689949067,
+              "ttft_s": 0.049732258994481526,
+              "decode_s": 1.0671348100004252,
+              "tok_s": 159.37438298739178,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17231818499567453,
+              "ttft_s": 0.04928208999626804,
+              "decode_s": 0.12303609499940649,
+              "tok_s": 121.86757886596318,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4425005249941023,
+              "ttft_s": 0.04936798800190445,
+              "decode_s": 0.39313253699219786,
+              "tok_s": 151.4122497388969,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.527359821004211,
+              "ttft_s": 0.0885304020048352,
+              "decode_s": 0.4388294189993758,
+              "tok_s": 149.80284210800576,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9386465489951661,
+              "ttft_s": 0.05020258099830244,
+              "decode_s": 0.8884439679968636,
+              "tok_s": 154.4777426127273,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1156165819993475,
+              "ttft_s": 0.04941955399408471,
+              "decode_s": 1.0661970280052628,
+              "tok_s": 159.55302464310637,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17324542099959217,
+              "ttft_s": 0.04947934100346174,
+              "decode_s": 0.12376607999613043,
+              "tok_s": 121.21532493519373,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 50,
+              "elapsed_s": 0.35095380700659007,
+              "ttft_s": 0.0490514080011053,
+              "decode_s": 0.30190239900548477,
+              "tok_s": 142.4688919218965,
+              "text_sha1": "f6bc33b47c3e9204",
+              "text_preview": "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more effectively than othe",
+              "text_len": 277
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5257035219983663,
+              "ttft_s": 0.08878997599822469,
+              "decode_s": 0.43691354600014165,
+              "tok_s": 150.27481592608675,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 134,
+              "elapsed_s": 0.8573944119998487,
+              "ttft_s": 0.048439901001984254,
+              "decode_s": 0.8089545109978644,
+              "tok_s": 156.2874659836524,
+              "text_sha1": "95b17bca914d2003",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 723
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.120723956002621,
+              "ttft_s": 0.04912693001097068,
+              "decode_s": 1.0715970259916503,
+              "tok_s": 158.82590806293402,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.17325597698800266,
+              "ttft_s": 0.049311981987557374,
+              "decode_s": 0.12394399500044528,
+              "tok_s": 121.20793963404896,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 1,
+          "total_requests": 20,
+          "total_tokens": 1944,
+          "wall_time_s": 12.699849049007753,
+          "aggregate_tok_s": 153.0726855491157,
+          "mean_ttft_ms": 57.3932685496402,
+          "mean_decode_tpot_ms": 6.118733498314672,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.4420090630010236,
+              "ttft_s": 0.04900076999911107,
+              "decode_s": 0.39300829300191253,
+              "tok_s": 151.58060231865616,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5271242580056423,
+              "ttft_s": 0.08807452600740362,
+              "decode_s": 0.4390497319982387,
+              "tok_s": 149.86978648809287,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9385276310058543,
+              "ttft_s": 0.04941649599641096,
+              "decode_s": 0.8891111350094434,
+              "tok_s": 154.4973160189202,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.1158155570010422,
+              "ttft_s": 0.04976567100675311,
+              "decode_s": 1.066049885994289,
+              "tok_s": 159.52457275143882,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.21693359699565917,
+              "ttft_s": 0.0493148800014751,
+              "decode_s": 0.16761871699418407,
+              "tok_s": 101.41352148620953,
+              "text_sha1": "e51763f77ee807fd",
+              "text_preview": "Screen glow, cold coffee,\nStack trace winds through endless loops,\nWho left this leak here?",
+              "text_len": 91
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4404352929996094,
+              "ttft_s": 0.04887857299763709,
+              "decode_s": 0.3915567200019723,
+              "tok_s": 152.12223240261406,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.525935361001757,
+              "ttft_s": 0.08785264199832454,
+              "decode_s": 0.43808271900343243,
+              "tok_s": 150.20857287391271,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.936197696995805,
+              "ttft_s": 0.04921731499780435,
+              "decode_s": 0.8869803819980007,
+              "tok_s": 154.88181659204585,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.1041846169973724,
+              "ttft_s": 0.05040326098969672,
+              "decode_s": 1.0537813560076756,
+              "tok_s": 162.1105721312779,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.18502564399386756,
+              "ttft_s": 0.050323818999459036,
+              "decode_s": 0.13470182499440853,
+              "tok_s": 113.49778088434066,
+              "text_sha1": "8480b707d2490feb",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nWhy won't it release?",
+              "text_len": 79
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.4419546110002557,
+              "ttft_s": 0.050018096997519024,
+              "decode_s": 0.39193651400273666,
+              "tok_s": 151.59927814388442,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5247046570002567,
+              "ttft_s": 0.08854618300392758,
+              "decode_s": 0.4361584739963291,
+              "tok_s": 150.56088972345705,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.941815152997151,
+              "ttft_s": 0.04950952000217512,
+              "decode_s": 0.8923056329949759,
+              "tok_s": 153.95802407570588,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.100061719000223,
+              "ttft_s": 0.04992483599926345,
+              "decode_s": 1.0501368830009596,
+              "tok_s": 162.71814290809232,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.1747095890023047,
+              "ttft_s": 0.0505018699914217,
+              "decode_s": 0.12420771901088301,
+              "tok_s": 120.19946998858188,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 48,
+              "elapsed_s": 0.3419161149940919,
+              "ttft_s": 0.05049081800098065,
+              "decode_s": 0.29142529699311126,
+              "tok_s": 140.38531059242237,
+              "text_sha1": "fa0b4097bc3482c3",
+              "text_preview": "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more effectively than othe",
+              "text_len": 277
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.5269370790047105,
+              "ttft_s": 0.08838881501287688,
+              "decode_s": 0.43854826399183366,
+              "tok_s": 149.9230233507515,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 0.9384058360010386,
+              "ttft_s": 0.04968762399221305,
+              "decode_s": 0.8887182120088255,
+              "tok_s": 154.51736811219013,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.103956985010882,
+              "ttft_s": 0.04942271400068421,
+              "decode_s": 1.0545342710101977,
+              "tok_s": 162.14399875212126,
+              "text_sha1": "d5b935d9ac04e0e7",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen cloth and placing a heavy ",
+              "text_len": 777
+            },
+            {
+              "ct": 20,
+              "elapsed_s": 0.1724819219962228,
+              "ttft_s": 0.04912694099766668,
+              "decode_s": 0.12335498099855613,
+              "tok_s": 115.95418098621363,
+              "text_sha1": "c4ae647a98d5f9c8",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nCoffee turns to ice.",
+              "text_len": 78
+            }
+          ]
+        }
+      ],
+      "n_trials": 5
+    },
+    "C4": {
+      "trials": [
+        {
+          "concurrent": 4,
+          "total_requests": 20,
+          "total_tokens": 1945,
+          "wall_time_s": 6.873739356000442,
+          "aggregate_tok_s": 282.96097644466386,
+          "mean_ttft_ms": 139.90357845104882,
+          "mean_decode_tpot_ms": 11.789139932787215,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 1.1402725230000215,
+              "ttft_s": 0.10474584400071763,
+              "decode_s": 1.0355266789993038,
+              "tok_s": 58.75788344327116,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.5768566530023236,
+              "ttft_s": 0.10457679600222036,
+              "decode_s": 1.4722798570001032,
+              "tok_s": 50.09967129832923,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.3931268449960044,
+              "ttft_s": 0.1044483500008937,
+              "decode_s": 2.2886784949951107,
+              "tok_s": 60.590185724251526,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.7856275389931398,
+              "ttft_s": 0.10429904000193346,
+              "decode_s": 2.6813284989912063,
+              "tok_s": 64.25841125360903,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.6932994210073957,
+              "ttft_s": 0.4195891060080612,
+              "decode_s": 0.2737103149993345,
+              "tok_s": 30.289943080416887,
+              "text_sha1": "63b2f1f1abfa4bc2",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nCoffee cold, code breaks.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.783282369011431,
+              "ttft_s": 0.12336294900160283,
+              "decode_s": 0.6599194200098282,
+              "tok_s": 85.53748003361764,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9196261100005358,
+              "ttft_s": 0.12220375699689612,
+              "decode_s": 0.7974223530036397,
+              "tok_s": 85.90447698353624,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.8656833339919103,
+              "ttft_s": 0.12279570200189482,
+              "decode_s": 1.7428876319900155,
+              "tok_s": 77.7195129302842,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 2.133877071988536,
+              "ttft_s": 0.19227463399874978,
+              "decode_s": 1.9416024379897863,
+              "tok_s": 80.60445573826571,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.39163355600612704,
+              "ttft_s": 0.12249703200359363,
+              "decode_s": 0.2691365240025334,
+              "tok_s": 53.62155432787138,
+              "text_sha1": "8480b707d2490feb",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nWhy won't it release?",
+              "text_len": 79
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.8498606590001145,
+              "ttft_s": 0.19212796799547505,
+              "decode_s": 0.6577326910046395,
+              "tok_s": 78.83645311788808,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8457143239938887,
+              "ttft_s": 0.12288075700053014,
+              "decode_s": 0.7228335669933585,
+              "tok_s": 93.41215793404355,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 134,
+              "elapsed_s": 1.5332791109976824,
+              "ttft_s": 0.12039496199577115,
+              "decode_s": 1.4128841490019113,
+              "tok_s": 87.39439482274571,
+              "text_sha1": "95b17bca914d2003",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 723
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.0387139079975896,
+              "ttft_s": 0.12024339300114661,
+              "decode_s": 1.918470514996443,
+              "tok_s": 87.30994540319311,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 20,
+              "elapsed_s": 0.30128215000149794,
+              "ttft_s": 0.11930247300188057,
+              "decode_s": 0.18197967699961737,
+              "tok_s": 66.38295697206277,
+              "text_sha1": "c4ae647a98d5f9c8",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nCoffee turns to ice.",
+              "text_len": 78
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7792532439925708,
+              "ttft_s": 0.12223750300472602,
+              "decode_s": 0.6570157409878448,
+              "tok_s": 85.97975114831702,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9146911959978752,
+              "ttft_s": 0.12206180200155359,
+              "decode_s": 0.7926293939963216,
+              "tok_s": 86.36794619392349,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.4324402420024853,
+              "ttft_s": 0.1205500200012466,
+              "decode_s": 1.3118902220012387,
+              "tok_s": 101.22586321457759,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.5668814910022775,
+              "ttft_s": 0.11894330399809405,
+              "decode_s": 1.4479381870041834,
+              "tok_s": 114.23965438860355,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.36641898700327147,
+              "ttft_s": 0.118536177003989,
+              "decode_s": 0.24788280999928247,
+              "tok_s": 60.04055679517388,
+              "text_sha1": "9b0f0c7c07f209a5",
+              "text_preview": "Screen glow, cold coffee,\nStack trace winds through midnight dark,\nWho owns this lost heap?",
+              "text_len": 91
+            }
+          ]
+        },
+        {
+          "concurrent": 4,
+          "total_requests": 20,
+          "total_tokens": 1941,
+          "wall_time_s": 6.048257118003676,
+          "aggregate_tok_s": 320.9188964904088,
+          "mean_ttft_ms": 121.71990594797535,
+          "mean_decode_tpot_ms": 10.344795626967834,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.6770280210039346,
+              "ttft_s": 0.09150566400785465,
+              "decode_s": 0.5855223569960799,
+              "tok_s": 98.96193055739214,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8143458569975337,
+              "ttft_s": 0.09130780499253888,
+              "decode_s": 0.7230380520049948,
+              "tok_s": 97.01037872442845,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.6229988670093007,
+              "ttft_s": 0.0910571050044382,
+              "decode_s": 1.5319417620048625,
+              "tok_s": 89.34078941607115,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 1.9671356740000192,
+              "ttft_s": 0.09106986799451988,
+              "decode_s": 1.8760658060054993,
+              "tok_s": 87.43677534465695,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.38934855799016077,
+              "ttft_s": 0.12081561499508098,
+              "decode_s": 0.2685329429950798,
+              "tok_s": 53.936247018361094,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7758492499997374,
+              "ttft_s": 0.11856235799496062,
+              "decode_s": 0.6572868920047767,
+              "tok_s": 86.35698236483786,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9177612890052842,
+              "ttft_s": 0.12102253599732649,
+              "decode_s": 0.7967387530079577,
+              "tok_s": 86.07902833385376,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.862923402004526,
+              "ttft_s": 0.12314702400180977,
+              "decode_s": 1.7397763780027162,
+              "tok_s": 77.83465484623706,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 176,
+              "elapsed_s": 2.1491522150026867,
+              "ttft_s": 0.19370241300202906,
+              "decode_s": 1.9554498020006577,
+              "tok_s": 81.8927569538298,
+              "text_sha1": "90fb5cee38fec5ef",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 759
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3895684730086941,
+              "ttft_s": 0.12116003900882788,
+              "decode_s": 0.26840843399986625,
+              "tok_s": 53.90579950634593,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 58,
+              "elapsed_s": 0.7779040030000033,
+              "ttft_s": 0.19028991500090342,
+              "decode_s": 0.5876140879990999,
+              "tok_s": 74.55932836998109,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8430124240112491,
+              "ttft_s": 0.12053369299974293,
+              "decode_s": 0.7224787310115062,
+              "tok_s": 93.71154890470017,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.6488589410000714,
+              "ttft_s": 0.12121886300155893,
+              "decode_s": 1.5276400779985124,
+              "tok_s": 87.9396025909009,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 1.9766886189900106,
+              "ttft_s": 0.12101952299417462,
+              "decode_s": 1.855669095995836,
+              "tok_s": 87.01421070956711,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.31917154899565503,
+              "ttft_s": 0.12003374399500899,
+              "decode_s": 0.19913780500064604,
+              "tok_s": 65.79533816870963,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7764355120016262,
+              "ttft_s": 0.11889671599783469,
+              "decode_s": 0.6575387960037915,
+              "tok_s": 86.29177692719917,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.912600448995363,
+              "ttft_s": 0.11882746899209451,
+              "decode_s": 0.7937729800032685,
+              "tok_s": 86.5658132066089,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.4184946629975457,
+              "ttft_s": 0.1211948699929053,
+              "decode_s": 1.2972997930046404,
+              "tok_s": 102.2210402213201,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 182,
+              "elapsed_s": 1.4989276120031718,
+              "ttft_s": 0.11950675699335989,
+              "decode_s": 1.379420855009812,
+              "tok_s": 121.42013966690132,
+              "text_sha1": "ddc322f52ee6176c",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 760
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3017324839893263,
+              "ttft_s": 0.1195261419925373,
+              "decode_s": 0.18220634199678898,
+              "tok_s": 69.5980748322175,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 4,
+          "total_requests": 20,
+          "total_tokens": 1942,
+          "wall_time_s": 6.158065854993765,
+          "aggregate_tok_s": 315.3587580465987,
+          "mean_ttft_ms": 114.27610875034588,
+          "mean_decode_tpot_ms": 10.480060570625486,
+          "per_request": [
+            {
+              "ct": 50,
+              "elapsed_s": 0.5417210940067889,
+              "ttft_s": 0.09122300200397149,
+              "decode_s": 0.45049809200281743,
+              "tok_s": 92.29841804789199,
+              "text_sha1": "f6bc33b47c3e9204",
+              "text_preview": "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more effectively than othe",
+              "text_len": 277
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8132917120092316,
+              "ttft_s": 0.0911080759979086,
+              "decode_s": 0.722183636011323,
+              "tok_s": 97.13611836130858,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.7109268759959377,
+              "ttft_s": 0.09093697999196593,
+              "decode_s": 1.6199898960039718,
+              "tok_s": 84.74938469570472,
+              "text_sha1": "643ba35d34903da4",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 760
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.0972840189933777,
+              "ttft_s": 0.09082288699573837,
+              "decode_s": 2.0064611319976393,
+              "tok_s": 84.87167135590616,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.39289737299259286,
+              "ttft_s": 0.12133808599901386,
+              "decode_s": 0.271559286993579,
+              "tok_s": 53.449072056778306,
+              "text_sha1": "0a0d9aa905fcb84a",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nNull pointer, my friend.",
+              "text_len": 81
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.775719030003529,
+              "ttft_s": 0.1214319680002518,
+              "decode_s": 0.6542870620032772,
+              "tok_s": 86.37147911621453,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.911978911011829,
+              "ttft_s": 0.11850357100775,
+              "decode_s": 0.793475340004079,
+              "tok_s": 86.62481012017098,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.8552268560015364,
+              "ttft_s": 0.1219095330015989,
+              "decode_s": 1.7333173229999375,
+              "tok_s": 78.15755767599772,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.1915939089958556,
+              "ttft_s": 0.11886031099129468,
+              "decode_s": 2.072733598004561,
+              "tok_s": 81.219426313133,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 20,
+              "elapsed_s": 0.3715189950016793,
+              "ttft_s": 0.11885306300246157,
+              "decode_s": 0.2526659319992177,
+              "tok_s": 53.83304829382842,
+              "text_sha1": "4d0c8bb0251d37c0",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nMemory leaks slow.",
+              "text_len": 74
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7754451079963474,
+              "ttft_s": 0.12053075199946761,
+              "decode_s": 0.6549143559968797,
+              "tok_s": 86.40198939821747,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8428782760020113,
+              "ttft_s": 0.11876048300473485,
+              "decode_s": 0.7241177929972764,
+              "tok_s": 93.72646353482658,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.789158136001788,
+              "ttft_s": 0.12135483299789485,
+              "decode_s": 1.6678033030038932,
+              "tok_s": 81.04370266790944,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.1178523449925706,
+              "ttft_s": 0.12032237699895632,
+              "decode_s": 1.9975299679936143,
+              "tok_s": 84.0474079417583,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3190764390019467,
+              "ttft_s": 0.12036829101270996,
+              "decode_s": 0.19870814798923675,
+              "tok_s": 65.81495037893373,
+              "text_sha1": "654789a5da8f20a6",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nNull pointer, I sigh.",
+              "text_len": 78
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.778013422008371,
+              "ttft_s": 0.12187421201088,
+              "decode_s": 0.656139209997491,
+              "tok_s": 86.11676624684132,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9116892049933085,
+              "ttft_s": 0.11869357900286559,
+              "decode_s": 0.7929956259904429,
+              "tok_s": 86.65233674734564,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.3991785399994114,
+              "ttft_s": 0.12063241099531297,
+              "decode_s": 1.2785461290040985,
+              "tok_s": 103.63223552589722,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.4954324080026709,
+              "ttft_s": 0.11886172599042766,
+              "decode_s": 1.3765706820122432,
+              "tok_s": 119.02911763009091,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.30072762101190165,
+              "ttft_s": 0.11913603400171269,
+              "decode_s": 0.18159158701018896,
+              "tok_s": 69.8306325482783,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 4,
+          "total_requests": 20,
+          "total_tokens": 1963,
+          "wall_time_s": 6.170091870997567,
+          "aggregate_tok_s": 318.14761287867606,
+          "mean_ttft_ms": 125.93304274923867,
+          "mean_decode_tpot_ms": 10.399804502504091,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.6774494540004525,
+              "ttft_s": 0.09219899500021711,
+              "decode_s": 0.5852504590002354,
+              "tok_s": 98.90036755414559,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8157953059999272,
+              "ttft_s": 0.09193013700132724,
+              "decode_s": 0.7238651689986,
+              "tok_s": 96.83801735432766,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.6238611389999278,
+              "ttft_s": 0.09180972998728976,
+              "decode_s": 1.532051409012638,
+              "tok_s": 89.29334936194101,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.9975317409989657,
+              "ttft_s": 0.09173076000297442,
+              "decode_s": 1.9058009809959913,
+              "tok_s": 89.61059107400321,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3910219570097979,
+              "ttft_s": 0.12187678400368895,
+              "decode_s": 0.26914517300610896,
+              "tok_s": 53.70542401401208,
+              "text_sha1": "63b2f1f1abfa4bc2",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nCoffee cold, code breaks.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7752141899982234,
+              "ttft_s": 0.11950038299255539,
+              "decode_s": 0.6557138070056681,
+              "tok_s": 86.42772651020945,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9128389319957932,
+              "ttft_s": 0.12054298300063238,
+              "decode_s": 0.7922959489951609,
+              "tok_s": 86.54319752475683,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.8603110630065203,
+              "ttft_s": 0.12184877500112634,
+              "decode_s": 1.738462288005394,
+              "tok_s": 77.9439540426427,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.268316599991522,
+              "ttft_s": 0.19061157100077253,
+              "decode_s": 2.0777050289907493,
+              "tok_s": 78.47229086127805,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.38932687099440955,
+              "ttft_s": 0.12032319299760275,
+              "decode_s": 0.2690036779968068,
+              "tok_s": 53.93925147360698,
+              "text_sha1": "0a0d9aa905fcb84a",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nNull pointer, my friend.",
+              "text_len": 81
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.8436511589970905,
+              "ttft_s": 0.1898443899990525,
+              "decode_s": 0.653806768998038,
+              "tok_s": 79.41671066942855,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8447848089999752,
+              "ttft_s": 0.1197808799915947,
+              "decode_s": 0.7250039290083805,
+              "tok_s": 93.51493913996542,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.7426284920074977,
+              "ttft_s": 0.12245334099861793,
+              "decode_s": 1.6201751510088798,
+              "tok_s": 83.20763758026294,
+              "text_sha1": "643ba35d34903da4",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 760
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.1062146759941243,
+              "ttft_s": 0.1201660459919367,
+              "decode_s": 1.9860486300021876,
+              "tok_s": 84.98658851833932,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.31921422100276686,
+              "ttft_s": 0.12099855400447268,
+              "decode_s": 0.19821566699829418,
+              "tok_s": 65.78654276125742,
+              "text_sha1": "63b2f1f1abfa4bc2",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nCoffee cold, code breaks.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7803156870068051,
+              "ttft_s": 0.12137621000874788,
+              "decode_s": 0.6589394769980572,
+              "tok_s": 85.86268495639726,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9203957749996334,
+              "ttft_s": 0.12041217600926757,
+              "decode_s": 0.7999835989903659,
+              "tok_s": 85.83264085499682,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.4238240369886626,
+              "ttft_s": 0.12422680399322417,
+              "decode_s": 1.2995972329954384,
+              "tok_s": 101.83842682321185,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.5855993279983522,
+              "ttft_s": 0.19530698399466928,
+              "decode_s": 1.390292344003683,
+              "tok_s": 112.8910670175221,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3036160860065138,
+              "ttft_s": 0.12172215900500305,
+              "decode_s": 0.18189392700151075,
+              "tok_s": 69.1662957526877,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 4,
+          "total_requests": 20,
+          "total_tokens": 1941,
+          "wall_time_s": 6.193399473006139,
+          "aggregate_tok_s": 313.3981601638691,
+          "mean_ttft_ms": 121.6028188013297,
+          "mean_decode_tpot_ms": 10.50786533011617,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.6768275490030646,
+              "ttft_s": 0.09249182599887718,
+              "decode_s": 0.5843357230041875,
+              "tok_s": 98.9912424497021,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8151336570008425,
+              "ttft_s": 0.09223037199990358,
+              "decode_s": 0.7229032850009389,
+              "tok_s": 96.91662136816704,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.6929144080058904,
+              "ttft_s": 0.09211910600424744,
+              "decode_s": 1.600795302001643,
+              "tok_s": 85.65111107465717,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 181,
+              "elapsed_s": 2.0850045980041614,
+              "ttft_s": 0.09197392000351101,
+              "decode_s": 1.9930306780006504,
+              "tok_s": 86.81036011779517,
+              "text_sha1": "4843560bb60c9959",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 788
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.37349825199635234,
+              "ttft_s": 0.12180591700598598,
+              "decode_s": 0.25169233499036636,
+              "tok_s": 56.225162735715,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 50,
+              "elapsed_s": 0.6402961959975073,
+              "ttft_s": 0.11877190999803133,
+              "decode_s": 0.521524285999476,
+              "tok_s": 78.08885998784639,
+              "text_sha1": "a59675b4d303cafd",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue, ",
+              "text_len": 278
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.9139795889932429,
+              "ttft_s": 0.11993196498951875,
+              "decode_s": 0.7940476240037242,
+              "tok_s": 86.43519062282259,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.8646490380051546,
+              "ttft_s": 0.1203500800038455,
+              "decode_s": 1.744298958001309,
+              "tok_s": 77.76262290898688,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 2.1368901960086077,
+              "ttft_s": 0.12018626699864399,
+              "decode_s": 2.0167039290099638,
+              "tok_s": 80.49079935004164,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.37245864700526,
+              "ttft_s": 0.12113285600207746,
+              "decode_s": 0.25132579100318253,
+              "tok_s": 56.382098170762646,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.7737076640041778,
+              "ttft_s": 0.11870197900861967,
+              "decode_s": 0.6550056849955581,
+              "tok_s": 86.59601438255653,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8461131360090803,
+              "ttft_s": 0.12017082099919207,
+              "decode_s": 0.7259423150098883,
+              "tok_s": 93.36812849003232,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.802733379008714,
+              "ttft_s": 0.12146338300954085,
+              "decode_s": 1.6812699959991733,
+              "tok_s": 80.43341388604703,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.1576185390003957,
+              "ttft_s": 0.1207054750120733,
+              "decode_s": 2.0369130639883224,
+              "tok_s": 82.49836418371976,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.30340626199904364,
+              "ttft_s": 0.1211759629950393,
+              "decode_s": 0.18223029900400434,
+              "tok_s": 69.21412848119198,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.781641181994928,
+              "ttft_s": 0.12277245499717537,
+              "decode_s": 0.6588687269977527,
+              "tok_s": 85.71708034753311,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 0.8485657330020331,
+              "ttft_s": 0.1224896140047349,
+              "decode_s": 0.7260761189972982,
+              "tok_s": 93.09826796860618,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.4786076489981497,
+              "ttft_s": 0.12239756800408941,
+              "decode_s": 1.3562100809940603,
+              "tok_s": 98.06523055541251,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 1.5311312259873375,
+              "ttft_s": 0.1496158999943873,
+              "decode_s": 1.3815153259929502,
+              "tok_s": 116.2539153920123,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.47198334999848157,
+              "ttft_s": 0.2215689989970997,
+              "decode_s": 0.2504143510013819,
+              "tok_s": 46.611813743155935,
+              "text_sha1": "9b0f0c7c07f209a5",
+              "text_preview": "Screen glow, cold coffee,\nStack trace winds through midnight dark,\nWho owns this lost heap?",
+              "text_len": 91
+            }
+          ]
+        }
+      ],
+      "n_trials": 5
+    },
+    "C8": {
+      "trials": [
+        {
+          "concurrent": 8,
+          "total_requests": 20,
+          "total_tokens": 1948,
+          "wall_time_s": 4.383892757003196,
+          "aggregate_tok_s": 444.3539356404425,
+          "mean_ttft_ms": 225.57606644913903,
+          "mean_decode_tpot_ms": 13.734493632894463,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 1.144920209000702,
+              "ttft_s": 0.09294195000256877,
+              "decode_s": 1.0519782589981332,
+              "tok_s": 58.51936185009633,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.3020786450069863,
+              "ttft_s": 0.09274261200334877,
+              "decode_s": 1.2093360330036376,
+              "tok_s": 60.67221845849113,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.527645444992231,
+              "ttft_s": 0.3846299439901486,
+              "decode_s": 2.1430155010020826,
+              "tok_s": 57.36564053604665,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 181,
+              "elapsed_s": 2.981512173995725,
+              "ttft_s": 0.3843598309904337,
+              "decode_s": 2.597152343005291,
+              "tok_s": 60.70744958838445,
+              "text_sha1": "df314b76e8616365",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 773
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.6345376039971597,
+              "ttft_s": 0.3842731990007451,
+              "decode_s": 0.25026440499641467,
+              "tok_s": 33.09496532232942,
+              "text_sha1": "8480b707d2490feb",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nWhy won't it release?",
+              "text_len": 79
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.187273333009216,
+              "ttft_s": 0.38429611299943645,
+              "decode_s": 0.8029772200097796,
+              "tok_s": 56.431824195178756,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.412740334009868,
+              "ttft_s": 0.3840816770098172,
+              "decode_s": 1.0286586570000509,
+              "tok_s": 55.91968891818175,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.5269137829891406,
+              "ttft_s": 0.3839047269866569,
+              "decode_s": 2.1430090560024837,
+              "tok_s": 57.38225062371395,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.757670234001125,
+              "ttft_s": 0.13435534499876667,
+              "decode_s": 2.6233148890023585,
+              "tok_s": 64.54723911703482,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.5938654749916168,
+              "ttft_s": 0.13520212599541992,
+              "decode_s": 0.4586633489961969,
+              "tok_s": 35.36154379120363,
+              "text_sha1": "8480b707d2490feb",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nWhy won't it release?",
+              "text_len": 79
+            },
+            {
+              "ct": 48,
+              "elapsed_s": 0.9552784050029004,
+              "ttft_s": 0.20391596300760284,
+              "decode_s": 0.7513624419952976,
+              "tok_s": 50.24713188178295,
+              "text_sha1": "fa0b4097bc3482c3",
+              "text_preview": "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more effectively than othe",
+              "text_len": 277
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.2256250819918932,
+              "ttft_s": 0.20096655499946792,
+              "decode_s": 1.0246585269924253,
+              "tok_s": 64.45690542788887,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.2085505059949355,
+              "ttft_s": 0.2002024999965215,
+              "decode_s": 2.008348005998414,
+              "tok_s": 65.65392079846441,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 181,
+              "elapsed_s": 2.2638357570103835,
+              "ttft_s": 0.13393211200309452,
+              "decode_s": 2.129903645007289,
+              "tok_s": 79.95279668125227,
+              "text_sha1": "3e63c832ab6da01a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen cloth and placing a heavy ",
+              "text_len": 742
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.363723258007667,
+              "ttft_s": 0.13458752300357446,
+              "decode_s": 0.22913573500409257,
+              "tok_s": 57.73620338449002,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.0130031470034737,
+              "ttft_s": 0.13455698000325356,
+              "decode_s": 0.8784461670002202,
+              "tok_s": 66.13997221843799,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0942400779895252,
+              "ttft_s": 0.20232851599575952,
+              "decode_s": 0.8919115619937656,
+              "tok_s": 72.1962223730177,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.694079556997167,
+              "ttft_s": 0.20219654600077774,
+              "decode_s": 1.4918830109963892,
+              "tok_s": 85.59220220862537,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.855481244987459,
+              "ttft_s": 0.20212716599053238,
+              "decode_s": 1.6533540789969265,
+              "tok_s": 96.4709292985658,
+              "text_sha1": "867024c757563498",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen cloth and placing a heavy ",
+              "text_len": 744
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.38950594900234137,
+              "ttft_s": 0.1359199440048542,
+              "decode_s": 0.2535860049974872,
+              "tok_s": 53.914452536060665,
+              "text_sha1": "a7c7d0c17a624414",
+              "text_preview": "Screen glow, cold coffee,\nTrace the ghost in heap memory,\nSun rises, fixed.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 8,
+          "total_requests": 20,
+          "total_tokens": 1953,
+          "wall_time_s": 4.1832172900030855,
+          "aggregate_tok_s": 466.8655402307728,
+          "mean_ttft_ms": 131.96754034725018,
+          "mean_decode_tpot_ms": 13.370491914905207,
+          "per_request": [
+            {
+              "ct": 71,
+              "elapsed_s": 0.919110456990893,
+              "ttft_s": 0.09982708799361717,
+              "decode_s": 0.8192833689972758,
+              "tok_s": 77.24860429991115,
+              "text_sha1": "e3ab4156fa980ded",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 380
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.030768149998039,
+              "ttft_s": 0.09946628300531302,
+              "decode_s": 0.931301866992726,
+              "tok_s": 76.64187140449604,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.1385106129891938,
+              "ttft_s": 0.09929925898904912,
+              "decode_s": 2.0392113540001446,
+              "tok_s": 67.8041993896491,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.659857569000451,
+              "ttft_s": 0.09921900399785955,
+              "decode_s": 2.5606385650025913,
+              "tok_s": 67.2968365246965,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3202563600061694,
+              "ttft_s": 0.09905967400118243,
+              "decode_s": 0.221196686004987,
+              "tok_s": 65.57246825510492,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.8761801670043496,
+              "ttft_s": 0.09913776900793891,
+              "decode_s": 0.7770423979964107,
+              "tok_s": 76.46829102406217,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0302592319931136,
+              "ttft_s": 0.09899207499984186,
+              "decode_s": 0.9312671569932718,
+              "tok_s": 76.67973025310201,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.138082094999845,
+              "ttft_s": 0.09891071599849965,
+              "decode_s": 2.0391713790013455,
+              "tok_s": 67.81778882069096,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.682575779996114,
+              "ttft_s": 0.1305131309927674,
+              "decode_s": 2.5520626490033465,
+              "tok_s": 66.72691274363899,
+              "text_sha1": "f5fedcca420dbb2a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 765
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.5586156929930439,
+              "ttft_s": 0.1330457539879717,
+              "decode_s": 0.42556993900507223,
+              "tok_s": 39.3830683168329,
+              "text_sha1": "c8c4e89f12110ba2",
+              "text_preview": "Screen glow, eyes burn bright,\nStack grows deep in silent night,\nOne lost pointer waits.",
+              "text_len": 88
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.065938012994593,
+              "ttft_s": 0.19956596598785836,
+              "decode_s": 0.8663720470067346,
+              "tok_s": 62.85543735491105,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1501577849994646,
+              "ttft_s": 0.19529314299870748,
+              "decode_s": 0.9548646420007572,
+              "tok_s": 68.68622812481053,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 129,
+              "elapsed_s": 2.0606697920011356,
+              "ttft_s": 0.19516655200277455,
+              "decode_s": 1.865503239998361,
+              "tok_s": 62.601005023093435,
+              "text_sha1": "f848abfcd2ae8194",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 669
+            },
+            {
+              "ct": 178,
+              "elapsed_s": 2.3059746150102,
+              "ttft_s": 0.1329380210081581,
+              "decode_s": 2.173036594002042,
+              "tok_s": 77.19078902315351,
+              "text_sha1": "78667243f5dc9e6e",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 771
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.5004756249982165,
+              "ttft_s": 0.13277612198726274,
+              "decode_s": 0.3676995030109538,
+              "tok_s": 41.96008546884743,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.0767571199976373,
+              "ttft_s": 0.13166941399686038,
+              "decode_s": 0.945087706000777,
+              "tok_s": 62.22387459127924,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1473736389889382,
+              "ttft_s": 0.13153196299390402,
+              "decode_s": 1.0158416759950342,
+              "tok_s": 68.85289788391385,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.7392128469946329,
+              "ttft_s": 0.19817616099317092,
+              "decode_s": 1.541036686001462,
+              "tok_s": 83.3710492942601,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.6974259129929123,
+              "ttft_s": 0.13239290499768686,
+              "decode_s": 1.5650330079952255,
+              "tok_s": 105.45379249241344,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.4314322050049668,
+              "ttft_s": 0.13236980700457934,
+              "decode_s": 0.2990623980003875,
+              "tok_s": 50.99294801079286,
+              "text_sha1": "c8c4e89f12110ba2",
+              "text_preview": "Screen glow, eyes burn bright,\nStack grows deep in silent night,\nOne lost pointer waits.",
+              "text_len": 88
+            }
+          ]
+        },
+        {
+          "concurrent": 8,
+          "total_requests": 20,
+          "total_tokens": 1947,
+          "wall_time_s": 4.173848058009753,
+          "aggregate_tok_s": 466.47601276803607,
+          "mean_ttft_ms": 119.55609749857103,
+          "mean_decode_tpot_ms": 13.628842325390334,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 0.9418635190086206,
+              "ttft_s": 0.09405658701143693,
+              "decode_s": 0.8478069319971837,
+              "tok_s": 71.13557181885794,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0919861669972306,
+              "ttft_s": 0.09374566900078207,
+              "decode_s": 0.9982404979964485,
+              "tok_s": 72.34523878378063,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.132521569990786,
+              "ttft_s": 0.09359560499433428,
+              "decode_s": 2.0389259649964515,
+              "tok_s": 67.9946229104855,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.634489110991126,
+              "ttft_s": 0.09344540399615653,
+              "decode_s": 2.5410437069949694,
+              "tok_s": 67.94486234663466,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 20,
+              "elapsed_s": 0.31360259700159077,
+              "ttft_s": 0.09350703899690416,
+              "decode_s": 0.2200955580046866,
+              "tok_s": 63.774982067187885,
+              "text_sha1": "c4ae647a98d5f9c8",
+              "text_preview": "Screen glow in the dark,\nMemory slips through my fingers,\nCoffee turns to ice.",
+              "text_len": 78
+            },
+            {
+              "ct": 58,
+              "elapsed_s": 0.7895277200004784,
+              "ttft_s": 0.09339055400050711,
+              "decode_s": 0.6961371659999713,
+              "tok_s": 73.46163856028367,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0915070619957987,
+              "ttft_s": 0.09331735799787566,
+              "decode_s": 0.9981897039979231,
+              "tok_s": 72.3769939294301,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.1319455659977393,
+              "ttft_s": 0.09305680899706203,
+              "decode_s": 2.0388887570006773,
+              "tok_s": 68.01299353632453,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 2.642980417003855,
+              "ttft_s": 0.1300200359983137,
+              "decode_s": 2.5129603810055414,
+              "tok_s": 65.07804556304025,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.5764528369909385,
+              "ttft_s": 0.13111655399552546,
+              "decode_s": 0.44533628299541306,
+              "tok_s": 38.16444050278102,
+              "text_sha1": "9b0f0c7c07f209a5",
+              "text_preview": "Screen glow, cold coffee,\nStack trace winds through midnight dark,\nWho owns this lost heap?",
+              "text_len": 91
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.9953057560051093,
+              "ttft_s": 0.12985882900829893,
+              "decode_s": 0.8654469269968104,
+              "tok_s": 67.31599771804802,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0825997900101356,
+              "ttft_s": 0.12839277999592014,
+              "decode_s": 0.9542070100142155,
+              "tok_s": 72.97248782882211,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.2027217440045206,
+              "ttft_s": 0.12830797499918845,
+              "decode_s": 2.074413769005332,
+              "tok_s": 65.82765181061491,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.3087746769888327,
+              "ttft_s": 0.13350207298935857,
+              "decode_s": 2.175272603999474,
+              "tok_s": 77.53030288492972,
+              "text_sha1": "867024c757563498",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen cloth and placing a heavy ",
+              "text_len": 744
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.5427423799992539,
+              "ttft_s": 0.132916035989183,
+              "decode_s": 0.4098263440100709,
+              "tok_s": 38.692390301322824,
+              "text_sha1": "a7f1a487e04b572d",
+              "text_preview": "Screen glow, eyes burn red,\nStack grows without any end,\nCoffee turns to stone.",
+              "text_len": 79
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.08017994799593,
+              "ttft_s": 0.13211677900108043,
+              "decode_s": 0.9480631689948495,
+              "tok_s": 62.026702240034965,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1619753569975728,
+              "ttft_s": 0.13197608999325894,
+              "decode_s": 1.0299992670043139,
+              "tok_s": 67.9876724788106,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 1.7472348930023145,
+              "ttft_s": 0.1991242709918879,
+              "decode_s": 1.5481106220104266,
+              "tok_s": 82.98826939681997,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.693572800999391,
+              "ttft_s": 0.1336807210027473,
+              "decode_s": 1.5598920799966436,
+              "tok_s": 105.69371443280777,
+              "text_sha1": "f5fedcca420dbb2a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 765
+            },
+            {
+              "ct": 20,
+              "elapsed_s": 0.3656091720040422,
+              "ttft_s": 0.13199478101159912,
+              "decode_s": 0.23361439099244308,
+              "tok_s": 54.703222816792135,
+              "text_sha1": "325ff47e749fb318",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nMemory leaks out.",
+              "text_len": 73
+            }
+          ]
+        },
+        {
+          "concurrent": 8,
+          "total_requests": 20,
+          "total_tokens": 1908,
+          "wall_time_s": 4.064779277003254,
+          "aggregate_tok_s": 469.3981812972308,
+          "mean_ttft_ms": 123.25905765028438,
+          "mean_decode_tpot_ms": 13.293776209416281,
+          "per_request": [
+            {
+              "ct": 51,
+              "elapsed_s": 0.7167745760089019,
+              "ttft_s": 0.09431655899970792,
+              "decode_s": 0.622458017009194,
+              "tok_s": 71.15207724578475,
+              "text_sha1": "38d4699cbc849c9c",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue, ",
+              "text_len": 279
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1033864709897898,
+              "ttft_s": 0.09424356000090484,
+              "decode_s": 1.009142910988885,
+              "tok_s": 71.59776023819947,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.1411492750048637,
+              "ttft_s": 0.09415104500658344,
+              "decode_s": 2.0469982299982803,
+              "tok_s": 67.72064035547947,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 176,
+              "elapsed_s": 2.618439985002624,
+              "ttft_s": 0.09394093100854661,
+              "decode_s": 2.5244990539940773,
+              "tok_s": 67.21559440279616,
+              "text_sha1": "90fb5cee38fec5ef",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 759
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.31651070999214426,
+              "ttft_s": 0.09389235299022403,
+              "decode_s": 0.22261835700192023,
+              "tok_s": 66.34846574550737,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 58,
+              "elapsed_s": 0.8691862229898106,
+              "ttft_s": 0.09379622199048754,
+              "decode_s": 0.7753900009993231,
+              "tok_s": 66.72908344139726,
+              "text_sha1": "8c270677c6dcac02",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 317
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1027068669936853,
+              "ttft_s": 0.09359811199828982,
+              "decode_s": 1.0091087549953954,
+              "tok_s": 71.64188631143475,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.1404706219909713,
+              "ttft_s": 0.09349648799980059,
+              "decode_s": 2.0469741339911707,
+              "tok_s": 67.7421117161269,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 2.6465894259890774,
+              "ttft_s": 0.13225567499466706,
+              "decode_s": 2.5143337509944104,
+              "tok_s": 64.98930219813772,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.42744603399478365,
+              "ttft_s": 0.13220525899669155,
+              "decode_s": 0.2952407749980921,
+              "tok_s": 49.12900888034974,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 0.9940728770015994,
+              "ttft_s": 0.13030475300911348,
+              "decode_s": 0.8637681239924859,
+              "tok_s": 67.39948503784818,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.0796885890013073,
+              "ttft_s": 0.1311855870008003,
+              "decode_s": 0.948503002000507,
+              "tok_s": 73.16924602590603,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.195948792999843,
+              "ttft_s": 0.13103733799653128,
+              "decode_s": 2.064911455003312,
+              "tok_s": 66.03068362168787,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.425559723007609,
+              "ttft_s": 0.198548322005081,
+              "decode_s": 2.227011401002528,
+              "tok_s": 73.79739954539082,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.518470975002856,
+              "ttft_s": 0.13139209800283425,
+              "decode_s": 0.38707887700002175,
+              "tok_s": 40.50371382869469,
+              "text_sha1": "d3b2b44c96bfc242",
+              "text_preview": "Screen glow, cold coffee,\nTracing pointers in the dark,\nNull pointer strikes back.",
+              "text_len": 82
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.076724586004275,
+              "ttft_s": 0.13223987200763077,
+              "decode_s": 0.9444847139966441,
+              "tok_s": 62.22575472957018,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1581385750032496,
+              "ttft_s": 0.13210523599991575,
+              "decode_s": 1.0260333390033338,
+              "tok_s": 68.2129079413302,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 131,
+              "elapsed_s": 1.6069489239889663,
+              "ttft_s": 0.19906770798843354,
+              "decode_s": 1.4078812160005327,
+              "tok_s": 81.52094820463596,
+              "text_sha1": "6f56157f0791f07d",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 702
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 1.6820760160044301,
+              "ttft_s": 0.13058597400959115,
+              "decode_s": 1.551490041994839,
+              "tok_s": 102.25459394431256,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.3663206950004678,
+              "ttft_s": 0.1328180609998526,
+              "decode_s": 0.23350263400061522,
+              "tok_s": 57.32681851341536,
+              "text_sha1": "c0c59791f0307652",
+              "text_preview": "Screen glow in the dark,\nMemory drifts into void,\nCoffee cold, code breaks.",
+              "text_len": 75
+            }
+          ]
+        },
+        {
+          "concurrent": 8,
+          "total_requests": 20,
+          "total_tokens": 1924,
+          "wall_time_s": 5.022324178004055,
+          "aggregate_tok_s": 383.08956805823425,
+          "mean_ttft_ms": 379.7776719504327,
+          "mean_decode_tpot_ms": 14.898282168977978,
+          "per_request": [
+            {
+              "ct": 67,
+              "elapsed_s": 1.5831360009906348,
+              "ttft_s": 0.052353587991092354,
+              "decode_s": 1.5307824129995424,
+              "tok_s": 42.32106398823303,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.8302712310105562,
+              "ttft_s": 0.7344615180045366,
+              "decode_s": 1.0958097130060196,
+              "tok_s": 43.1630015603651,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 134,
+              "elapsed_s": 2.754672779003158,
+              "ttft_s": 0.8229367089952575,
+              "decode_s": 1.9317360700079007,
+              "tok_s": 48.64461616689405,
+              "text_sha1": "95b17bca914d2003",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 723
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 3.500150042003952,
+              "ttft_s": 0.8227055229945108,
+              "decode_s": 2.677444519009441,
+              "tok_s": 49.14075052094746,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 1.0511920300050406,
+              "ttft_s": 0.822701846002019,
+              "decode_s": 0.22849018400302157,
+              "tok_s": 19.97732041394882,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.6260233349894406,
+              "ttft_s": 0.8224664729932556,
+              "decode_s": 0.803556861996185,
+              "tok_s": 41.204820717062525,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.850742962997174,
+              "ttft_s": 0.8225127799960319,
+              "decode_s": 1.028230183001142,
+              "tok_s": 42.68556011260686,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 3.0398418660042807,
+              "ttft_s": 0.822294272002182,
+              "decode_s": 2.2175475940020988,
+              "tok_s": 47.69984966046777,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 172,
+              "elapsed_s": 2.8145755529985763,
+              "ttft_s": 0.1330683269916335,
+              "decode_s": 2.681507226006943,
+              "tok_s": 61.110457602303704,
+              "text_sha1": "b06b8cf4112051b3",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 741
+            },
+            {
+              "ct": 22,
+              "elapsed_s": 0.636545514993486,
+              "ttft_s": 0.13645261300553102,
+              "decode_s": 0.500092901987955,
+              "tok_s": 34.561550559703704,
+              "text_sha1": "c8c4e89f12110ba2",
+              "text_preview": "Screen glow, eyes burn bright,\nStack grows deep in silent night,\nOne lost pointer waits.",
+              "text_len": 88
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.149093914005789,
+              "ttft_s": 0.2040451210050378,
+              "decode_s": 0.9450487930007512,
+              "tok_s": 58.30680955087058,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.2309809669968672,
+              "ttft_s": 0.1319919430097798,
+              "decode_s": 1.0989890239870874,
+              "tok_s": 64.17645935885623,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 145,
+              "elapsed_s": 2.346339315001387,
+              "ttft_s": 0.19940130499890074,
+              "decode_s": 2.1469380100024864,
+              "tok_s": 61.7983933836587,
+              "text_sha1": "5dc03c49c1732b21",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 757
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 2.3887677900056588,
+              "ttft_s": 0.1344776870100759,
+              "decode_s": 2.254290102995583,
+              "tok_s": 74.93403115569302,
+              "text_sha1": "2333c037606dc0ae",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 764
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.5699929889960913,
+              "ttft_s": 0.13461077600368299,
+              "decode_s": 0.4353822129924083,
+              "tok_s": 36.84255842687919,
+              "text_sha1": "707b1859d6801a39",
+              "text_preview": "Screen glow, cold coffee,\nNull pointer in the dark code,\nMemory bleeds out.",
+              "text_len": 75
+            },
+            {
+              "ct": 67,
+              "elapsed_s": 1.2186637590057217,
+              "ttft_s": 0.20074954599840567,
+              "decode_s": 1.017914213007316,
+              "tok_s": 54.978249336522225,
+              "text_sha1": "ef2fcce5ed1005f2",
+              "text_preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter wavelengths of sunlight, such as blue a",
+              "text_len": 361
+            },
+            {
+              "ct": 79,
+              "elapsed_s": 1.1569918299937854,
+              "ttft_s": 0.13309313599893358,
+              "decode_s": 1.0238986939948518,
+              "tok_s": 68.28051672622817,
+              "text_sha1": "dca63db49b833e7b",
+              "text_preview": "```python\ndef fib(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for i in ",
+              "text_len": 193
+            },
+            {
+              "ct": 129,
+              "elapsed_s": 1.617090225990978,
+              "ttft_s": 0.1989070199924754,
+              "decode_s": 1.4181832059985027,
+              "tok_s": 79.77291429174694,
+              "text_sha1": "f848abfcd2ae8194",
+              "text_preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data delivery through acknowledgments and retra",
+              "text_len": 669
+            },
+            {
+              "ct": 179,
+              "elapsed_s": 1.6970739410026,
+              "ttft_s": 0.13306503600324504,
+              "decode_s": 1.5640089049993549,
+              "tok_s": 105.47566353782447,
+              "text_sha1": "f5fedcca420dbb2a",
+              "text_preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a clean kitchen towel and placing a heavy ",
+              "text_len": 765
+            },
+            {
+              "ct": 21,
+              "elapsed_s": 0.38719447400944773,
+              "ttft_s": 0.13325822001206689,
+              "decode_s": 0.25393625399738085,
+              "tok_s": 54.23631123280853,
+              "text_sha1": "654789a5da8f20a6",
+              "text_preview": "Screen glow in the dark,\nMemory grows with every breath,\nNull pointer, I sigh.",
+              "text_len": 78
+            }
+          ]
+        }
+      ],
+      "n_trials": 5
+    }
+  }
+}

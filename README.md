@@ -8,6 +8,17 @@ If yes, single unified model (qwen3.6-35b-a3b VL+dialog+tools) on 2× RTX 3090
 beats GPU-partitioning architectures (B1/B2 in our internal taxonomy) for an
 always-on conversational robot brain.
 
+> **2026-04-26 — v3 MTP retest flips the headline.** A clean A/B retest with
+> matched serve flags AND `--no-enable-prefix-caching` shows MTP k=1 is
+> **−21.6 % decode TPOT (≡ +27.5 % faster decode rate)** on the same s1
+> 2× RTX 3090, not the −12 % NET LOSS reported in v1/v2. v1/v2 had two
+> confounders: (a) flag mismatch (0.80/2 vs 0.90/8 — disclosed but not
+> corrected), and (b) prefix-caching was ON in both runs and is known to
+> interact adversely with MTP per [vllm #38182](https://github.com/vllm-project/vllm/issues/38182).
+> Full v3 methodology, results, and reconciliation are in the **MTP** section
+> below; v1/v2 raw data retained in-repo for audit; release notes in
+> [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Hardware
 
 - 2× NVIDIA RTX 3090 24GB (SM 8.6, Ampere, no NVLink, PCIe Gen4 x8)
@@ -42,7 +53,7 @@ A `systemd` unit applies these on boot:
 
 ### Quantitative impact
 
-Per [`results/power_scaling_v2.json`](results/power_scaling_v2.json), the difference between our 220 W production setting and a factory-equivalent 350 W setting is **+2.4 % tok/s** (122.8 → 125.7). The MTP NEGATIVE finding (mean −12 %, variance 65×) is **completely insensitive** to this — it manifests at all power levels we tested.
+Per [`results/power_scaling_v2.json`](results/power_scaling_v2.json), the difference between our 220 W production setting and a factory-equivalent 350 W setting is **+2.4 % tok/s** (122.8 → 125.7). The v3 MTP POSITIVE finding (decode TPOT −21.6 %) is well outside this band, so power-limit setting does not explain it.
 
 OS tuning effect was not isolated in a separate ablation; the v2 numbers reflect "with full tuning". Public reproduction without any of these tweaks should land within a few percent of our numbers; the qualitative findings will not change.
 
@@ -135,97 +146,143 @@ concurrent vision+dialog on an always-on robot brain. The dominant
 alternative architectures (Ollama unified blocks dialog; GPU partitioning
 loses unified VL context) are both worse for this specific use case.
 
-## MTP speculative decoding — empirical net loss, with A100 cross-hardware corroboration
+## MTP speculative decoding — v3 clean A/B retest (2026-04-26)
 
-![Cross-hardware comparison: spec-decode net loss across 3090 single, 3090 TP=2 PCIe, A100 NVLink](analysis/plot_cross_hardware.png)
+> **⚠ This section was rewritten on 2026-04-26 after a v3 clean A/B retest
+> on the same hardware (s1 2× RTX 3090) flipped the headline from
+> "MTP is a NET LOSS" to "MTP is +27% faster on decode".** The previously
+> published −12% finding was a flag confound (0.80/2 vs 0.90/8); the
+> Modal A100 −11.4% finding was prefix-cache-enabled and is partly a
+> known vLLM-side MTP × prefix-cache interaction artifact ([vllm #38182](https://github.com/vllm-project/vllm/issues/38182)
+> reports MTP drops prefix-cache hit rate ~92 % → ~71 % on Qwen3.5-35B-A3B).
+> Both v1/v2 numbers are kept in this repo's
+> [`results/mtp_speculative_decoding.json`](results/mtp_speculative_decoding.json)
+> and [`results/modal_2x_a100_v2.json`](results/modal_2x_a100_v2.json) for
+> full audit; the writeup below is the corrected v3 finding.
 
+### v3 methodology hardening
 
-A separate benchmark of `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`
-(qwen3.6's built-in MTP heads) returned **net negative** on single-stream
-batch=1 dialog. This direction matches the sibling
-[`thc1006/qwen3.6-speculative-decoding-rtx3090`](https://github.com/thc1006/qwen3.6-speculative-decoding-rtx3090)
-repo's llama.cpp draft-spec finding, despite a different engine, quant,
-and spec-decode method.
+After the v2 disclosures (flag confound + prefix-caching interaction), the
+v3 retest fixes everything that could plausibly bias the comparison:
 
-### 3090 TP=2 (this repo) — with disclosed config confound
+1. **Identical serve flags** between no-MTP and MTP: `0.90 / 8 / hermes / qwen3 reasoning-parser`.
+2. **`--no-enable-prefix-caching`** on **both** runs → eliminates across-trial cache inflation
+   AND avoids the MTP × prefix-cache interaction reported in
+   [vllm #38182](https://github.com/vllm-project/vllm/issues/38182) and the related
+   crash in [vllm #40756](https://github.com/vllm-project/vllm/issues/40756).
+3. **Streaming responses** with `stream=True, stream_options.include_usage=true`
+   → time-to-first-token (TTFT) cleanly separated from per-output-token decode time
+   (TPOT). Decode-only TPOT is the fair MTP comparison metric — prefill is unaffected
+   by spec-decode method.
+4. **N=5 trials × 5 prompts = 25 measurements per phase** for sequential dialog.
+   N=5 trials × 20 requests × 3 concurrencies = 300 measurements per phase for
+   the concurrent stress.
+5. **Full-prompt warmup pass** before measurement — MTP draft heads + cuda graphs
+   warm before the timed phase.
+6. **Response SHA1 + content preview captured** for manual content-equivalence
+   audit. Full per-request data in
+   [`results/mtp_v3_clean_ab_no_mtp.json`](results/mtp_v3_clean_ab_no_mtp.json) /
+   [`results/mtp_v3_clean_ab_mtp.json`](results/mtp_v3_clean_ab_mtp.json).
 
-| Config | mean tok/s | min | max | stdev |
-|---|---:|---:|---:|---:|
-| no-MTP baseline | 126.4 | 125.6 | 126.7 | 0.4 |
-| `method=mtp k=1` | 111.2 | 75.8 | 142.3 | ~26 |
-| **delta** | **−12.0%** | — | — | **65× variance blowup** |
+Reproducer: [`scripts/run_v3.sh`](scripts/run_v3.sh) +
+[`scripts/serve_v3_no_mtp.sh`](scripts/serve_v3_no_mtp.sh) /
+[`scripts/serve_v3_mtp.sh`](scripts/serve_v3_mtp.sh) +
+[`scripts/bench_v3_clean_ab.py`](scripts/bench_v3_clean_ab.py).
 
-**⚠ Honest disclosure**: this 3090 comparison is **not** a clean A/B test.
-The no-MTP baseline above used `--gpu-memory-utilization 0.90 --max-num-seqs 8`,
-but the MTP run in [`results/mtp_speculative_decoding.json`](results/mtp_speculative_decoding.json)
-used `0.80 / 2` — originally chosen for OOM headroom that the same JSON's
-`boot_findings` shows is unnecessary (~0.79 GB per-card overhead, well under
-the 0.90/0.80 gap). The published −12% therefore conflates "MTP method
-effect" with "serve-config change effect". For a clean apples-to-apples MTP
-A/B, see the A100 NVLink subsection next.
+### v3 result — MTP is decisively positive across all measured operating points
 
-### 2× A100-80GB SXM4 NVLink (Modal, clean A/B with matched serve flags)
+#### Exp 1 — sequential dialog (N=5 trials × 5 prompts = 25 measurements per phase)
 
-Cross-hardware corroboration via [`scripts/bench_modal_a100.py`](scripts/bench_modal_a100.py)
-on `vllm/vllm-openai:v0.19.1` image, with **identical** serve flags between
-no-MTP and MTP runs (matching the `0.90 / 8 / hermes` flags above). Same
-5-prompt set, `max_tokens=200`, `temperature=0.5`, `seed=42`.
-
-| Comparison | no-MTP | MTP k=1 | delta |
+| Metric | no-MTP | MTP k=1 | Δ |
 |---|---:|---:|---:|
-| Auto-computed mean tok/s¹ | 86.8 | 99.2 | +14.3% (artifact — do not cite) |
-| **Prompt 4 decode-only**² | **134.8** | **119.5** | **−11.4%** ✅ clean |
-| Prompt 3 decode-only² | 130.5 | 117.4 | −10.1% |
+| **decode TPOT (ms / output token)** | **7.620 ± 0.022** | **5.976 ± 0.456** | **−21.6 %** (≡ +27.5 % faster decode rate) |
+| total throughput tok/s (incl prefill) | 113.4 ± 12.9 | 149.3 ± 17.3 | +31.7 % |
+| TTFT (ms) | 78.6 ± 4.4 | 53.9 ± 15.0 | −31.4 % |
 
-¹ The auto-computed +14.3% is a **measurement artifact**: 4 of 5 prompts
-early-stopped at different completion-token counts on A100 (vs all 5
-hitting `max_tokens=200` on 3090) due to floating-point non-associativity
-in TP-2 allreduce on different interconnects (PCIe vs NVLink) → tiny
-logits drift → temperature-0.5 sampling lands on different tokens at top-k
-boundaries → cascading EOS divergence. See
-[`results/modal_2x_a100_v2.json`](results/modal_2x_a100_v2.json)
-`analysis_corrected` block for full per-prompt audit.
+The decode TPOT improvement holds **on every prompt individually**:
 
-² Decode-only ≈ (ct − 1) / (elapsed − TTFT) with TTFT ≈ 80 ms. The −11.4%
-on prompt 4 is **robust to TTFT estimate** (varies <0.2 pp across TTFT
-∈ [0, 200 ms]) because both A and B share the same TTFT for the same
-prompt content.
+| Prompt | no-MTP TPOT | MTP TPOT | Δ |
+|---|---:|---:|---:|
+| p1 (sky color, 50 tok) | 7.618 ms | 5.883 ms | −22.8 % |
+| p2 (Python fib, 80 tok) | 7.619 ms | 5.550 ms | −27.2 % |
+| p3 (TCP vs UDP, 130 tok) | 7.613 ms | 6.037 ms | −20.7 % |
+| p4 (tofu steps, 200 tok cap) | 7.607 ms | 5.869 ms | −22.8 % |
+| p5 (haiku, 19–22 tok) | 7.642 ms | 6.540 ms | −14.4 % |
 
-### Why this matters
+#### Exp 3 — concurrent stress (20 reqs × N=5 trials per concurrency)
 
-A100 NVLink HBM2e provides **~2.1× memory bandwidth + ~30× TP-allreduce
-interconnect** vs 3090 GDDR6X PCIe Gen4 x8, yet shows the **same magnitude
-regression**. That rules out two natural-sounding hypotheses:
+| Concurrency | no-MTP agg tok/s | MTP agg tok/s | Δ agg | no-MTP TPOT | MTP TPOT | Δ TPOT |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 118.80 | 153.32 | +29.1 % | 7.633 ms | 6.048 ms | −20.8 % |
+| 4 | 271.94 | 310.16 | +14.1 % | 12.133 ms | 10.704 ms | −11.8 % |
+| 8 | 390.25 | 446.04 | +14.3 % | 15.165 ms | 13.785 ms | −9.1 % |
 
-- ❌ "GDDR6X bandwidth is the bottleneck" — HBM2e 2 TB/s shows same regression
-- ❌ "PCIe-x8 allreduce is the bottleneck" — NVLink ~600 GB/s shows same regression
+The TPOT speedup attenuates as concurrency rises (−21 % → −12 % → −9 %),
+consistent with the vLLM Recipes phrasing that "MTP-1 reduces per-token
+latency but degrades text throughput under high concurrency" — but at
+C=8 on this hardware the **aggregate throughput is still +14 %** and
+TPOT is still **negative**, so on 2× RTX 3090 the C=8 batching regime
+remains MTP-positive. Higher concurrencies (C=16+) are not benched
+because `--max-num-seqs 8` caps the engine.
 
-What remains as the dominant mechanism: **MoE expert-union load below
-saturation threshold**, per [MoESD (arXiv 2505.19645)](https://arxiv.org/abs/2505.19645)
-and [Utility-Driven SD for MoE (arXiv 2506.20675)](https://arxiv.org/pdf/2506.20675).
-For 3B-active sparsity ρ ≈ 0.031, T_thres ≈ 94 tokens; single-stream
-batch=1 spec-decode K (1–32) ≪ T_thres, so each verify pass loads the
-union of K positions' expert sets with no amortization vs autoregressive.
+#### Sanity check — content equivalence
 
-The negative direction now spans (same model, same engine version):
+Per-trial response SHA1 hashes confirm vLLM has **intrinsic non-determinism
+even without MTP** (1–3 unique SHA1 across 5 trials, despite `seed=42`,
+`temperature=0.5`) — this is well-known V1-engine chunked-prefill
+non-determinism, not MTP-specific. MTP and no-MTP responses are
+content-equivalent on manual inspection — same cooking steps, same Python
+fib skeleton, same TCP vs UDP bullet structure, no truncation, no
+gibberish. Full SHA1 audit + 200-char text previews dumped in the
+v3 result JSONs.
 
-| Hardware | Quant | Spec method | Delta | Note |
+### Reconciliation with v1/v2 published numbers
+
+| Bench | flags | prefix cache | MTP delta | reading |
 |---|---|---|---:|---|
-| 1× 3090 | Q4_K_M (llama.cpp) | draft, 19 configs | −3% to −12% | sibling repo |
-| 2× 3090 PCIe | AWQ-Marlin Q4 (vLLM) | MTP k=1 | −12% | confound disclosed |
-| **2× A100 NVLink** | **AWQ-Marlin Q4 (vLLM)** | **MTP k=1** | **−11.4%** | **clean A/B** |
+| v1 (mtp_speculative_decoding.json, 2026-04-25) | 0.80/2 vs 0.90/8 | ON | **−12.0 %** | confounded — flag-effect dominates |
+| v2-clean (intermediate, 2026-04-26 morning) | 0.90/8/0.90/8 | ON | **+17.7 %** (Exp 1 throughput) | matched flags, but cache effect still in play |
+| **v3 (this section, 2026-04-26)** | **0.90/8/0.90/8** | **OFF** | **+27.5 %** (decode rate) | **clean — both confounders removed** |
 
-### Practical recommendation
+Decomposition (each step holds the prior factor fixed):
 
-**Do not enable MTP for single-stream voice-dialog deployments** on this
-hardware-class spectrum. The mechanism is structural to MoE × spec-decode
-at K ≪ expert-saturation threshold; better consumer/datacenter Ampere or
-Ampere-with-NVLink hardware does not help.
+- Removing the flag confound (0.80/2 → 0.90/8 on the MTP run) accounts
+  for ≈ 30 percentage points of the swing.
+- Disabling prefix caching on top of that adds another ≈ 10 percentage
+  points to the MTP advantage. This is consistent with vllm #38182's
+  observation that MTP drops cache hit rate 92 % → 71 % — under
+  cache-ON, MTP loses cache hits that no-MTP keeps, masking MTP's
+  compute speedup.
 
-Batched multi-user serving may amortize verify cost across requests — vLLM
-official Recipes phrases this as: "MTP-1 reduces per-token latency but
-degrades text throughput under high concurrency." That regime is not
-benched in this repo.
+### Reconciliation with the Modal A100 −11.4 % finding
+
+[`results/modal_2x_a100_v2.json`](results/modal_2x_a100_v2.json) was
+collected with `--enable-prefix-caching` ON on both runs, mirroring v1
+production. Its prompt-4 decode-only delta of **−11.4 %** is now best
+read as the **prefix-cache-ON regime** datapoint on A100 NVLink, **not**
+as evidence that MTP is intrinsically negative. Whether A100 with
+prefix-cache OFF would also flip positive (matching this 3090 v3 result)
+is an open question — Modal credits permitting, a v3-equivalent A100 run
+is the obvious next step. We will add that result here when collected.
+
+### Practical recommendation (revised)
+
+For the single-stream voice-dialog deployment that motivated this repo on
+**2× RTX 3090 PCIe + AWQ-Marlin Q4 + vLLM 0.19.1**:
+
+- **Enable MTP k=1** with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`
+  if you can run with `--no-enable-prefix-caching` (the typical single-user
+  voice-dialog case has near-zero prefix-cache hit rate anyway).
+- **Be cautious about combining MTP with prefix-caching** until vllm
+  #38182 / #40756 are resolved. If your workload depends on prefix-cache
+  hit rate (multi-turn chat with shared system prompt), benchmark the
+  net effect on **your** workload before enabling MTP — the cache loss
+  may eat the MTP gain.
+- The MoE expert-saturation analysis (MoESD arXiv 2505.19645,
+  Utility-Driven SD arXiv 2506.20675) still applies and explains why
+  llama.cpp draft-spec on the same model+hardware is still net-negative
+  (see sibling repo) — but vLLM MTP k=1 with prefix-cache disabled
+  appears to dodge the expert-saturation pathology at this `K=1`.
 
 ## Comparison vs alternative architectures
 

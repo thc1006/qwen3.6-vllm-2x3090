@@ -1,0 +1,185 @@
+=== run_v3.sh start 2026-04-26T08:24:16+08:00 ===
+[pre] stopping production vllm-server.service
+172 MiB
+15 MiB
+
+============================================
+PHASE: no_mtp
+2026-04-26T08:24:24+08:00
+============================================
+[serve] started PID=133838, waiting for /v1/models...
+[ready] vLLM ready after 16 × 5s
+[bench] running bench_v3.py TAG=no_mtp
+=== bench_v3.py | TAG=no_mtp ===
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  model: qwen36-awq
+  out: /home/reachym/bench_clean_ab/results_v3_no_mtp.json
+[warmup] full prompt set
+  warmup ct=50 elapsed=1.04s ttft=429ms decode_tpot=12.57ms
+  warmup ct=50 elapsed=0.46s ttft=87ms decode_tpot=7.65ms
+  warmup ct=50 elapsed=0.45s ttft=75ms decode_tpot=7.64ms
+  warmup ct=50 elapsed=0.45s ttft=73ms decode_tpot=7.62ms
+  warmup ct=19 elapsed=0.21s ttft=73ms decode_tpot=7.64ms
+
+=== Exp 1 (dialog · streaming · N=5) ===
+  trial 1/5
+    p1: ct= 50 ttft=   78ms decode=0.37s decode_tpot=7.63ms tok_s= 110.7 sha1=232d31ab51
+    p2: ct= 80 ttft=   77ms decode=0.60s decode_tpot=7.64ms tok_s= 117.5 sha1=0c717ac69d
+    p3: ct=127 ttft=   76ms decode=0.96s decode_tpot=7.63ms tok_s= 122.5 sha1=be5cc8a2c2
+    p4: ct=200 ttft=   76ms decode=1.52s decode_tpot=7.62ms tok_s= 125.6 sha1=e6842f130d
+    p5: ct= 22 ttft=   73ms decode=0.16s decode_tpot=7.65ms tok_s=  94.2 sha1=edf1dce160
+  trial 2/5
+    p1: ct= 50 ttft=   75ms decode=0.37s decode_tpot=7.63ms tok_s= 111.4 sha1=232d31ab51
+    p2: ct= 84 ttft=   75ms decode=0.63s decode_tpot=7.63ms tok_s= 118.5 sha1=58529a32f1
+    p3: ct=130 ttft=   75ms decode=0.98s decode_tpot=7.63ms tok_s= 122.7 sha1=ce1d6b356e
+    p4: ct=200 ttft=   76ms decode=1.52s decode_tpot=7.62ms tok_s= 125.6 sha1=e6842f130d
+    p5: ct= 22 ttft=   73ms decode=0.16s decode_tpot=7.66ms tok_s=  94.1 sha1=b081bbc44e
+  trial 3/5
+    p1: ct= 50 ttft=   75ms decode=0.37s decode_tpot=7.63ms tok_s= 111.3 sha1=232d31ab51
+    p2: ct= 80 ttft=   76ms decode=0.60s decode_tpot=7.63ms tok_s= 117.9 sha1=0c717ac69d
+    p3: ct=130 ttft=   75ms decode=0.98s decode_tpot=7.63ms tok_s= 122.6 sha1=ce1d6b356e
+    p4: ct=200 ttft=   76ms decode=1.52s decode_tpot=7.62ms tok_s= 125.6 sha1=bfa58d2cce
+    p5: ct= 19 ttft=   73ms decode=0.14s decode_tpot=7.65ms tok_s=  90.1 sha1=771013d69e
+  trial 4/5
+    p1: ct= 50 ttft=   79ms decode=0.37s decode_tpot=7.60ms tok_s= 110.9 sha1=232d31ab51
+    p2: ct= 84 ttft=   86ms decode=0.63s decode_tpot=7.60ms tok_s= 117.3 sha1=58529a32f1
+    p3: ct=127 ttft=   86ms decode=0.96s decode_tpot=7.59ms tok_s= 121.9 sha1=52eb220b36
+    p4: ct=200 ttft=   84ms decode=1.51s decode_tpot=7.59ms tok_s= 125.4 sha1=bfa58d2cce
+    p5: ct= 19 ttft=   83ms decode=0.14s decode_tpot=7.63ms tok_s=  86.2 sha1=771013d69e
+  trial 5/5
+    p1: ct= 50 ttft=   84ms decode=0.37s decode_tpot=7.60ms tok_s= 109.6 sha1=232d31ab51
+    p2: ct= 84 ttft=   84ms decode=0.63s decode_tpot=7.59ms tok_s= 117.5 sha1=58529a32f1
+    p3: ct=127 ttft=   84ms decode=0.96s decode_tpot=7.59ms tok_s= 122.0 sha1=52eb220b36
+    p4: ct=200 ttft=   84ms decode=1.51s decode_tpot=7.58ms tok_s= 125.5 sha1=bfa58d2cce
+    p5: ct= 19 ttft=   82ms decode=0.14s decode_tpot=7.62ms tok_s=  86.8 sha1=771013d69e
+
+=== Exp 3 (concurrent · streaming · concurrencies=(1, 4, 8) · N=5) ===
+  C=1 trial 1/5
+    aggregate= 119.1 tok/s wall=16.17s ttft=   84ms decode_tpot=7.61ms
+  C=1 trial 2/5
+    aggregate= 118.9 tok/s wall=16.19s ttft=   84ms decode_tpot=7.62ms
+  C=1 trial 3/5
+    aggregate= 118.8 tok/s wall=16.21s ttft=   84ms decode_tpot=7.64ms
+  C=1 trial 4/5
+    aggregate= 118.6 tok/s wall=16.23s ttft=   84ms decode_tpot=7.65ms
+  C=1 trial 5/5
+    aggregate= 118.6 tok/s wall=16.23s ttft=   84ms decode_tpot=7.65ms
+  C=4 trial 1/5
+    aggregate= 271.6 tok/s wall=7.05s ttft=  112ms decode_tpot=12.13ms
+  C=4 trial 2/5
+    aggregate= 272.6 tok/s wall=7.06s ttft=  104ms decode_tpot=12.19ms
+  C=4 trial 3/5
+    aggregate= 271.9 tok/s wall=7.10s ttft=  111ms decode_tpot=12.13ms
+  C=4 trial 4/5
+    aggregate= 269.4 tok/s wall=7.14s ttft=  115ms decode_tpot=12.11ms
+  C=4 trial 5/5
+    aggregate= 274.3 tok/s wall=6.98s ttft=  104ms decode_tpot=12.11ms
+  C=8 trial 1/5
+    aggregate= 387.2 tok/s wall=5.00s ttft=  146ms decode_tpot=15.30ms
+  C=8 trial 2/5
+    aggregate= 394.0 tok/s wall=4.91s ttft=  123ms decode_tpot=15.18ms
+  C=8 trial 3/5
+    aggregate= 391.3 tok/s wall=4.91s ttft=  144ms decode_tpot=15.04ms
+  C=8 trial 4/5
+    aggregate= 393.5 tok/s wall=4.89s ttft=  129ms decode_tpot=15.10ms
+  C=8 trial 5/5
+    aggregate= 385.2 tok/s wall=5.00s ttft=  141ms decode_tpot=15.22ms
+
+=== written: /home/reachym/bench_clean_ab/results_v3_no_mtp.json ===
+[stop] stopping vLLM (pkill -f vllm)
+/home/reachym/bench_clean_ab/run_v3.sh: line 23: 133838 Killed                  bash "$SCRIPT" > "$LOGDIR/serve_v3_${TAG}.log" 2>&1
+[done] phase no_mtp complete
+
+============================================
+PHASE: mtp
+2026-04-26T08:28:44+08:00
+============================================
+[serve] started PID=134265, waiting for /v1/models...
+[ready] vLLM ready after 17 × 5s
+[bench] running bench_v3.py TAG=mtp
+=== bench_v3.py | TAG=mtp ===
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  model: qwen36-awq
+  out: /home/reachym/bench_clean_ab/results_v3_mtp.json
+[warmup] full prompt set
+  warmup ct=50 elapsed=0.49s ttft=147ms decode_tpot=7.05ms
+  warmup ct=50 elapsed=0.36s ttft=86ms decode_tpot=5.66ms
+  warmup ct=50 elapsed=0.33s ttft=41ms decode_tpot=5.87ms
+  warmup ct=50 elapsed=0.32s ttft=47ms decode_tpot=5.62ms
+  warmup ct=21 elapsed=0.18s ttft=47ms decode_tpot=6.60ms
+
+=== Exp 1 (dialog · streaming · N=5) ===
+  trial 1/5
+    p1: ct= 67 ttft=   47ms decode=0.38s decode_tpot=5.83ms tok_s= 155.3 sha1=ef2fcce5ed
+    p2: ct= 79 ttft=   82ms decode=0.43s decode_tpot=5.54ms tok_s= 153.5 sha1=dca63db49b
+    p3: ct=134 ttft=   47ms decode=0.80s decode_tpot=5.99ms tok_s= 158.7 sha1=95b17bca91
+    p4: ct=178 ttft=   47ms decode=1.05s decode_tpot=5.94ms tok_s= 162.1 sha1=78667243f5
+    p5: ct= 21 ttft=   47ms decode=0.12s decode_tpot=6.07ms tok_s= 124.3 sha1=707b1859d6
+  trial 2/5
+    p1: ct= 67 ttft=   47ms decode=0.39s decode_tpot=5.84ms tok_s= 154.8 sha1=ef2fcce5ed
+    p2: ct= 79 ttft=   82ms decode=0.44s decode_tpot=5.59ms tok_s= 152.4 sha1=dca63db49b
+    p3: ct=145 ttft=   46ms decode=0.87s decode_tpot=6.06ms tok_s= 158.0 sha1=5dc03c49c1
+    p4: ct=178 ttft=   46ms decode=1.05s decode_tpot=5.94ms tok_s= 162.2 sha1=78667243f5
+    p5: ct= 21 ttft=   46ms decode=0.12s decode_tpot=6.14ms tok_s= 124.3 sha1=c0c59791f0
+  trial 3/5
+    p1: ct= 50 ttft=   46ms decode=0.30s decode_tpot=6.06ms tok_s= 146.0 sha1=a59675b4d3
+    p2: ct= 79 ttft=   83ms decode=0.43s decode_tpot=5.55ms tok_s= 153.1 sha1=dca63db49b
+    p3: ct=145 ttft=   45ms decode=0.87s decode_tpot=6.07ms tok_s= 157.8 sha1=5dc03c49c1
+    p4: ct=178 ttft=   45ms decode=1.05s decode_tpot=5.93ms tok_s= 162.6 sha1=78667243f5
+    p5: ct= 21 ttft=   45ms decode=0.13s decode_tpot=6.59ms tok_s= 119.0 sha1=8480b707d2
+  trial 4/5
+    p1: ct= 67 ttft=   45ms decode=0.39s decode_tpot=5.85ms tok_s= 155.4 sha1=ef2fcce5ed
+    p2: ct= 79 ttft=   82ms decode=0.43s decode_tpot=5.53ms tok_s= 154.0 sha1=dca63db49b
+    p3: ct=145 ttft=   47ms decode=0.88s decode_tpot=6.08ms tok_s= 157.1 sha1=5dc03c49c1
+    p4: ct=179 ttft=   45ms decode=1.03s decode_tpot=5.76ms tok_s= 167.1 sha1=f5fedcca42
+    p5: ct= 21 ttft=   62ms decode=0.12s decode_tpot=6.06ms tok_s= 114.4 sha1=707b1859d6
+  trial 5/5
+    p1: ct= 67 ttft=   45ms decode=0.38s decode_tpot=5.83ms tok_s= 155.8 sha1=ef2fcce5ed
+    p2: ct= 79 ttft=   84ms decode=0.43s decode_tpot=5.54ms tok_s= 153.2 sha1=dca63db49b
+    p3: ct=134 ttft=   45ms decode=0.80s decode_tpot=5.98ms tok_s= 159.3 sha1=95b17bca91
+    p4: ct=179 ttft=   45ms decode=1.03s decode_tpot=5.77ms tok_s= 166.8 sha1=f5fedcca42
+    p5: ct= 22 ttft=   46ms decode=0.16s decode_tpot=7.84ms tok_s= 104.7 sha1=a298d1f641
+
+=== Exp 3 (concurrent · streaming · concurrencies=(1, 4, 8) · N=5) ===
+  C=1 trial 1/5
+    aggregate= 153.9 tok/s wall=12.70s ttft=   57ms decode_tpot=6.00ms
+  C=1 trial 2/5
+    aggregate= 153.5 tok/s wall=12.73s ttft=   57ms decode_tpot=6.07ms
+  C=1 trial 3/5
+    aggregate= 152.9 tok/s wall=12.67s ttft=   57ms decode_tpot=6.06ms
+  C=1 trial 4/5
+    aggregate= 153.2 tok/s wall=12.57s ttft=   57ms decode_tpot=5.99ms
+  C=1 trial 5/5
+    aggregate= 153.1 tok/s wall=12.70s ttft=   57ms decode_tpot=6.12ms
+  C=4 trial 1/5
+    aggregate= 283.0 tok/s wall=6.87s ttft=  140ms decode_tpot=11.79ms
+  C=4 trial 2/5
+    aggregate= 320.9 tok/s wall=6.05s ttft=  122ms decode_tpot=10.34ms
+  C=4 trial 3/5
+    aggregate= 315.4 tok/s wall=6.16s ttft=  114ms decode_tpot=10.48ms
+  C=4 trial 4/5
+    aggregate= 318.1 tok/s wall=6.17s ttft=  126ms decode_tpot=10.40ms
+  C=4 trial 5/5
+    aggregate= 313.4 tok/s wall=6.19s ttft=  122ms decode_tpot=10.51ms
+  C=8 trial 1/5
+    aggregate= 444.4 tok/s wall=4.38s ttft=  226ms decode_tpot=13.73ms
+  C=8 trial 2/5
+    aggregate= 466.9 tok/s wall=4.18s ttft=  132ms decode_tpot=13.37ms
+  C=8 trial 3/5
+    aggregate= 466.5 tok/s wall=4.17s ttft=  120ms decode_tpot=13.63ms
+  C=8 trial 4/5
+    aggregate= 469.4 tok/s wall=4.06s ttft=  123ms decode_tpot=13.29ms
+  C=8 trial 5/5
+    aggregate= 383.1 tok/s wall=5.02s ttft=  380ms decode_tpot=14.90ms
+
+=== written: /home/reachym/bench_clean_ab/results_v3_mtp.json ===
+[stop] stopping vLLM (pkill -f vllm)
+/home/reachym/bench_clean_ab/run_v3.sh: line 23: 134265 Killed                  bash "$SCRIPT" > "$LOGDIR/serve_v3_${TAG}.log" 2>&1
+[done] phase mtp complete
+
+=== ALL DONE 2026-04-26T08:32:34+08:00 ===
+Results:
+-rw-r--r-- 1 reachym reachym 157923 Apr 26 08:32 /home/reachym/bench_clean_ab/results_v3_mtp.json
+-rw-r--r-- 1 reachym reachym 157744 Apr 26 08:28 /home/reachym/bench_clean_ab/results_v3_no_mtp.json
+[post] restarting production vllm-server.service
+active
