@@ -285,9 +285,17 @@ is the obvious next step. We will add that result here when collected.
 For the single-stream voice-dialog deployment that motivated this repo on
 **2× RTX 3090 PCIe + AWQ-Marlin Q4 + vLLM 0.19.1**:
 
-- **Enable MTP k=1** with `--speculative-config '{"method":"mtp","num_speculative_tokens":1}'`
+- **Enable MTP** with `--speculative-config '{"method":"mtp","num_speculative_tokens":<K>}'`
   if you can run with `--no-enable-prefix-caching` (the typical single-user
   voice-dialog case has near-zero prefix-cache hit rate anyway).
+  - v3 (this section's data) was measured at **k=1** and is +27.5 % decode
+    rate vs no-MTP.
+  - v4 (2026-05-07, see [`v4_2026_05_07/`](v4_2026_05_07/)) sweeps k∈{1,2,3}
+    on the same hardware: **k=3 is the new recommended production setting**
+    (TTFT −33 % and tok/s +8 % vs k=2; decode TPOT essentially unchanged
+    across k=1/2/3). If you optimise for TTFT (latency-to-first-word in
+    voice dialog), use k=3; if you prefer the simplest published config,
+    k=1 is still well above no-MTP.
 - **Be cautious about combining MTP with prefix-caching** until vllm
   #38182 / #40756 are resolved. If your workload depends on prefix-cache
   hit rate (multi-turn chat with shared system prompt), benchmark the
@@ -321,8 +329,12 @@ uv venv .venv --python 3.12 --seed
 .venv/bin/hf download QuantTrio/Qwen3.6-35B-A3B-AWQ \
     --local-dir ~/models/qwen36-awq
 
-# 3. Serve
+# 3a. Serve — v1/v2 baseline (no MTP, prefix-caching ON)
 MODEL_PATH=~/models/qwen36-awq bash scripts/vllm_serve.sh
+
+# 3b. Serve — v3/v4 MTP production (cache OFF, +27.5 % decode rate)
+MODEL_PATH=~/models/qwen36-awq bash scripts/serve_v3_mtp.sh
+# v4 recommendation: edit num_speculative_tokens to 3 (TTFT-optimised)
 
 # 4. Bench (in another terminal)
 .venv/bin/python scripts/bench_vllm_dialog.py

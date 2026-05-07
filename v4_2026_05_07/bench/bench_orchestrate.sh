@@ -461,7 +461,9 @@ phase_e_stability() {
 
 # =========================================================================
 # Phase H: AWQ at gpu-memory-utilization=0.92 (matched control vs FP8 0.92).
-# Verifies Finding 2 (FP8 > AWQ) properly: same mem-util, same model class.
+# Tests Finding 2 (FP8 > AWQ) properly: same mem-util, same model class.
+# OUTCOME (post-run, see analysis/analyze_final.py): RETRACTED — all 4 cells
+# Welch p > 0.6 (NS). The +2.7% gap from v3 was confounded by 0.85 vs 0.92.
 # =========================================================================
 phase_h_awq_092() {
     ensure_prod_stopped
