@@ -142,7 +142,7 @@ print("""
 Finding 1 (MTP cross-k SHA1 lossless): partial novel - confirmed at temp=0.0
 Finding 2 (FP8 vs AWQ): RETRACTED - all 4 matched-mem-util comparisons NS
 Finding 3 (220W +11% perf/W): novel for vLLM dual-3090 MoE
-Finding 4 (DFlash NET LOSS -44%): known + corroborated
+Finding 4 (DFlash NET LOSS -44.6%): known + corroborated
 Finding 5 (MTP no monotonic regression): novel + first Ampere data
 Finding 6 (tool-call faster TPOT): mechanism mystery (not higher acceptance)
 Finding 7 (long-context decode scaling): novel curve, sparse public data
