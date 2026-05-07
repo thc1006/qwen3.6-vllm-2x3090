@@ -1,5 +1,13 @@
 # Methodology
 
+> **2026-05-07 — v4 methodology supplement.** [`v4_2026_05_07/README.md`](../v4_2026_05_07/README.md)
+> documents the 9-phase factorial sweep with explicit Welch's t-test,
+> p-values, confidence intervals, and a 3-way comparison (Phase A / J / J.2)
+> to control for the `VLLM_USE_FLASHINFER_MOE_FP16` env-var confound when
+> comparing vLLM 0.19.1 vs 0.20.1. The methodology below remains correct
+> for the v1–v3 single-test framing; v4 adds matched-flag controls and
+> per-comparison statistical tests on top.
+
 ## Question
 
 Can a single vLLM engine on **2× consumer Ampere GPUs** serve **concurrent

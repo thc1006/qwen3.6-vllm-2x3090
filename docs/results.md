@@ -1,5 +1,16 @@
 # Results
 
+> **2026-05-07 — v4 update.** A 9-phase factorial sweep with statistical
+> analysis adds: k=3 supersedes k=1 as the recommended MTP setting (TTFT
+> −33 % p<0.001), TP=1 categorically does not fit a single 24 GB 3090 for
+> Qwen3.6-35B-A3B-AWQ + production stack, AWQ ≈ FP8 within noise at
+> matched gpu-mem-util, no monotonic acceptance regression in 60 min,
+> vLLM 0.20.1 ≈ 0.19.1 on AWQ-Marlin path, 220 W gives +11 % perf/W vs
+> 350 W. Full v4 results, ~3000 measurements, raw JSONs, bench scripts,
+> and Welch's t-test analysis live in [`v4_2026_05_07/`](../v4_2026_05_07/).
+> Numbers below remain the canonical v1–v3 results; v4 refines and adds
+> orthogonal axes.
+
 ## Summary
 
 vLLM 0.19.1 with `QuantTrio/Qwen3.6-35B-A3B-AWQ` on 2× RTX 3090 (TP=2, AWQ-Marlin)
