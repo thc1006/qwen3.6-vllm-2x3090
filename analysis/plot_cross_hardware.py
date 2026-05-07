@@ -44,15 +44,15 @@ status_colors = {
     "CLEAN A/B": "#27AE60",
 }
 notes = [
-    "v2.3 N=3 srogmann config\nllama.cpp+Q4+draft\nv3 DFlash (2026-05-07)\nalso NET LOSS −44%",
+    "v2.3 srogmann (N=3) + v3 DFlash (2026-05-07)\nllama.cpp + Q4 target\nboth NET LOSS",
     "0.80/2 vs 0.90/8 flag mismatch\n+ prefix-caching ON\n→ SUPERSEDED by v3",
-    "prefix-caching ON\n(vllm #38182:\nMTP cache hit rate 92→71%)\nA100 cache-OFF retest pending",
-    "matched 0.90/8/hermes\n--no-enable-prefix-caching\nstreaming N=5 trials\n−21.6% decode TPOT\nv4 confirms k=2/k=3 too",
+    "prefix-caching ON (vllm #38182:\nMTP cache hit rate 92→71%)\nA100 cache-OFF retest pending",
+    "matched 0.90/8/hermes flags\n--no-enable-prefix-caching · N=5\n−21.6% TPOT · v4 k=2/k=3 confirm",
 ]
 
 n = len(hardware_labels)
 fig, ax = plt.subplots(figsize=(14, 8.5), constrained_layout=False)
-fig.subplots_adjust(left=0.07, right=0.98, top=0.88, bottom=0.32)
+fig.subplots_adjust(left=0.07, right=0.98, top=0.88, bottom=0.34)
 
 x = np.arange(n)
 width = 0.6
@@ -118,15 +118,15 @@ for bar, tag in zip(bars, status_tags):
         ),
     )
 
-# Notes below x-axis labels (in the bottom margin)
+# Notes below x-axis labels (figure-fraction coords; sit between xtick labels and footers)
 for i, note in enumerate(notes):
-    ax.text(
-        x[i],
-        -65,
+    fig.text(
+        ax.get_position().x0 + (i + 0.5) / n * (ax.get_position().x1 - ax.get_position().x0),
+        0.18,
         note,
         ha="center",
         va="top",
-        fontsize=8.5,
+        fontsize=8.0,
         style="italic",
         color="#34495E",
     )
