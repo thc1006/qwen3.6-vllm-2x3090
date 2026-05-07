@@ -1,0 +1,1300 @@
+{
+  "config_id": "p350_k3_t0.0",
+  "wall_start": 1778131017.671879,
+  "wall_end": 1778131031.2066197,
+  "args": {
+    "config_id": "p350_k3_t0.0",
+    "output": "/home/reachym/bench_2026_05_07/phase_a_p350_k3_t0.0.json",
+    "max_tokens": 200,
+    "trials": 5,
+    "temperature": 0.0
+  },
+  "server_meta": {
+    "object": "list",
+    "data": [
+      {
+        "id": "qwen36-awq",
+        "object": "model",
+        "created": 1778131017,
+        "owned_by": "vllm",
+        "root": "/home/reachym/models/qwen36-awq",
+        "parent": null,
+        "max_model_len": 32768,
+        "permission": [
+          {
+            "id": "modelperm-b1c4b025f2c75b12",
+            "object": "model_permission",
+            "created": 1778131017,
+            "allow_create_engine": false,
+            "allow_sampling": true,
+            "allow_logprobs": true,
+            "allow_search_indices": false,
+            "allow_view": true,
+            "allow_fine_tuning": false,
+            "organization": "*",
+            "group": null,
+            "is_blocking": false
+          }
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "n": 25,
+    "tpot_ms": {
+      "mean": 4.9883678996606,
+      "median": 4.755199869611749,
+      "stdev": 1.164698655347852,
+      "min": 3.642841869105513,
+      "max": 7.125234268115539
+    },
+    "ttft_ms": {
+      "mean": 49.94728124700487,
+      "median": 43.63351804204285,
+      "min": 41.52997280471027,
+      "max": 78.94692313857377
+    },
+    "tok_s": {
+      "mean": 183.48913957647713,
+      "median": 199.33364360683683
+    },
+    "spec_acceptance_per_token": {
+      "n": 25,
+      "mean": 0.6466076583773226,
+      "median": 0.6296296296296297
+    },
+    "spec_acceptance_per_cycle": {
+      "n": 25,
+      "mean": 1.939822975131968,
+      "median": 1.8888888888888888
+    },
+    "unique_sha1": 8
+  },
+  "measurements": [
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 1,
+      "prompt_id": "sky",
+      "wall_ts": 1778131017.671879,
+      "ct": 55,
+      "ttft_ms": 45.4079220071435,
+      "tpot_ms": 4.856925867325454,
+      "elapsed_s": 0.307681918842718,
+      "tok_s": 178.75603547608887,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 19.0,
+        "draft_tokens": 57.0,
+        "ratio_per_token": 0.631578947368421,
+        "length_per_cycle": 1.894736842105263
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21040,
+          "power_w": 133.91,
+          "temp_c": 63
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20677,
+          "power_w": 117.64,
+          "temp_c": 54
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 149.32,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20677,
+          "power_w": 132.54,
+          "temp_c": 54
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 1,
+      "prompt_id": "python",
+      "wall_ts": 1778131018.0362928,
+      "ct": 79,
+      "ttft_ms": 78.94692313857377,
+      "tpot_ms": 3.6828565494849896,
+      "elapsed_s": 0.36620973399840295,
+      "tok_s": 215.72337561170485,
+      "sha1": "dca63db49b83",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 60.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9523809523809523,
+        "length_per_cycle": 2.857142857142857
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 152.26,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20677,
+          "power_w": 137.34,
+          "temp_c": 54
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 187.21,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 206.02,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 1,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778131018.4591784,
+      "ct": 130,
+      "ttft_ms": 44.49691716581583,
+      "tpot_ms": 4.763038262233947,
+      "elapsed_s": 0.658928852993995,
+      "tok_s": 197.2898885961892,
+      "sha1": "25e926e3138d",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 85.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6296296296296297,
+        "length_per_cycle": 1.8888888888888888
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 205.93,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 206.02,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 229.94,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 245.61,
+          "temp_c": 58
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 1,
+      "prompt_id": "tofu",
+      "wall_ts": 1778131019.1742027,
+      "ct": 197,
+      "ttft_ms": 45.18772894516587,
+      "tpot_ms": 4.764176602237763,
+      "elapsed_s": 0.9789663429837674,
+      "tok_s": 201.2326587240666,
+      "sha1": "fa6a2f2467f2",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping the block in paper towel",
+      "spec": {
+        "accepted": 128.0,
+        "drafts": 69.0,
+        "draft_tokens": 207.0,
+        "ratio_per_token": 0.6183574879227053,
+        "length_per_cycle": 1.855072463768116
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 229.94,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 245.61,
+          "temp_c": 58
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 235.66,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 254.2,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 1,
+      "prompt_id": "haiku",
+      "wall_ts": 1778131020.2091167,
+      "ct": 20,
+      "ttft_ms": 43.959550093859434,
+      "tpot_ms": 7.116465571973669,
+      "elapsed_s": 0.17917239596135914,
+      "tok_s": 111.62433751409598,
+      "sha1": "b5ad4cf7bb5c",
+      "preview": "Midnight code runs deep, Memory grows, never frees, Coffee turns to dust.",
+      "spec": {
+        "accepted": 12.0,
+        "drafts": 10.0,
+        "draft_tokens": 30.0,
+        "ratio_per_token": 0.4,
+        "length_per_cycle": 1.2
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 235.66,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 254.2,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 235.77,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 254.59,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 2,
+      "prompt_id": "sky",
+      "wall_ts": 1778131020.447539,
+      "ct": 55,
+      "ttft_ms": 47.24571201950312,
+      "tpot_ms": 4.507561408293744,
+      "elapsed_s": 0.2906540280673653,
+      "tok_s": 189.22841140619792,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 37.0,
+        "drafts": 18.0,
+        "draft_tokens": 54.0,
+        "ratio_per_token": 0.6851851851851852,
+        "length_per_cycle": 2.0555555555555554
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 233.51,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 252.67,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 229.72,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.24,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 2,
+      "prompt_id": "python",
+      "wall_ts": 1778131020.7947946,
+      "ct": 79,
+      "ttft_ms": 75.57996711693704,
+      "tpot_ms": 3.6570397056400394,
+      "elapsed_s": 0.3608290641568601,
+      "tok_s": 218.9402347191661,
+      "sha1": "dca63db49b83",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 60.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9523809523809523,
+        "length_per_cycle": 2.857142857142857
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 229.72,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.24,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 220.91,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 237.6,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 2,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778131021.211578,
+      "ct": 130,
+      "ttft_ms": 43.1599011644721,
+      "tpot_ms": 4.7141323245108815,
+      "elapsed_s": 0.6512829710263759,
+      "tok_s": 199.6060173278125,
+      "sha1": "25e926e3138d",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 85.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6296296296296297,
+        "length_per_cycle": 1.8888888888888888
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 220.91,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 237.6,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 228.11,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 245.18,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 2,
+      "prompt_id": "tofu",
+      "wall_ts": 1778131021.9188197,
+      "ct": 197,
+      "ttft_ms": 43.276590993627906,
+      "tpot_ms": 4.821511148237528,
+      "elapsed_s": 0.9882927760481834,
+      "tok_s": 199.33364360683683,
+      "sha1": "8a372a9da0f9",
+      "preview": "1. Press the tofu to remove excess water by wrapping the block in paper towels o",
+      "spec": {
+        "accepted": 127.0,
+        "drafts": 70.0,
+        "draft_tokens": 210.0,
+        "ratio_per_token": 0.6047619047619047,
+        "length_per_cycle": 1.8142857142857143
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 228.11,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 245.18,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.14,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.32,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 2,
+      "prompt_id": "haiku",
+      "wall_ts": 1778131022.9631493,
+      "ct": 20,
+      "ttft_ms": 41.99195094406605,
+      "tpot_ms": 7.114423475669403,
+      "elapsed_s": 0.1771659969817847,
+      "tok_s": 112.88847939628222,
+      "sha1": "fbb256de4389",
+      "preview": "Midnight code runs deep, Memory grows, never freed, Coffee turns to dust.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 10.0,
+        "draft_tokens": 30.0,
+        "ratio_per_token": 0.36666666666666664,
+        "length_per_cycle": 1.1
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.14,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.32,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.63,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.17,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 3,
+      "prompt_id": "sky",
+      "wall_ts": 1778131023.1963692,
+      "ct": 55,
+      "ttft_ms": 42.14355302974582,
+      "tpot_ms": 4.755199869611749,
+      "elapsed_s": 0.29892434598878026,
+      "tok_s": 183.9930428485887,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 19.0,
+        "draft_tokens": 57.0,
+        "ratio_per_token": 0.631578947368421,
+        "length_per_cycle": 1.894736842105263
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.63,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.17,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 231.43,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.66,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 3,
+      "prompt_id": "python",
+      "wall_ts": 1778131023.5516138,
+      "ct": 79,
+      "ttft_ms": 75.3653331194073,
+      "tpot_ms": 3.642841869105513,
+      "elapsed_s": 0.35950699890963733,
+      "tok_s": 219.74537419188542,
+      "sha1": "dca63db49b83",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 60.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9523809523809523,
+        "length_per_cycle": 2.857142857142857
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 229.85,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.66,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.6,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 238.99,
+          "temp_c": 59
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 3,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778131023.9673314,
+      "ct": 130,
+      "ttft_ms": 42.38830995745957,
+      "tpot_ms": 4.715499612538852,
+      "elapsed_s": 0.6506877599749714,
+      "tok_s": 199.7886052213437,
+      "sha1": "25e926e3138d",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 85.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6296296296296297,
+        "length_per_cycle": 1.8888888888888888
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.6,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 238.99,
+          "temp_c": 59
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 230.33,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 246.8,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 3,
+      "prompt_id": "tofu",
+      "wall_ts": 1778131024.6741097,
+      "ct": 197,
+      "ttft_ms": 42.927832109853625,
+      "tpot_ms": 4.76247553561567,
+      "elapsed_s": 0.976373037090525,
+      "tok_s": 201.7671448476665,
+      "sha1": "fa6a2f2467f2",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping the block in paper towel",
+      "spec": {
+        "accepted": 128.0,
+        "drafts": 69.0,
+        "draft_tokens": 207.0,
+        "ratio_per_token": 0.6183574879227053,
+        "length_per_cycle": 1.855072463768116
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 230.33,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 246.8,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.51,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.55,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 3,
+      "prompt_id": "haiku",
+      "wall_ts": 1778131025.7080941,
+      "ct": 20,
+      "ttft_ms": 42.17779100872576,
+      "tpot_ms": 7.092804427405722,
+      "elapsed_s": 0.17694107512943447,
+      "tok_s": 113.03197963146638,
+      "sha1": "fbb256de4389",
+      "preview": "Midnight code runs deep, Memory grows, never freed, Coffee turns to dust.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 10.0,
+        "draft_tokens": 30.0,
+        "ratio_per_token": 0.36666666666666664,
+        "length_per_cycle": 1.1
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.51,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.55,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.28,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 255.55,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 4,
+      "prompt_id": "sky",
+      "wall_ts": 1778131025.9413152,
+      "ct": 55,
+      "ttft_ms": 41.60957783460617,
+      "tpot_ms": 4.749195555362989,
+      "elapsed_s": 0.29806613782420754,
+      "tok_s": 184.522805580947,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 19.0,
+        "draft_tokens": 57.0,
+        "ratio_per_token": 0.631578947368421,
+        "length_per_cycle": 1.894736842105263
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 233.94,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 253.67,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 231.25,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 249.02,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 4,
+      "prompt_id": "python",
+      "wall_ts": 1778131026.2957041,
+      "ct": 79,
+      "ttft_ms": 75.66170883364975,
+      "tpot_ms": 3.647544615281125,
+      "elapsed_s": 0.3601701888255775,
+      "tok_s": 219.34075181957374,
+      "sha1": "dca63db49b83",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 60.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9523809523809523,
+        "length_per_cycle": 2.857142857142857
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 231.25,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 249.02,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.55,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 239.62,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 4,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778131026.7123787,
+      "ct": 140,
+      "ttft_ms": 41.52997280471027,
+      "tpot_ms": 4.5808396476367825,
+      "elapsed_s": 0.678266683826223,
+      "tok_s": 206.40848701315403,
+      "sha1": "0a1145e8c68d",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 94.0,
+        "drafts": 47.0,
+        "draft_tokens": 141.0,
+        "ratio_per_token": 0.6666666666666666,
+        "length_per_cycle": 2.0
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.55,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 239.62,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 228.4,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 246.41,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 4,
+      "prompt_id": "tofu",
+      "wall_ts": 1778131027.4473329,
+      "ct": 197,
+      "ttft_ms": 42.25104697979987,
+      "tpot_ms": 4.769212224197631,
+      "elapsed_s": 0.9770166429225355,
+      "tok_s": 201.63423154258334,
+      "sha1": "fa6a2f2467f2",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping the block in paper towel",
+      "spec": {
+        "accepted": 128.0,
+        "drafts": 69.0,
+        "draft_tokens": 207.0,
+        "ratio_per_token": 0.6183574879227053,
+        "length_per_cycle": 1.855072463768116
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 232.85,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 251.69,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.31,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.71,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 4,
+      "prompt_id": "haiku",
+      "wall_ts": 1778131028.4806008,
+      "ct": 20,
+      "ttft_ms": 42.68788895569742,
+      "tpot_ms": 7.125234268115539,
+      "elapsed_s": 0.17806734004989266,
+      "tok_s": 112.31705934617882,
+      "sha1": "b5ad4cf7bb5c",
+      "preview": "Midnight code runs deep, Memory grows, never frees, Coffee turns to dust.",
+      "spec": {
+        "accepted": 12.0,
+        "drafts": 10.0,
+        "draft_tokens": 30.0,
+        "ratio_per_token": 0.4,
+        "length_per_cycle": 1.2
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.31,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.71,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.12,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.78,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 5,
+      "prompt_id": "sky",
+      "wall_ts": 1778131028.7147746,
+      "ct": 55,
+      "ttft_ms": 43.89909305609763,
+      "tpot_ms": 4.757162092977928,
+      "elapsed_s": 0.3007858460769057,
+      "tok_s": 182.85434875794473,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 19.0,
+        "draft_tokens": 57.0,
+        "ratio_per_token": 0.631578947368421,
+        "length_per_cycle": 1.894736842105263
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.12,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.78,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 230.7,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 250.03,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 5,
+      "prompt_id": "python",
+      "wall_ts": 1778131029.0718656,
+      "ct": 79,
+      "ttft_ms": 75.58662700466812,
+      "tpot_ms": 3.652978321322455,
+      "elapsed_s": 0.3605189360678196,
+      "tok_s": 219.1285729999458,
+      "sha1": "dca63db49b83",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 60.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9523809523809523,
+        "length_per_cycle": 2.857142857142857
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 230.7,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 250.03,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.02,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 240.41,
+          "temp_c": 60
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 5,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778131029.4885972,
+      "ct": 130,
+      "ttft_ms": 44.136131880804896,
+      "tpot_ms": 4.726585163193387,
+      "elapsed_s": 0.6538656179327518,
+      "tok_s": 198.81761088923034,
+      "sha1": "25e926e3138d",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 85.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6296296296296297,
+        "length_per_cycle": 1.8888888888888888
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 222.02,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 240.41,
+          "temp_c": 60
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 235.56,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.07,
+          "temp_c": 61
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 5,
+      "prompt_id": "tofu",
+      "wall_ts": 1778131030.2003446,
+      "ct": 197,
+      "ttft_ms": 43.43048296868801,
+      "tpot_ms": 4.62664615800034,
+      "elapsed_s": 0.9502531299367547,
+      "tok_s": 207.3131819235487,
+      "sha1": "8a372a9da0f9",
+      "preview": "1. Press the tofu to remove excess water by wrapping the block in paper towels o",
+      "spec": {
+        "accepted": 130.0,
+        "drafts": 67.0,
+        "draft_tokens": 201.0,
+        "ratio_per_token": 0.6467661691542289,
+        "length_per_cycle": 1.9402985074626866
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 235.56,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 247.07,
+          "temp_c": 61
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.46,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.97,
+          "temp_c": 61
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p350_k3_t0.0",
+      "trial": 5,
+      "prompt_id": "haiku",
+      "wall_ts": 1778131031.2066197,
+      "ct": 20,
+      "ttft_ms": 43.63351804204285,
+      "tpot_ms": 7.106847215541883,
+      "elapsed_s": 0.17866361513733864,
+      "tok_s": 111.94221041942988,
+      "sha1": "b5ad4cf7bb5c",
+      "preview": "Midnight code runs deep, Memory grows, never frees, Coffee turns to dust.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 10.0,
+        "draft_tokens": 30.0,
+        "ratio_per_token": 0.36666666666666664,
+        "length_per_cycle": 1.1
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.46,
+          "temp_c": 67
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.97,
+          "temp_c": 61
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21042,
+          "power_w": 236.04,
+          "temp_c": 66
+        },
+        {
+          "idx": 1,
+          "mem_mb": 20679,
+          "power_w": 256.57,
+          "temp_c": 61
+        }
+      ],
+      "error": null
+    }
+  ]
+}

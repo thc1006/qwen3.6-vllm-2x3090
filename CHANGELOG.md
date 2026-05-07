@@ -5,6 +5,72 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Versioning is not strictly semver — each numbered release is a public
 publication point with its own data set.
 
+## [v4.0] — 2026-05-07
+
+### Added
+
+- **9-phase factorial sweep** with statistical analysis (~3000 measurements
+  across 38 configurations). Full content lives in
+  [`v4_2026_05_07/`](v4_2026_05_07/). Highlights:
+  - **Phase A** k sweep (k=1/2/3 × power × temp = 12 configs): k=3 winner
+    via TTFT (−33 % p<0.001), TPOT statistically equivalent to k=2.
+  - **Phase B** TP=1 vs TP=2: TP=1 categorically does not fit on single
+    24 GB RTX 3090 (3 progressive memory configs all OOM, even no-spec).
+  - **Phase C+H+I** AWQ vs FP8 with matched gpu-memory-utilization control:
+    AWQ ≈ FP8 within statistical noise (all 4 cells p > 0.6). FP8 minimum
+    mem-util on dual 3090 with Whisper sidecar = 0.90.
+  - **Phase E** 60-min sustained-load × 2 power configs: no monotonic
+    acceptance regression detected (NS at α=0.05). Counter-evidence to
+    [vllm-project/vllm#41838](https://github.com/vllm-project/vllm/issues/41838)
+    on Ampere — but note we tested MTP, the issue is about Eagle3.
+  - **Phase F** tool-call workload: 25/25 produced tool_calls; 3-metric
+    nuance — TPOT lower (p<0.0001) but TTFT higher (~3×) and tok/s lower.
+    Acceptance rate is NOT significantly different — refutes "structured
+    tokens → higher MTP acceptance" hypothesis.
+  - **Phase G** long-context decode scaling: TPOT scales steeply on dual
+    3090 PCIe TP=2 (+150 % at 24 k tokens). TP=2 inter-GPU communication
+    overhead dominant past ~6 k.
+  - **Phase J + J.2** vLLM 0.20.1 vs 0.19.1 with backend-confound control:
+    `VLLM_USE_FLASHINFER_MOE_FP16` is essentially a no-op for AWQ-Marlin
+    Qwen3.6 (NS p > 0.57), and version effect is also NS (p > 0.34). The
+    [#41306 MoE-backend regression](https://github.com/vllm-project/vllm/issues/41306)
+    does not manifest on AWQ-Marlin path on Ampere SM 8.6. **Caveat**:
+    0.20.1 raises `NotImplementedError` if `VLLM_USE_FLASHINFER_MOE_FP16=1`
+    is set; must unset it.
+- [`v4_2026_05_07/data/`](v4_2026_05_07/data/) — 27 phase JSONs (~1 MB).
+- [`v4_2026_05_07/bench/`](v4_2026_05_07/bench/) — bench scripts (matched-flag
+  methodology, streaming SSE, spec-acceptance from /metrics, t-test, p-value).
+- [`v4_2026_05_07/analysis/`](v4_2026_05_07/analysis/) — statistical analysis
+  (Welch's t-test, perf/W, per-prompt breakdown, MTP cross-k SHA1 lossless
+  check).
+
+### Changed
+
+- **k=3 is the new production recommendation** (replacing k=1 from v3.0
+  analysis and k=2 from earlier production deploy). Reason: TTFT savings
+  ~26 ms at p<0.001 in all 4 (power × temp) cells; TPOT statistically
+  equivalent. The v3.0 analysis correctly identified that MTP gives a net
+  speedup; the v4.0 analysis refines the optimal k for voice-agent TTFB.
+
+### Caveats
+
+- **Finding "FP8 +2.7 % vs AWQ" — RETRACTED.** Earlier impression that FP8
+  beats AWQ was driven by `gpu-memory-utilization=0.85` (AWQ) vs `0.92`
+  (FP8) confound. With matched mem-util at 0.92, all 4 cells NS (p > 0.6).
+  Additionally, AWQ at 0.85 and at 0.92 are themselves NS (p > 0.95) —
+  mem-util setting is decoupled from decode speed at concurrency=1.
+- **Tool-call "faster" framing — clarified.** Tool-call has lower TPOT
+  (good) but higher TTFT and lower tok/s (less good). For voice-agent
+  short outputs, total wall-clock is acceptable (~240 ms for 35-token
+  tool_call), but readers should not infer "tool-call uniformly faster".
+
+### Reproduction
+
+- See [`v4_2026_05_07/README.md`](v4_2026_05_07/README.md) for full
+  publication writeup, methodology, and full per-config tables.
+- Bench scripts require setting `S1_SUDO_PW` env var for nvidia-smi power
+  cap; no hardcoded passwords in repo.
+
 ## [v3.0] — 2026-04-26
 
 ### Changed

@@ -21,6 +21,17 @@ always-on conversational robot brain.
 > below; v1/v2 raw data retained in-repo for audit; release notes in
 > [`CHANGELOG.md`](CHANGELOG.md).
 
+> **2026-05-07 — v4 update**: a 9-phase factorial sweep adds Phase A k sweep
+> (k=3 supersedes k=1 as the recommended production setting via TTFT savings),
+> Phase B (TP=1 categorically does not fit single 3090), AWQ ≈ FP8 within
+> noise at matched gpu-mem-util, 60-min stability with no regression, vLLM
+> 0.20.1 ≈ 0.19.1 on AWQ-Marlin (clean comparison after backend-confound
+> control), and first public 3090 + DFlash + Q4 datapoint (NET LOSS, in
+> [sister repo](https://github.com/thc1006/qwen3.6-speculative-decoding-rtx3090)).
+> Full results, raw data, and bench scripts in [`v4_2026_05_07/`](v4_2026_05_07/).
+> v3 narrative below remains the canonical +27.5 % MTP finding; v4 refines
+> the optimal k.
+
 ## Hardware
 
 - 2× NVIDIA RTX 3090 24GB (SM 8.6, Ampere, no NVLink, PCIe Gen4 x8)

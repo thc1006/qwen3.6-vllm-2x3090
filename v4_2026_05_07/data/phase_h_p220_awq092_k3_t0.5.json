@@ -1,0 +1,1300 @@
+{
+  "config_id": "p220_awq092_k3_t0.5",
+  "wall_start": 1778164337.0310915,
+  "wall_end": 1778164351.1663134,
+  "args": {
+    "config_id": "p220_awq092_k3_t0.5",
+    "output": "/home/reachym/bench_2026_05_07/phase_h_p220_awq092_k3_t0.5.json",
+    "max_tokens": 200,
+    "trials": 5,
+    "temperature": 0.5
+  },
+  "server_meta": {
+    "object": "list",
+    "data": [
+      {
+        "id": "qwen36-awq",
+        "object": "model",
+        "created": 1778164336,
+        "owned_by": "vllm",
+        "root": "/home/reachym/models/qwen36-awq",
+        "parent": null,
+        "max_model_len": 32768,
+        "permission": [
+          {
+            "id": "modelperm-a40367f03fb31280",
+            "object": "model_permission",
+            "created": 1778164336,
+            "allow_create_engine": false,
+            "allow_sampling": true,
+            "allow_logprobs": true,
+            "allow_search_indices": false,
+            "allow_view": true,
+            "allow_fine_tuning": false,
+            "organization": "*",
+            "group": null,
+            "is_blocking": false
+          }
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "n": 25,
+    "tpot_ms": {
+      "mean": 5.340283132744642,
+      "median": 5.011368525914684,
+      "stdev": 1.2734973839015804,
+      "min": 4.032344327461493,
+      "max": 8.680421426626188
+    },
+    "ttft_ms": {
+      "mean": 51.72816383652389,
+      "median": 44.739251025021076,
+      "min": 41.74607596360147,
+      "max": 82.98750082030892
+    },
+    "tok_s": {
+      "mean": 172.28072278961898,
+      "median": 188.75982725232507
+    },
+    "spec_acceptance_per_token": {
+      "n": 25,
+      "mean": 0.6707405352863715,
+      "median": 0.6888888888888889
+    },
+    "spec_acceptance_per_cycle": {
+      "n": 25,
+      "mean": 2.0122216058591142,
+      "median": 2.066666666666667
+    },
+    "unique_sha1": 10
+  },
+  "measurements": [
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 1,
+      "prompt_id": "sky",
+      "wall_ts": 1778164337.0310915,
+      "ct": 49,
+      "ttft_ms": 41.74607596360147,
+      "tpot_ms": 5.3405297512654215,
+      "elapsed_s": 0.2980915040243417,
+      "tok_s": 164.37905588882109,
+      "sha1": "5a59f93ce20d",
+      "preview": "The sky appears blue because the Earth's atmosphere scatters shorter blue wavele",
+      "spec": {
+        "accepted": 32.0,
+        "drafts": 17.0,
+        "draft_tokens": 51.0,
+        "ratio_per_token": 0.6274509803921569,
+        "length_per_cycle": 1.8823529411764706
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 207.59,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 206.1,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 205.57,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.26,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 1,
+      "prompt_id": "python",
+      "wall_ts": 1778164337.3849692,
+      "ct": 80,
+      "ttft_ms": 78.07637704536319,
+      "tpot_ms": 4.033117808543051,
+      "elapsed_s": 0.39669268392026424,
+      "tok_s": 201.66744495867766,
+      "sha1": "0c717ac69d7b",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 58.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9206349206349206,
+        "length_per_cycle": 2.761904761904762
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 205.57,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.26,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 199.25,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 203.21,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 1,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778164337.837833,
+      "ct": 138,
+      "ttft_ms": 42.54079004749656,
+      "tpot_ms": 4.98430004486148,
+      "elapsed_s": 0.7253898961935192,
+      "tok_s": 190.24251747116205,
+      "sha1": "62d36f312eb5",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 93.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6888888888888889,
+        "length_per_cycle": 2.066666666666667
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 201.69,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 203.21,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 211.99,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.46,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 1,
+      "prompt_id": "tofu",
+      "wall_ts": 1778164338.621036,
+      "ct": 192,
+      "ttft_ms": 43.9682740252465,
+      "tpot_ms": 4.697458010352173,
+      "elapsed_s": 0.9411827540025115,
+      "tok_s": 203.998638079048,
+      "sha1": "c6e31209eb69",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a ",
+      "spec": {
+        "accepted": 133.0,
+        "drafts": 59.0,
+        "draft_tokens": 177.0,
+        "ratio_per_token": 0.751412429378531,
+        "length_per_cycle": 2.2542372881355934
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 211.44,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.46,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.13,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.37,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 1,
+      "prompt_id": "haiku",
+      "wall_ts": 1778164339.620494,
+      "ct": 20,
+      "ttft_ms": 44.84676686115563,
+      "tpot_ms": 6.3632468962551725,
+      "elapsed_s": 0.16574845789000392,
+      "tok_s": 120.66477272007353,
+      "sha1": "73d944ec4276",
+      "preview": "Screen glow in the dark, Memory grows with every call, Coffee turns to dust.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 8.0,
+        "draft_tokens": 24.0,
+        "ratio_per_token": 0.4583333333333333,
+        "length_per_cycle": 1.375
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 210.62,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.37,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 211.65,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.87,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 2,
+      "prompt_id": "sky",
+      "wall_ts": 1778164339.8442209,
+      "ct": 50,
+      "ttft_ms": 44.632273027673364,
+      "tpot_ms": 5.562207998935969,
+      "elapsed_s": 0.31718046497553587,
+      "tok_s": 157.63896431596598,
+      "sha1": "0d495e0e66cf",
+      "preview": "The sky appears blue because the Earth's atmosphere scatters shorter blue wavele",
+      "spec": {
+        "accepted": 32.0,
+        "drafts": 18.0,
+        "draft_tokens": 54.0,
+        "ratio_per_token": 0.5925925925925926,
+        "length_per_cycle": 1.7777777777777777
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 212.5,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.87,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 208.86,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.5,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 2,
+      "prompt_id": "python",
+      "wall_ts": 1778164340.218927,
+      "ct": 80,
+      "ttft_ms": 82.98750082030892,
+      "tpot_ms": 4.046502419971401,
+      "elapsed_s": 0.4026611919980496,
+      "tok_s": 198.678197923746,
+      "sha1": "0c717ac69d7b",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 58.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9206349206349206,
+        "length_per_cycle": 2.761904761904762
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 206.27,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.5,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 201.93,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 202.89,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 2,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778164340.6795664,
+      "ct": 138,
+      "ttft_ms": 46.55029810965061,
+      "tpot_ms": 5.017904773776005,
+      "elapsed_s": 0.7340032521169633,
+      "tok_s": 188.01006617067375,
+      "sha1": "62d36f312eb5",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 93.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6888888888888889,
+        "length_per_cycle": 2.066666666666667
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 201.93,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 201.79,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.35,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 211.96,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 2,
+      "prompt_id": "tofu",
+      "wall_ts": 1778164341.47105,
+      "ct": 191,
+      "ttft_ms": 45.272220857441425,
+      "tpot_ms": 4.7314496110438515,
+      "elapsed_s": 0.9442476469557732,
+      "tok_s": 202.27744343952395,
+      "sha1": "3fe9f019f47f",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a ",
+      "spec": {
+        "accepted": 131.0,
+        "drafts": 59.0,
+        "draft_tokens": 177.0,
+        "ratio_per_token": 0.7401129943502824,
+        "length_per_cycle": 2.2203389830508473
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.35,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.79,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.31,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 211.28,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 2,
+      "prompt_id": "haiku",
+      "wall_ts": 1778164342.4731321,
+      "ct": 22,
+      "ttft_ms": 44.97183207422495,
+      "tpot_ms": 8.680421426626188,
+      "elapsed_s": 0.2272606820333749,
+      "tok_s": 96.80513058026085,
+      "sha1": "8af4246802ba",
+      "preview": "Screen glow in the dark, Memory grows, never shrinks, Coffee gone, still stuck.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 12.0,
+        "draft_tokens": 36.0,
+        "ratio_per_token": 0.3055555555555556,
+        "length_per_cycle": 0.9166666666666666
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.31,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.09,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.58,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 211.84,
+          "temp_c": 56
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 3,
+      "prompt_id": "sky",
+      "wall_ts": 1778164342.7582536,
+      "ct": 55,
+      "ttft_ms": 44.88460998982191,
+      "tpot_ms": 5.334202148434188,
+      "elapsed_s": 0.3329315260052681,
+      "tok_s": 165.19913466869977,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 19.0,
+        "draft_tokens": 57.0,
+        "ratio_per_token": 0.631578947368421,
+        "length_per_cycle": 1.894736842105263
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.58,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 209.08,
+          "temp_c": 56
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 209.59,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.65,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 3,
+      "prompt_id": "python",
+      "wall_ts": 1778164343.1487143,
+      "ct": 80,
+      "ttft_ms": 80.32058901153505,
+      "tpot_ms": 4.053442632850213,
+      "elapsed_s": 0.4005425570067018,
+      "tok_s": 199.7290889583587,
+      "sha1": "0c717ac69d7b",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 58.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9206349206349206,
+        "length_per_cycle": 2.761904761904762
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 209.59,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.65,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 203.0,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.55,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 3,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778164343.6071146,
+      "ct": 138,
+      "ttft_ms": 43.91150292940438,
+      "tpot_ms": 5.015885115798263,
+      "elapsed_s": 0.7310877637937665,
+      "tok_s": 188.75982725232507,
+      "sha1": "62d36f312eb5",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 93.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6888888888888889,
+        "length_per_cycle": 2.066666666666667
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 203.0,
+          "temp_c": 64
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.55,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.54,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.58,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 3,
+      "prompt_id": "tofu",
+      "wall_ts": 1778164344.3963416,
+      "ct": 191,
+      "ttft_ms": 44.49994000606239,
+      "tpot_ms": 4.729132979225955,
+      "elapsed_s": 0.9430352060589939,
+      "tok_s": 202.53750737281754,
+      "sha1": "3fe9f019f47f",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a ",
+      "spec": {
+        "accepted": 131.0,
+        "drafts": 59.0,
+        "draft_tokens": 177.0,
+        "ratio_per_token": 0.7401129943502824,
+        "length_per_cycle": 2.2203389830508473
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.54,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.58,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.35,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.27,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 3,
+      "prompt_id": "haiku",
+      "wall_ts": 1778164345.3971896,
+      "ct": 20,
+      "ttft_ms": 44.739251025021076,
+      "tpot_ms": 7.228871586879618,
+      "elapsed_s": 0.1820878111757338,
+      "tok_s": 109.83711578968845,
+      "sha1": "0d98d896bbe6",
+      "preview": "Screen glow in the dark, Memory grows with every call, Stack overflows now.",
+      "spec": {
+        "accepted": 12.0,
+        "drafts": 9.0,
+        "draft_tokens": 27.0,
+        "ratio_per_token": 0.4444444444444444,
+        "length_per_cycle": 1.3333333333333333
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.35,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.27,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 212.96,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.53,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 4,
+      "prompt_id": "sky",
+      "wall_ts": 1778164345.6397493,
+      "ct": 50,
+      "ttft_ms": 44.56012090668082,
+      "tpot_ms": 5.566464347422731,
+      "elapsed_s": 0.31731687393039465,
+      "tok_s": 157.57119809193568,
+      "sha1": "0d495e0e66cf",
+      "preview": "The sky appears blue because the Earth's atmosphere scatters shorter blue wavele",
+      "spec": {
+        "accepted": 32.0,
+        "drafts": 18.0,
+        "draft_tokens": 54.0,
+        "ratio_per_token": 0.5925925925925926,
+        "length_per_cycle": 1.7777777777777777
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 212.32,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.53,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 209.09,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.35,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 4,
+      "prompt_id": "python",
+      "wall_ts": 1778164346.0157812,
+      "ct": 80,
+      "ttft_ms": 81.38151909224689,
+      "tpot_ms": 4.058472567556214,
+      "elapsed_s": 0.4020008519291878,
+      "tok_s": 199.00455338858822,
+      "sha1": "0c717ac69d7b",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 58.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9206349206349206,
+        "length_per_cycle": 2.761904761904762
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 206.35,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.35,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 202.58,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 202.47,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 4,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778164346.47822,
+      "ct": 138,
+      "ttft_ms": 45.0450899079442,
+      "tpot_ms": 5.011368525914684,
+      "elapsed_s": 0.731602577958256,
+      "tok_s": 188.62700072097618,
+      "sha1": "62d36f312eb5",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 93.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6888888888888889,
+        "length_per_cycle": 2.066666666666667
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 202.58,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 201.23,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.59,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 211.63,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 4,
+      "prompt_id": "tofu",
+      "wall_ts": 1778164347.2678764,
+      "ct": 191,
+      "ttft_ms": 44.726504012942314,
+      "tpot_ms": 4.713287804961989,
+      "elapsed_s": 0.9402511869557202,
+      "tok_s": 203.13720700359497,
+      "sha1": "3fe9f019f47f",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a ",
+      "spec": {
+        "accepted": 131.0,
+        "drafts": 59.0,
+        "draft_tokens": 177.0,
+        "ratio_per_token": 0.7401129943502824,
+        "length_per_cycle": 2.2203389830508473
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.59,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.51,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.6,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.41,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 4,
+      "prompt_id": "haiku",
+      "wall_ts": 1778164348.2657738,
+      "ct": 22,
+      "ttft_ms": 44.73111894913018,
+      "tpot_ms": 8.662899435009985,
+      "elapsed_s": 0.22665200708433986,
+      "tok_s": 97.06510117871377,
+      "sha1": "8af4246802ba",
+      "preview": "Screen glow in the dark, Memory grows, never shrinks, Coffee gone, still stuck.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 12.0,
+        "draft_tokens": 36.0,
+        "ratio_per_token": 0.3055555555555556,
+        "length_per_cycle": 0.9166666666666666
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.6,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.16,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 214.0,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.09,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 5,
+      "prompt_id": "sky",
+      "wall_ts": 1778164348.5500095,
+      "ct": 50,
+      "ttft_ms": 44.68327318318188,
+      "tpot_ms": 5.560119588840373,
+      "elapsed_s": 0.31712913303636014,
+      "tok_s": 157.66448046344357,
+      "sha1": "0d495e0e66cf",
+      "preview": "The sky appears blue because the Earth's atmosphere scatters shorter blue wavele",
+      "spec": {
+        "accepted": 32.0,
+        "drafts": 18.0,
+        "draft_tokens": 54.0,
+        "ratio_per_token": 0.5925925925925926,
+        "length_per_cycle": 1.7777777777777777
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 214.0,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.09,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 210.15,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.56,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 5,
+      "prompt_id": "python",
+      "wall_ts": 1778164348.9246516,
+      "ct": 80,
+      "ttft_ms": 80.51412599161267,
+      "tpot_ms": 4.032344327461493,
+      "elapsed_s": 0.39906932786107063,
+      "tok_s": 200.4664212826967,
+      "sha1": "0c717ac69d7b",
+      "preview": "```python def fib(n):     if n <= 0:         return []     if n == 1:         re",
+      "spec": {
+        "accepted": 58.0,
+        "drafts": 21.0,
+        "draft_tokens": 63.0,
+        "ratio_per_token": 0.9206349206349206,
+        "length_per_cycle": 2.761904761904762
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 208.38,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 208.56,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 203.4,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.46,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 5,
+      "prompt_id": "tcp_udp",
+      "wall_ts": 1778164349.3814821,
+      "ct": 138,
+      "ttft_ms": 44.17468095198274,
+      "tpot_ms": 4.9930071682553665,
+      "elapsed_s": 0.7282166630029678,
+      "tok_s": 189.50404050207456,
+      "sha1": "62d36f312eb5",
+      "preview": "*   **Reliability vs. Speed**: TCP is connection-oriented and guarantees data de",
+      "spec": {
+        "accepted": 93.0,
+        "drafts": 45.0,
+        "draft_tokens": 135.0,
+        "ratio_per_token": 0.6888888888888889,
+        "length_per_cycle": 2.066666666666667
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 203.4,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 204.46,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 214.0,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.01,
+          "temp_c": 57
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 5,
+      "prompt_id": "tofu",
+      "wall_ts": 1778164350.1675737,
+      "ct": 191,
+      "ttft_ms": 44.59950001910329,
+      "tpot_ms": 4.7165634049298735,
+      "elapsed_s": 0.9407465469557792,
+      "tok_s": 203.03024296827758,
+      "sha1": "3fe9f019f47f",
+      "preview": "1. Press the tofu to remove excess moisture by wrapping it in paper towels or a ",
+      "spec": {
+        "accepted": 131.0,
+        "drafts": 59.0,
+        "draft_tokens": 177.0,
+        "ratio_per_token": 0.7401129943502824,
+        "length_per_cycle": 2.2203389830508473
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 214.0,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.98,
+          "temp_c": 57
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.53,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.37,
+          "temp_c": 58
+        }
+      ],
+      "error": null
+    },
+    {
+      "config_id": "p220_awq092_k3_t0.5",
+      "trial": 5,
+      "prompt_id": "haiku",
+      "wall_ts": 1778164351.1663134,
+      "ct": 20,
+      "ttft_ms": 44.839861104264855,
+      "tpot_ms": 6.373877943444408,
+      "elapsed_s": 0.16594354202970862,
+      "tok_s": 120.52291855033098,
+      "sha1": "73d944ec4276",
+      "preview": "Screen glow in the dark, Memory grows with every call, Coffee turns to dust.",
+      "spec": {
+        "accepted": 11.0,
+        "drafts": 8.0,
+        "draft_tokens": 24.0,
+        "ratio_per_token": 0.4583333333333333,
+        "length_per_cycle": 1.375
+      },
+      "gpu_before": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 213.53,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 210.7,
+          "temp_c": 58
+        }
+      ],
+      "gpu_after": [
+        {
+          "idx": 0,
+          "mem_mb": 21096,
+          "power_w": 214.09,
+          "temp_c": 65
+        },
+        {
+          "idx": 1,
+          "mem_mb": 22351,
+          "power_w": 212.82,
+          "temp_c": 58
+        }
+      ],
+      "error": null
+    }
+  ]
+}

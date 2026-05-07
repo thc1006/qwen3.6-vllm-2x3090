@@ -1,0 +1,346 @@
+{
+  "phase": "G_longctx",
+  "config": {
+    "trials": 3,
+    "temperature": 0.0
+  },
+  "by_ctx": {
+    "200": {
+      "n": 3,
+      "actual_prompt_tokens_mean": 292,
+      "ttft_ms_mean": 78.59752435858051,
+      "tpot_ms_mean": 4.726962616126754,
+      "tok_s_mean": 164.74481343463145
+    },
+    "1000": {
+      "n": 3,
+      "actual_prompt_tokens_mean": 1448,
+      "ttft_ms_mean": 301.63060772853595,
+      "tpot_ms_mean": 5.207880584628515,
+      "tok_s_mean": 93.82709515974291
+    },
+    "4000": {
+      "n": 3,
+      "actual_prompt_tokens_mean": 5948,
+      "ttft_ms_mean": 1124.8122663237154,
+      "tpot_ms_mean": 6.686313258897927,
+      "tok_s_mean": 37.052737173051085
+    },
+    "8000": {
+      "n": 3,
+      "actual_prompt_tokens_mean": 12044,
+      "ttft_ms_mean": 2258.842686035981,
+      "tpot_ms_mean": 9.461440274790245,
+      "tok_s_mean": 20.15163407283509
+    },
+    "16000": {
+      "n": 3,
+      "actual_prompt_tokens_mean": 24280,
+      "ttft_ms_mean": 4800.346370320767,
+      "tpot_ms_mean": 12.473433581617515,
+      "tok_s_mean": 10.575950745178597
+    }
+  },
+  "measurements": [
+    {
+      "trial": 1,
+      "target_ctx": 200,
+      "wall_ts": 1778162535.9405417,
+      "ct": 55,
+      "prompt_tokens": 292,
+      "ttft_ms": 80.16857807524502,
+      "tpot_ms": 4.727573720393358,
+      "tok_s": 163.95516669175782,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 2,
+      "target_ctx": 200,
+      "wall_ts": 1778162536.284635,
+      "ct": 55,
+      "prompt_tokens": 292,
+      "ttft_ms": 77.78473012149334,
+      "tpot_ms": 4.726727885470071,
+      "tok_s": 165.1512607497851,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 3,
+      "target_ctx": 200,
+      "wall_ts": 1778162536.6254241,
+      "ct": 55,
+      "prompt_tokens": 292,
+      "ttft_ms": 77.83926487900317,
+      "tpot_ms": 4.726586242516835,
+      "tok_s": 165.1280128623514,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 1,
+      "target_ctx": 1000,
+      "wall_ts": 1778162536.9664042,
+      "ct": 54,
+      "prompt_tokens": 1448,
+      "ttft_ms": 351.33897606283426,
+      "tpot_ms": 5.224320189675914,
+      "tok_s": 85.95606154403472,
+      "sha1": "014216fe5882",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 34.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.8095238095238095,
+        "length_per_cycle": 1.619047619047619
+      },
+      "error": null
+    },
+    {
+      "trial": 2,
+      "target_ctx": 1000,
+      "wall_ts": 1778162537.6023808,
+      "ct": 54,
+      "prompt_tokens": 1448,
+      "ttft_ms": 276.6484951134771,
+      "tpot_ms": 5.199124452324127,
+      "tok_s": 97.79028524454809,
+      "sha1": "014216fe5882",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 34.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.8095238095238095,
+        "length_per_cycle": 1.619047619047619
+      },
+      "error": null
+    },
+    {
+      "trial": 3,
+      "target_ctx": 1000,
+      "wall_ts": 1778162538.162532,
+      "ct": 54,
+      "prompt_tokens": 1448,
+      "ttft_ms": 276.9043520092964,
+      "tpot_ms": 5.200197111885503,
+      "tok_s": 97.7349386906459,
+      "sha1": "014216fe5882",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 34.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.8095238095238095,
+        "length_per_cycle": 1.619047619047619
+      },
+      "error": null
+    },
+    {
+      "trial": 1,
+      "target_ctx": 4000,
+      "wall_ts": 1778162538.722972,
+      "ct": 55,
+      "prompt_tokens": 5948,
+      "ttft_ms": 1193.273854907602,
+      "tpot_ms": 6.668790351358001,
+      "tok_s": 35.40646708817261,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 2,
+      "target_ctx": 4000,
+      "wall_ts": 1778162540.2842746,
+      "ct": 55,
+      "prompt_tokens": 5948,
+      "ttft_ms": 1088.3469618856907,
+      "tpot_ms": 6.6933424074064805,
+      "tok_s": 37.93659541504875,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 3,
+      "target_ctx": 4000,
+      "wall_ts": 1778162541.743974,
+      "ct": 55,
+      "prompt_tokens": 5948,
+      "ttft_ms": 1092.8159821778536,
+      "tpot_ms": 6.6968070179293,
+      "tok_s": 37.8151490159319,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 33.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.7857142857142857,
+        "length_per_cycle": 1.5714285714285714
+      },
+      "error": null
+    },
+    {
+      "trial": 1,
+      "target_ctx": 8000,
+      "wall_ts": 1778162543.208137,
+      "ct": 55,
+      "prompt_tokens": 12044,
+      "ttft_ms": 2258.520851843059,
+      "tpot_ms": 9.59716225905275,
+      "tok_s": 19.80720306806684,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 31.0,
+        "drafts": 23.0,
+        "draft_tokens": 46.0,
+        "ratio_per_token": 0.6739130434782609,
+        "length_per_cycle": 1.3478260869565217
+      },
+      "error": null
+    },
+    {
+      "trial": 2,
+      "target_ctx": 8000,
+      "wall_ts": 1778162545.9932094,
+      "ct": 55,
+      "prompt_tokens": 12044,
+      "ttft_ms": 2259.3325341586024,
+      "tpot_ms": 9.638224146328866,
+      "tok_s": 19.78562001513066,
+      "sha1": "35fcb038191a",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 31.0,
+        "drafts": 23.0,
+        "draft_tokens": 46.0,
+        "ratio_per_token": 0.6739130434782609,
+        "length_per_cycle": 1.3478260869565217
+      },
+      "error": null
+    },
+    {
+      "trial": 3,
+      "target_ctx": 8000,
+      "wall_ts": 1778162548.7808576,
+      "ct": 58,
+      "prompt_tokens": 12044,
+      "ttft_ms": 2258.674672106281,
+      "tpot_ms": 9.148934418989118,
+      "tok_s": 20.86207913530777,
+      "sha1": "0a00488b7249",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 34.0,
+        "drafts": 23.0,
+        "draft_tokens": 46.0,
+        "ratio_per_token": 0.7391304347826086,
+        "length_per_cycle": 1.4782608695652173
+      },
+      "error": null
+    },
+    {
+      "trial": 1,
+      "target_ctx": 16000,
+      "wall_ts": 1778162551.569544,
+      "ct": 59,
+      "prompt_tokens": 24280,
+      "ttft_ms": 4810.4401340242475,
+      "tpot_ms": 12.712334603841963,
+      "tok_s": 10.634931471559463,
+      "sha1": "7db7ff20065d",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 22.0,
+        "draft_tokens": 44.0,
+        "ratio_per_token": 0.8181818181818182,
+        "length_per_cycle": 1.6363636363636365
+      },
+      "error": null
+    },
+    {
+      "trial": 2,
+      "target_ctx": 16000,
+      "wall_ts": 1778162557.1258388,
+      "ct": 58,
+      "prompt_tokens": 24280,
+      "ttft_ms": 4793.532040901482,
+      "tpot_ms": 12.342448493367746,
+      "tok_s": 10.551110698505557,
+      "sha1": "0a00488b7249",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.8571428571428571,
+        "length_per_cycle": 1.7142857142857142
+      },
+      "error": null
+    },
+    {
+      "trial": 3,
+      "target_ctx": 16000,
+      "wall_ts": 1778162562.6314447,
+      "ct": 58,
+      "prompt_tokens": 24280,
+      "ttft_ms": 4797.066936036572,
+      "tpot_ms": 12.365517647642838,
+      "tok_s": 10.541810065470772,
+      "sha1": "0a00488b7249",
+      "preview": "The sky appears blue because molecules in the Earth's atmosphere scatter shorter",
+      "spec": {
+        "accepted": 36.0,
+        "drafts": 21.0,
+        "draft_tokens": 42.0,
+        "ratio_per_token": 0.8571428571428571,
+        "length_per_cycle": 1.7142857142857142
+      },
+      "error": null
+    }
+  ]
+}
