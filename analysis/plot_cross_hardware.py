@@ -44,10 +44,10 @@ status_colors = {
     "CLEAN A/B": "#27AE60",
 }
 notes = [
-    "v2.3 N=3 srogmann config\nllama.cpp+Q4+draft\nmechanism still applies",
+    "v2.3 N=3 srogmann config\nllama.cpp+Q4+draft\nv3 DFlash (2026-05-07)\nalso NET LOSS −44%",
     "0.80/2 vs 0.90/8 flag mismatch\n+ prefix-caching ON\n→ SUPERSEDED by v3",
     "prefix-caching ON\n(vllm #38182:\nMTP cache hit rate 92→71%)\nA100 cache-OFF retest pending",
-    "matched 0.90/8/hermes\n--no-enable-prefix-caching\nstreaming N=5 trials\n−21.6% decode TPOT",
+    "matched 0.90/8/hermes\n--no-enable-prefix-caching\nstreaming N=5 trials\n−21.6% decode TPOT\nv4 confirms k=2/k=3 too",
 ]
 
 n = len(hardware_labels)
@@ -174,7 +174,8 @@ fig.text(
 fig.text(
     0.5,
     0.035,
-    "References: vllm #38182 (MTP × prefix-cache hit rate 92→71%), vllm #40756 (cache+MTP+chunked-prefill crash), MoESD arXiv 2505.19645, Utility-Driven SD arXiv 2506.20675",
+    "References: vllm #38182 (MTP × prefix-cache hit rate 92→71%), vllm #40756 (cache+MTP+chunked-prefill crash), MoESD arXiv 2505.19645, Utility-Driven SD arXiv 2506.20675"
+    "  ·  v4 update (2026-05-07): k∈{1,2,3} sweep + vLLM 0.20.1 cross-version + 60-min stability — see v4_2026_05_07/",
     ha="center",
     va="top",
     fontsize=8,
