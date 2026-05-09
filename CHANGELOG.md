@@ -152,3 +152,9 @@ publication point with its own data set.
   4.3 % dialog degradation under VL prefill.
 - Decision: vLLM unified TP=2 on 2× consumer Ampere validated for
   embodied-robot dialog+vision.
+
+[Unreleased]: https://github.com/thc1006/qwen3.6-vllm-2x3090/compare/v4.0...HEAD
+[v4.0]: https://github.com/thc1006/qwen3.6-vllm-2x3090/releases/tag/v4.0
+[v3.0]: https://github.com/thc1006/qwen3.6-vllm-2x3090/releases/tag/v3.0
+[v2.0]: https://github.com/thc1006/qwen3.6-vllm-2x3090/releases/tag/v2.0
+[v1.0]: https://github.com/thc1006/qwen3.6-vllm-2x3090/releases/tag/v1.0

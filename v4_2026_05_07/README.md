@@ -216,7 +216,7 @@ Total: ~3,000 measurements, ~30 MB of structured JSON.
 ## Cross-references
 
 - v3 publication: vLLM MTP +27.5 % NET WIN on dual 3090 PCIe (still valid, k=1 specifically — k=3 now recommended)
-- Sister repo `qwen3.6-speculative-decoding-rtx3090` v3.0: llama.cpp draft-spec NET LOSS reproduction + first 3090 + DFlash + Q4 datapoint (NET LOSS −44 %)
+- Sister repo `qwen3.6-speculative-decoding-rtx3090` v3.0: llama.cpp draft-spec NET LOSS reproduction + first 3090 + DFlash + Q4 datapoint (NET LOSS −44.6 %)
 
 ## License
 
