@@ -8,7 +8,7 @@ v4.0 deepens that single point into a **9-phase factorial sweep** (~3,000 measur
 
 ## TL;DR — five new headline numbers
 
-1. **MTP `num_speculative_tokens=3` is the production winner** (not k=1 from v3 or k=2 from old production). TTFT saves 26 ms (p<0.001) versus k=2; TPOT statistically equivalent.
+1. **MTP `num_speculative_tokens=3` is the production winner on this 2× RTX 3090 PCIe + AWQ-Marlin + vLLM 0.19.1 setup** (not k=1 from v3 or k=2 from old production on the same hardware). TTFT saves 26 ms versus k=2 (p<0.001 in all 4 power×temp cells); TPOT statistically equivalent. Note: [vLLM Recipes](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html) currently recommends k=2 as the cross-hardware default; the k=3 advantage here is validated only on the above stack and may not generalize to single-card / NVLink / HBM regimes.
 2. **TP=1 categorically does not fit** Qwen3.6-35B-A3B-AWQ on a single 24 GB RTX 3090 with the production stack — even with `--enforce-eager`, `--gpu-memory-utilization=0.95`, `--max-num-seqs=1`, and `--max-model-len=4096`, OOM at 22.7 GB / 24 GB. Confirmed across 3 progressive configs and verified again with no spec decode at all. Dual 3090 TP=2 is mandatory.
 3. **AWQ ≈ FP8 on Ampere SM 8.6** within statistical noise. At matched `gpu-memory-utilization=0.92`, all 4 (power × temp) AWQ vs FP8 TPOT comparisons p > 0.6, NS at α=0.05. The earlier "FP8 +2.7%" was confounded by 0.85 vs 0.92 mem-util asymmetry.
 4. **MTP shows NO monotonic acceptance regression in 60-min sustained load** at either 350 W or 220 W. p_one_sided > 0.10, NS at α=0.05. Counter-evidence to vllm-project/vllm#41838 (H200 Eagle3) for MTP on Ampere.

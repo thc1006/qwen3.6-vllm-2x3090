@@ -46,11 +46,17 @@ publication point with its own data set.
 
 ### Changed
 
-- **k=3 is the new production recommendation** (replacing k=1 from v3.0
-  analysis and k=2 from earlier production deploy). Reason: TTFT savings
+- **k=3 is the new production recommendation on this 2× RTX 3090 PCIe + AWQ
+  + vLLM 0.19.1 hardware** (replacing k=1 from v3.0 analysis and k=2 from
+  earlier production deploy on the same machine). Reason: TTFT savings
   ~26 ms at p<0.001 in all 4 (power × temp) cells; TPOT statistically
   equivalent. The v3.0 analysis correctly identified that MTP gives a net
-  speedup; the v4.0 analysis refines the optimal k for voice-agent TTFB.
+  speedup; the v4.0 analysis refines the optimal k for voice-agent TTFB on
+  this stack. **Cross-hardware caveat**: [vLLM Recipes](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html)
+  recommends k=2 as the Qwen3.5/3.6 default; we have not validated k=3 on
+  single-card (TP=1), NVLink, HBM, or different quant paths, and would
+  recommend testing both on your setup before deviating from the Recipes
+  default.
 
 ### Caveats
 

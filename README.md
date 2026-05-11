@@ -22,15 +22,16 @@ always-on conversational robot brain.
 > [`CHANGELOG.md`](CHANGELOG.md).
 
 > **2026-05-07 — v4 update**: a 9-phase factorial sweep adds Phase A k sweep
-> (k=3 supersedes k=1 as the recommended production setting via TTFT savings),
-> Phase B (TP=1 categorically does not fit single 3090), AWQ ≈ FP8 within
-> noise at matched gpu-mem-util, 60-min stability with no regression, vLLM
-> 0.20.1 ≈ 0.19.1 on AWQ-Marlin (clean comparison after backend-confound
-> control), and first public 3090 + DFlash + Q4 datapoint (NET LOSS, in
-> [sister repo](https://github.com/thc1006/qwen3.6-speculative-decoding-rtx3090)).
+> (k=3 supersedes k=1 **on our 2× 3090 PCIe + AWQ + vLLM 0.19.1 stack**
+> via TTFT savings — vLLM Recipes' k=2 default remains the safer cross-hardware
+> starting point), Phase B (TP=1 categorically does not fit single 3090),
+> AWQ ≈ FP8 within noise at matched gpu-mem-util, 60-min stability with no
+> regression, vLLM 0.20.1 ≈ 0.19.1 on AWQ-Marlin (clean comparison after
+> backend-confound control), and first public 3090 + DFlash + Q4 datapoint
+> (NET LOSS, in [sister repo](https://github.com/thc1006/qwen3.6-speculative-decoding-rtx3090)).
 > Full results, raw data, and bench scripts in [`v4_2026_05_07/`](v4_2026_05_07/).
 > v3 narrative below remains the canonical +27.5 % MTP finding; v4 refines
-> the optimal k.
+> the optimal k for this hardware.
 
 ## Hardware
 
@@ -268,6 +269,26 @@ Decomposition (each step holds the prior factor fixed):
   observation that MTP drops cache hit rate 92 % → 71 % — under
   cache-ON, MTP loses cache hits that no-MTP keeps, masking MTP's
   compute speedup.
+
+### Attribution note on cache-OFF for MTP
+
+The `--no-enable-prefix-caching` recommendation for latency-focused MTP
+serving was documented by [vLLM Recipes](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html)
+in its 2026-04-24 revision, two days before our v3 publication. Recipes
+cites a **KV-capacity argument** ("speculative tokens consume KV cache
+capacity, reducing effective batch size"). Our v3 contribution on top of
+that is: (a) **quantification** of the impact on dual 3090 PCIe + AWQ +
+Qwen3.6-35B-A3B (decode rate +27.5 % vs cache-ON baseline), (b) **confound
+decomposition** (matched-flag fix ≈ 30 pp, cache-OFF ≈ 10 pp), and
+(c) connecting the cache-OFF benefit specifically to the
+[vllm-project/vllm#38182](https://github.com/vllm-project/vllm/issues/38182)
+`single_type_kv_cache_manager.py:L457` force-drop mechanism for
+Qwen3.5/3.6 A3B class (a different mechanism than the KV-capacity one
+Recipes mentions; not addressed by Recipes). The cache-OFF preference
+appears specific to A3B-class models with the L457 trigger condition —
+single 3090 + Qwen3.6-27B dense + `--enable-prefix-caching` ON + MTP k=3
+[has been reported working at 97/95/91 % per-position acceptance](https://medium.com/@fzbcwvv/an-overnight-stack-for-qwen3-6-27b-85-tps-125k-context-vision-on-one-rtx-3090-0d95c6291914),
+so this is not a Qwen3-family-wide rule.
 
 ### Reconciliation with the Modal A100 −11.4 % finding
 
