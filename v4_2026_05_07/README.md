@@ -2,7 +2,7 @@
 
 ## What's new vs v3.0
 
-v3.0 (2026-04-26) established **vLLM MTP +27.5% TPOT vs no-spec** on dual RTX 3090 PCIe with Qwen3.6-35B-A3B-AWQ at matched flags + `--no-enable-prefix-caching`.
+v3.0 (2026-04-26) measured **vLLM MTP +27.5 % decode-rate gain vs no-spec** on dual RTX 3090 PCIe with Qwen3.6-35B-A3B-AWQ at matched flags + `--no-enable-prefix-caching` (the cache-OFF setting was already recommended for latency-focused MTP serving by [vLLM Recipes](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html) as of 2026-04-24; v3 quantified the gain and linked it to the #38182 L457 mechanism).
 
 v4.0 deepens that single point into a **9-phase factorial sweep** (~3,000 measurements across 38 configurations) with statistical analysis.
 
@@ -197,7 +197,7 @@ n = 3 trials per ctx target (limited statistical power; trends only — confiden
 
    **(b) Version effect (J.2 vs J, both with FP16 MoE off):** all 3 metrics NS (p > 0.34). Conclusion: **vLLM 0.20.1 is statistically equivalent to 0.19.1 on this path**.
 
-   **Practical recommendation**: `vLLM 0.20.1` is safe to upgrade for production AWQ-Marlin Qwen3.6 dual 3090, after unsetting `VLLM_USE_FLASHINFER_MOE_FP16` (or removing it from the systemd unit). The #41306 MoE-backend regression that hits Mixtral 8×7B / DeepSeek-V4 / NVFP4 paths does NOT manifest on AWQ-Marlin path for this model on Ampere. Note: vllm-project/vllm#38182 (MTP × prefix-caching block-drop bug) remains unfixed in 0.20.x; the `--no-enable-prefix-caching` workaround established in v3 still applies.
+   **Practical recommendation**: `vLLM 0.20.1` is safe to upgrade for production AWQ-Marlin Qwen3.6 dual 3090, after unsetting `VLLM_USE_FLASHINFER_MOE_FP16` (or removing it from the systemd unit). The #41306 MoE-backend regression that hits Mixtral 8×7B / DeepSeek-V4 / NVFP4 paths does NOT manifest on AWQ-Marlin path for this model on Ampere. Note: vllm-project/vllm#38182 (MTP × prefix-caching block-drop bug for Qwen3.5/3.6 A3B) remains unfixed in 0.20.x; the `--no-enable-prefix-caching` recommendation — [documented by vLLM Recipes since 2026-04-24 for latency-focused MTP serving](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html) and connected to the #38182 L457 mechanism in our v3.0 retest — still applies.
 
 ## Reproduction
 
