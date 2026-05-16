@@ -7,6 +7,31 @@ publication point with its own data set.
 
 ## [v5.0] — 2026-05-17
 
+> **ERRATA (2026-05-17, same-day audit, fix commit on master)**: an audit
+> pass after the initial v5.0 release surfaced three issues. (1)
+> `analysis/analyze_v5.py` shipped with a unidirectional zh-TW classifier
+> that collapsed SIMP into "shared"; corrected counts: MoE chat replies
+> are **6 TRAD / 3 SIMP / 3 MIX** (the 3 SIMP are all c1 "你好" trials),
+> Dense's 5 chat replies are **5 TRAD / 0 SIMP / 0 MIX**. (2) The bench
+> SYSTEM_PROMPT is a 4-line stub with 4 tools, not the actual production
+> `robot_brain.py:1292` SYSTEM_PROMPT, which has 8 tools, JSON output
+> schema, and explicit "你好 / hi → speech only, use 'greet' animation"
+> guidance. So the **77 % vs 100 % tool-accuracy gap is partly an
+> artifact of bench prompt under-specification**, not pure model
+> behavior; a follow-up retest with the production SYSTEM_PROMPT is the
+> right way to confirm whether Dense's chat false-fires survive proper
+> steering. (3) vLLM-config confounds beyond TP and spec-decode were not
+> originally disclosed: prefix-caching default ON for Dense vs explicit
+> OFF for MoE, `--enforce-eager` (no CUDA graphs) for Dense vs CUDA
+> graphs for MoE, `max-num-seqs` 4 vs 1, chunked-prefill on vs off.
+> **Latency findings (TTFT 4.34×, tok/s 5.42×, e2e 6.13×) are dominated
+> by compute and remain robust**; the tool-accuracy and zh-TW purity
+> findings need the prompt-matched retest. The v5.0 tag is preserved
+> unchanged for reproducibility; this is a documentation-only fix
+> committed after the tag. See
+> [`v5_2026_05_17/README.md`](v5_2026_05_17/README.md) for the expanded
+> caveats.
+
 ### Added
 
 - **Dense Qwen3.6-27B vs MoE Qwen3.6-35B-A3B head-to-head on voice agent
@@ -45,6 +70,8 @@ publication point with its own data set.
   (shipped on commit `a7912c7`).
 
 ### Scope and caveats
+
+(See ERRATA above for the expanded caveat list added in the audit pass.)
 
 - N=3 trials per cell; sufficient for the 4× / 5× / 23 pp gaps shown; not
   sufficient for close calls.

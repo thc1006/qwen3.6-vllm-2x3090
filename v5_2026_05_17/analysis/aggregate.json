@@ -43,8 +43,8 @@
     "zh_tw_status": {
       "TRAD": 6,
       "SIMP": 3,
-      "MIX": 0,
-      "shared": 3,
+      "MIX": 3,
+      "shared": 0,
       "none": 18
     }
   },
