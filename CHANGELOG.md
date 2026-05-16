@@ -5,6 +5,64 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Versioning is not strictly semver — each numbered release is a public
 publication point with its own data set.
 
+## [v5.0] — 2026-05-17
+
+### Added
+
+- **Dense Qwen3.6-27B vs MoE Qwen3.6-35B-A3B head-to-head on voice agent
+  workload** with the production stack fixed at v4.0 settings (MoE + MTP
+  k=3 + TP=2 + `--no-enable-prefix-caching`). Full content in
+  [`v5_2026_05_17/`](v5_2026_05_17/). 10 prompts × 3 trials = 30 samples
+  per model with streaming SSE TTFT capture, tool-call accuracy scoring,
+  and zh-TW vs zh-CN purity analysis via OpenCC `t2s`.
+- [`v5_2026_05_17/data/`](v5_2026_05_17/data/) — raw rows (60 total).
+- [`v5_2026_05_17/bench/v5_voice_bench.py`](v5_2026_05_17/bench/v5_voice_bench.py)
+  — bench harness.
+- [`v5_2026_05_17/analysis/analyze_v5.py`](v5_2026_05_17/analysis/analyze_v5.py)
+  + [`aggregate.json`](v5_2026_05_17/analysis/aggregate.json) — analyzer
+  and aggregate metrics.
+
+### Headline numbers
+
+| metric | MoE 35B-A3B + MTP k=3 + TP=2 | Dense 27B no-spec TP=1 | MoE win factor |
+|---|---:|---:|---:|
+| TTFT mean (ms) | **178** | 771 | **4.34×** |
+| e2e mean (ms) | **274** | 1684 | **6.13×** |
+| tok/s mean | **88.0** | 16.2 | **5.42×** |
+| tool accuracy | **30/30 (100 %)** | 23/30 (77 %) | +23.3 pp |
+| chat false-fires | 0/12 | 7/12 | — |
+
+### Decision
+
+- **No production swap.** Keep MoE + MTP k=3 + TP=2 (v4.0 config).
+- Dense 27B-AWQ is not a free upgrade on this hardware for this workload:
+  it loses on TTFT (4.3×), throughput (5.4×), and tool-call discrimination
+  (over-fires `play_emotion` on greetings/smalltalk 7/12 chat prompts).
+- The only Dense win — cleaner raw zh-TW on the chat outputs it does
+  produce (5/5 TRAD vs MoE 6/9 TRAD with c1 leaking SIMP) — is partly an
+  artifact of Dense refusing to chat in the first place, and is
+  independently solved by `robot_brain.py`'s OpenCC `s2t` post-processor
+  (shipped on commit `a7912c7`).
+
+### Scope and caveats
+
+- N=3 trials per cell; sufficient for the 4× / 5× / 23 pp gaps shown; not
+  sufficient for close calls.
+- Dense ran TP=1 + `--enforce-eager` + `--limit-mm-per-prompt '{"image":0,"video":0}'`
+  + 0.95 mem-util (single 3090 budget; production was paused for this
+  arm). A "Dense TP=2 + no enforce-eager" follow-up arm is out of scope
+  for this release — textbook scaling suggests ≤ 2× tok/s, which would
+  still not close the 5.4× throughput gap.
+- Dense ran without spec decoding (no public MTP draft head exists for
+  Qwen3.6-27B yet). This is *the right* comparison for "what should I
+  serve in production"; it is the wrong comparison for "is dense's base
+  decode faster than MoE's base decode", and the latter is moot because
+  nothing in production runs base.
+- Single hardware (2× RTX 3090 PCIe, no NVLink, SM 8.6). NVLink / HBM /
+  H100-class hardware would change every absolute number; the
+  *direction* of "MoE+MTP wins by a wide margin on voice-agent shape" is
+  unlikely to flip but is unverified here.
+
 ## [v4.0] — 2026-05-07
 
 ### Added

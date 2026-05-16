@@ -1,0 +1,521 @@
+{
+  "model": "qwen36-27b",
+  "trials": 3,
+  "rows": [
+    {
+      "pid": "c1",
+      "trial": 1,
+      "prompt": "你好，我是瑞奇。",
+      "expected_tool": null,
+      "ttft_ms": 1644.0,
+      "e2e_ms": 2428.4,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 11.12,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c1",
+      "trial": 2,
+      "prompt": "你好，我是瑞奇。",
+      "expected_tool": null,
+      "ttft_ms": 803.1,
+      "e2e_ms": 1577.6,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 17.12,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c1",
+      "trial": 3,
+      "prompt": "你好，我是瑞奇。",
+      "expected_tool": null,
+      "ttft_ms": 800.6,
+      "e2e_ms": 1573.3,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 17.16,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c2",
+      "trial": 1,
+      "prompt": "你今天好嗎？",
+      "expected_tool": null,
+      "ttft_ms": 807.4,
+      "e2e_ms": 1586.6,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.02,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c2",
+      "trial": 2,
+      "prompt": "你今天好嗎？",
+      "expected_tool": null,
+      "ttft_ms": 804.3,
+      "e2e_ms": 1579.2,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.1,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c2",
+      "trial": 3,
+      "prompt": "你今天好嗎？",
+      "expected_tool": null,
+      "ttft_ms": 805.7,
+      "e2e_ms": 1582.2,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.06,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c3",
+      "trial": 1,
+      "prompt": "跟我講個短笑話。",
+      "expected_tool": null,
+      "ttft_ms": 461.0,
+      "e2e_ms": 1712.8,
+      "prompt_tok": 575,
+      "out_tok": 30,
+      "toks_per_sec": 17.51,
+      "text": "為什麼程式員總是分不清萬聖節和聖誕節？\n\n因為 Oct 31 == Dec 25 🎃🎄",
+      "tool_calls": []
+    },
+    {
+      "pid": "c3",
+      "trial": 2,
+      "prompt": "跟我講個短笑話。",
+      "expected_tool": null,
+      "ttft_ms": 806.0,
+      "e2e_ms": 1582.5,
+      "prompt_tok": 575,
+      "out_tok": 27,
+      "toks_per_sec": 17.06,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "c3",
+      "trial": 3,
+      "prompt": "跟我講個短笑話。",
+      "expected_tool": null,
+      "ttft_ms": 460.1,
+      "e2e_ms": 1023.6,
+      "prompt_tok": 575,
+      "out_tok": 14,
+      "toks_per_sec": 13.68,
+      "text": "為什麼數學書很憂鬱？\n因為它有太多的問題。",
+      "tool_calls": []
+    },
+    {
+      "pid": "c4",
+      "trial": 1,
+      "prompt": "你是誰？簡短自我介紹。",
+      "expected_tool": null,
+      "ttft_ms": 759.1,
+      "e2e_ms": 1406.2,
+      "prompt_tok": 576,
+      "out_tok": 16,
+      "toks_per_sec": 11.38,
+      "text": "我是 Reachy Mini，一個可愛的小機器人！很高興見到你。",
+      "tool_calls": []
+    },
+    {
+      "pid": "c4",
+      "trial": 2,
+      "prompt": "你是誰？簡短自我介紹。",
+      "expected_tool": null,
+      "ttft_ms": 454.6,
+      "e2e_ms": 1369.9,
+      "prompt_tok": 576,
+      "out_tok": 22,
+      "toks_per_sec": 16.06,
+      "text": "我是 Reachy Mini，一個可愛的小型桌面機器人！我喜歡和大家互動，也能做各種動作。",
+      "tool_calls": []
+    },
+    {
+      "pid": "c4",
+      "trial": 3,
+      "prompt": "你是誰？簡短自我介紹。",
+      "expected_tool": null,
+      "ttft_ms": 454.7,
+      "e2e_ms": 891.1,
+      "prompt_tok": 576,
+      "out_tok": 11,
+      "toks_per_sec": 12.34,
+      "text": "我是 Reachy Mini，你的桌面小機器人！",
+      "tool_calls": []
+    },
+    {
+      "pid": "t1",
+      "trial": 1,
+      "prompt": "向左轉。",
+      "expected_tool": "move_head",
+      "ttft_ms": 766.1,
+      "e2e_ms": 2190.6,
+      "prompt_tok": 571,
+      "out_tok": 41,
+      "toks_per_sec": 18.72,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"yaw\": -25, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t1",
+      "trial": 2,
+      "prompt": "向左轉。",
+      "expected_tool": "move_head",
+      "ttft_ms": 764.6,
+      "e2e_ms": 2182.0,
+      "prompt_tok": 571,
+      "out_tok": 41,
+      "toks_per_sec": 18.79,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"yaw\": -25, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t1",
+      "trial": 3,
+      "prompt": "向左轉。",
+      "expected_tool": "move_head",
+      "ttft_ms": 764.8,
+      "e2e_ms": 2184.6,
+      "prompt_tok": 571,
+      "out_tok": 41,
+      "toks_per_sec": 18.77,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"yaw\": -25, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t2",
+      "trial": 1,
+      "prompt": "頭抬起來看上面。",
+      "expected_tool": "move_head",
+      "ttft_ms": 763.7,
+      "e2e_ms": 3225.2,
+      "prompt_tok": 574,
+      "out_tok": 65,
+      "toks_per_sec": 20.15,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"pitch\": -25, \"yaw\": 0, \"roll\": 0, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t2",
+      "trial": 2,
+      "prompt": "頭抬起來看上面。",
+      "expected_tool": "move_head",
+      "ttft_ms": 767.4,
+      "e2e_ms": 3230.4,
+      "prompt_tok": 574,
+      "out_tok": 65,
+      "toks_per_sec": 20.12,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"pitch\": -25, \"yaw\": 0, \"roll\": 0, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t2",
+      "trial": 3,
+      "prompt": "頭抬起來看上面。",
+      "expected_tool": "move_head",
+      "ttft_ms": 768.3,
+      "e2e_ms": 3218.9,
+      "prompt_tok": 574,
+      "out_tok": 65,
+      "toks_per_sec": 20.19,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "move_head",
+          "arguments": "{\"pitch\": -25, \"yaw\": 0, \"roll\": 0, \"duration\": 2}"
+        }
+      ]
+    },
+    {
+      "pid": "t3",
+      "trial": 1,
+      "prompt": "跳一下舞。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 810.5,
+      "e2e_ms": 1584.7,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.04,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"dance\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t3",
+      "trial": 2,
+      "prompt": "跳一下舞。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 806.8,
+      "e2e_ms": 1586.7,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.02,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"dance\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t3",
+      "trial": 3,
+      "prompt": "跳一下舞。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 810.0,
+      "e2e_ms": 1585.5,
+      "prompt_tok": 572,
+      "out_tok": 27,
+      "toks_per_sec": 17.03,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"dance\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t4",
+      "trial": 1,
+      "prompt": "做個開心的動作。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 811.7,
+      "e2e_ms": 1587.8,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 17.0,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t4",
+      "trial": 2,
+      "prompt": "做個開心的動作。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 811.4,
+      "e2e_ms": 1587.9,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 17.0,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t4",
+      "trial": 3,
+      "prompt": "做個開心的動作。",
+      "expected_tool": "play_emotion",
+      "ttft_ms": 816.4,
+      "e2e_ms": 1596.0,
+      "prompt_tok": 574,
+      "out_tok": 27,
+      "toks_per_sec": 16.92,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "play_emotion",
+          "arguments": "{\"name\": \"happy\"}"
+        }
+      ]
+    },
+    {
+      "pid": "t5",
+      "trial": 1,
+      "prompt": "停下來。",
+      "expected_tool": "stop_motion",
+      "ttft_ms": 770.6,
+      "e2e_ms": 1075.1,
+      "prompt_tok": 571,
+      "out_tok": 15,
+      "toks_per_sec": 13.95,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "stop_motion",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "pid": "t5",
+      "trial": 2,
+      "prompt": "停下來。",
+      "expected_tool": "stop_motion",
+      "ttft_ms": 769.9,
+      "e2e_ms": 1071.3,
+      "prompt_tok": 571,
+      "out_tok": 15,
+      "toks_per_sec": 14.0,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "stop_motion",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "pid": "t5",
+      "trial": 3,
+      "prompt": "停下來。",
+      "expected_tool": "stop_motion",
+      "ttft_ms": 772.2,
+      "e2e_ms": 1077.7,
+      "prompt_tok": 571,
+      "out_tok": 15,
+      "toks_per_sec": 13.92,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "stop_motion",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "pid": "t6",
+      "trial": 1,
+      "prompt": "現在幾點？",
+      "expected_tool": "get_current_time",
+      "ttft_ms": 770.2,
+      "e2e_ms": 1070.8,
+      "prompt_tok": 572,
+      "out_tok": 15,
+      "toks_per_sec": 14.01,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "get_current_time",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "pid": "t6",
+      "trial": 2,
+      "prompt": "現在幾點？",
+      "expected_tool": "get_current_time",
+      "ttft_ms": 769.5,
+      "e2e_ms": 1071.4,
+      "prompt_tok": 572,
+      "out_tok": 15,
+      "toks_per_sec": 14.0,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "get_current_time",
+          "arguments": "{}"
+        }
+      ]
+    },
+    {
+      "pid": "t6",
+      "trial": 3,
+      "prompt": "現在幾點？",
+      "expected_tool": "get_current_time",
+      "ttft_ms": 769.8,
+      "e2e_ms": 1072.1,
+      "prompt_tok": 572,
+      "out_tok": 15,
+      "toks_per_sec": 13.99,
+      "text": "",
+      "tool_calls": [
+        {
+          "name": "get_current_time",
+          "arguments": "{}"
+        }
+      ]
+    }
+  ]
+}

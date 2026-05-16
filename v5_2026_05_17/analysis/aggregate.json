@@ -1,0 +1,150 @@
+{
+  "moe": {
+    "label": "MoE Qwen3.6-35B-A3B (MTP k=3, TP=2, production)",
+    "path": "C:\\Users\\thc1006\\Desktop\\_temp\\qwen3.6-vllm-2x3090\\v5_2026_05_17\\data\\results_moe_35b_mtp_tp2.json",
+    "n": 30,
+    "tool_accuracy": {
+      "overall_correct": 30,
+      "overall_total": 30,
+      "overall_pct": 100.0,
+      "chat_false_fires": 0,
+      "chat_total": 12,
+      "tool_misses": 0,
+      "tool_total": 18,
+      "bad_chat_examples": [],
+      "missed_tools": []
+    },
+    "latency": {
+      "ttft_ms": {
+        "mean": 177.62,
+        "median": 170.95,
+        "stdev": 77.01,
+        "min": 140.5,
+        "max": 574.8,
+        "n": 30
+      },
+      "e2e_ms": {
+        "mean": 274.45,
+        "median": 248.8,
+        "stdev": 125.06,
+        "min": 185.8,
+        "max": 889.7,
+        "n": 30
+      },
+      "toks_per_sec": {
+        "mean": 87.99,
+        "median": 74.45,
+        "stdev": 32.35,
+        "min": 29.22,
+        "max": 139.74,
+        "n": 30
+      }
+    },
+    "zh_tw_status": {
+      "TRAD": 6,
+      "SIMP": 3,
+      "MIX": 0,
+      "shared": 3,
+      "none": 18
+    }
+  },
+  "dense": {
+    "label": "Dense Qwen3.6-27B (no MTP, TP=1 GPU1, enforce-eager)",
+    "path": "C:\\Users\\thc1006\\Desktop\\_temp\\qwen3.6-vllm-2x3090\\v5_2026_05_17\\data\\results_dense_27b_tp1.json",
+    "n": 30,
+    "tool_accuracy": {
+      "overall_correct": 23,
+      "overall_total": 30,
+      "overall_pct": 76.7,
+      "chat_false_fires": 7,
+      "chat_total": 12,
+      "tool_misses": 0,
+      "tool_total": 18,
+      "bad_chat_examples": [
+        {
+          "pid": "c1",
+          "trial": 1,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c1",
+          "trial": 2,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c1",
+          "trial": 3,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c2",
+          "trial": 1,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c2",
+          "trial": 2,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c2",
+          "trial": 3,
+          "fired": [
+            "play_emotion"
+          ]
+        },
+        {
+          "pid": "c3",
+          "trial": 2,
+          "fired": [
+            "play_emotion"
+          ]
+        }
+      ],
+      "missed_tools": []
+    },
+    "latency": {
+      "ttft_ms": {
+        "mean": 771.48,
+        "median": 770.4,
+        "stdev": 201.02,
+        "min": 454.6,
+        "max": 1644.0,
+        "n": 30
+      },
+      "e2e_ms": {
+        "mean": 1683.74,
+        "median": 1583.6,
+        "stdev": 644.15,
+        "min": 891.1,
+        "max": 3230.4,
+        "n": 30
+      },
+      "toks_per_sec": {
+        "mean": 16.24,
+        "median": 17.02,
+        "stdev": 2.47,
+        "min": 11.12,
+        "max": 20.19,
+        "n": 30
+      }
+    },
+    "zh_tw_status": {
+      "TRAD": 5,
+      "SIMP": 0,
+      "MIX": 0,
+      "shared": 0,
+      "none": 25
+    }
+  }
+}

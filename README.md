@@ -33,6 +33,18 @@ always-on conversational robot brain.
 > v3 narrative below remains the canonical +27.5 % MTP finding; v4 refines
 > the optimal k for this hardware.
 
+> **2026-05-17 — v5 update**: Dense Qwen3.6-27B vs MoE Qwen3.6-35B-A3B + MTP k=3
+> head-to-head on a real voice-agent workload (10 prompts × 3 trials × 2 models,
+> N=60). **MoE+MTP wins decisively on every production-relevant axis** —
+> TTFT 4.34× faster (178 ms vs 771 ms), throughput 5.42× faster (88 vs 16 tok/s),
+> tool-call discrimination 100 % vs 77 % (Dense over-fires `play_emotion` on
+> 7/12 chat prompts). **No production swap**: MoE + MTP k=3 + TP=2 remains
+> the recommended stack on dual 3090. The new "dense fits TP=1, should be
+> cheaper to serve" intuition is falsified here for this hardware × workload.
+> Full results in [`v5_2026_05_17/`](v5_2026_05_17/). Scope caveat: N=3 per
+> cell, single hardware, voice-agent prompt distribution only — read the v5
+> README before generalizing.
+
 ## Hardware
 
 - 2× NVIDIA RTX 3090 24GB (SM 8.6, Ampere, no NVLink, PCIe Gen4 x8)
