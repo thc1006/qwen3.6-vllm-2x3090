@@ -17,7 +17,7 @@ v4.0 deepens that single point into a **9-phase factorial sweep** (~3,000 measur
 ## Methodology summary
 
 - Hardware: NVIDIA RTX 3090 24 GB × 2 (PCIe Gen4 ×16, no NVLink). GPU 0 driver-default 390 W (Founders); GPU 1 default 350 W (stock). Both capped at test power via `nvidia-smi -i N -pl`. CUDA 12.x, vLLM 0.19.1.
-- Model: `tclf90/Qwen3.6-35B-A3B-AWQ` (community AWQ Q4 of Qwen/Qwen3.6-35B-A3B). Plus official `Qwen/Qwen3.6-35B-A3B-FP8`.
+- Model: `QuantTrio/Qwen3.6-35B-A3B-AWQ` (community AWQ Q4 of Qwen/Qwen3.6-35B-A3B). Plus official `Qwen/Qwen3.6-35B-A3B-FP8`.
 - Prompts: same 5-prompt set as v3 (sky / python / tcp_udp / tofu / haiku, all with `/no_think`). N=5 trials × 5 prompts = 25 measurements per config.
 - Streaming SSE, TTFT and TPOT separated, spec-acceptance from `/metrics` differential. All under `--no-enable-prefix-caching` (prefix cache off — see v3 for why).
 
@@ -197,7 +197,7 @@ n = 3 trials per ctx target (limited statistical power; trends only — confiden
 
    **(b) Version effect (J.2 vs J, both with FP16 MoE off):** all 3 metrics NS (p > 0.34). Conclusion: **vLLM 0.20.1 is statistically equivalent to 0.19.1 on this path**.
 
-   **Practical recommendation**: `vLLM 0.20.1` is safe to upgrade for production AWQ-Marlin Qwen3.6 dual 3090, after unsetting `VLLM_USE_FLASHINFER_MOE_FP16` (or removing it from the systemd unit). The #41306 MoE-backend regression that hits Mixtral 8×7B / DeepSeek-V4 / NVFP4 paths does NOT manifest on AWQ-Marlin path for this model on Ampere. Note: vllm-project/vllm#38182 (MTP × prefix-caching block-drop bug for Qwen3.5/3.6 A3B) remains unfixed in 0.20.x; the `--no-enable-prefix-caching` recommendation — [documented by vLLM Recipes since 2026-04-24 for latency-focused MTP serving](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html) and connected to the #38182 L457 mechanism in our v3.0 retest — still applies.
+   **Practical recommendation**: `vLLM 0.20.1` is safe to upgrade for production AWQ-Marlin Qwen3.6 dual 3090, after unsetting `VLLM_USE_FLASHINFER_MOE_FP16` (or removing it from the systemd unit). The #41306 MoE-backend regression that hits Mixtral 8×7B / DeepSeek-V4 / NVFP4 paths does NOT manifest on AWQ-Marlin path for this model on Ampere. Note: vllm-project/vllm#38182 (MTP × prefix-caching block-drop behaviour for Qwen3.5/3.6 A3B) is by-design — a vLLM maintainer later [confirmed it is "not really a bug"](https://github.com/vllm-project/vllm/issues/38182#issuecomment-4500246930), just expected behaviour (the MTP head is one token ahead and can't reuse the last token's KV); the `--no-enable-prefix-caching` recommendation — [documented by vLLM Recipes since 2026-04-24 for latency-focused MTP serving](https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html) and connected to the #38182 L457 mechanism in our v3.0 retest — therefore applies permanently, not pending a fix.
 
 ## Reproduction
 

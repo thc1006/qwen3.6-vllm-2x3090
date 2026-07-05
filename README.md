@@ -329,11 +329,18 @@ For the single-stream voice-dialog deployment that motivated this repo on
     across k=1/2/3). If you optimise for TTFT (latency-to-first-word in
     voice dialog), use k=3; if you prefer the simplest published config,
     k=1 is still well above no-MTP.
-- **Be cautious about combining MTP with prefix-caching** until vllm
-  #38182 / #40756 are resolved. If your workload depends on prefix-cache
-  hit rate (multi-turn chat with shared system prompt), benchmark the
-  net effect on **your** workload before enabling MTP — the cache loss
-  may eat the MTP gain.
+- **Be cautious about combining MTP with prefix-caching.** For Qwen3.5/3.6
+  A3B, the cache-hit-rate drop under MTP is
+  [by-design, not a bug](https://github.com/vllm-project/vllm/issues/38182#issuecomment-4500246930):
+  a vLLM maintainer confirmed the last-block drop is expected behaviour (the
+  EAGLE/MTP head is one token ahead and can't reuse the last token's KV even
+  on a prefix match), so `--no-enable-prefix-caching` is the standing
+  recommendation, not a temporary workaround pending a fix. (Separately,
+  [#40756](https://github.com/vllm-project/vllm/issues/40756) is an open MTP
+  illegal-memory crash on long sequences — a real bug, unlike #38182.) If your
+  workload depends on prefix-cache hit rate (multi-turn chat with shared system
+  prompt), benchmark the net effect on **your** workload before enabling MTP —
+  the cache loss may eat the MTP gain.
 - The MoE expert-saturation analysis (MoESD arXiv 2505.19645,
   Utility-Driven SD arXiv 2506.20675) still applies and explains why
   llama.cpp draft-spec on the same model+hardware is still net-negative

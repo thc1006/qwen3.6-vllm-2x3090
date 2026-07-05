@@ -40,7 +40,7 @@ This release is the falsification of a tempting "dense 27B is smaller, simpler, 
 ## Hardware + software
 
 - Workstation `s1`: 2 × NVIDIA RTX 3090 24 GB (PCIe Gen4 ×16, no NVLink). Power capped 220 W via `nvidia-smi -pl`. CUDA 12.x, vLLM 0.19.1.
-- MoE arm: `tclf90/Qwen3.6-35B-A3B-AWQ` served via `vllm serve --tensor-parallel-size 2 --gpu-memory-utilization 0.85 --max-model-len 32768 --max-num-seqs 4 --enable-chunked-prefill --no-enable-prefix-caching --speculative-config '{"method":"mtp","num_speculative_tokens":3}' --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --mm-encoder-tp-mode data --mm-processor-cache-type shm`.
+- MoE arm: `QuantTrio/Qwen3.6-35B-A3B-AWQ` served via `vllm serve --tensor-parallel-size 2 --gpu-memory-utilization 0.85 --max-model-len 32768 --max-num-seqs 4 --enable-chunked-prefill --no-enable-prefix-caching --speculative-config '{"method":"mtp","num_speculative_tokens":3}' --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --mm-encoder-tp-mode data --mm-processor-cache-type shm`.
 - Dense arm: `QuantTrio/Qwen3.6-27B-AWQ` (community AWQ Q4, ~13.5 GB on disk) served via `vllm serve --tensor-parallel-size 1 --gpu-memory-utilization 0.95 --max-model-len 2048 --max-num-seqs 1 --enforce-eager --limit-mm-per-prompt '{"image":0,"video":0}' --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --trust-remote-code`. GPU 1 only; production was paused while Dense was bench'd, then resumed.
 
 ## Workload
@@ -145,7 +145,7 @@ This is a **single-day, N=3, single hardware** measurement. Read it as falsifyin
 
 ### Community quant disclosure
 
-- **MoE arm**: `tclf90/Qwen3.6-35B-A3B-AWQ` (community AWQ Q4).
+- **MoE arm**: `QuantTrio/Qwen3.6-35B-A3B-AWQ` (community AWQ Q4).
 - **Dense arm**: `QuantTrio/Qwen3.6-27B-AWQ` (community AWQ Q4). A poorly-calibrated AWQ pack could plausibly explain part of the over-fire pattern. We did not A/B alternative Dense 27B quantizations.
 
 ## Reproducing locally
